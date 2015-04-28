@@ -1,0 +1,15 @@
+-- Administração do sistema --
+
+Como administrador do sistema, quero um cadastro das vagas existentes no estacionamento.
+Como administrador do sistema, quero registrar o horário de entrada e saída dos veículos e a vaga utilizada, identificando-os pela placa.
+Como administrador do sistema, quero um cadastro de planos, para que eu possa disponibilizar planos com quantidade de horas adequada para meus clientes.
+Como administrador do sistema, quero um cadastro de clientes, para que eu possa ativar um plano de uso do estacionamento para os mesmos.
+Como administrador do sistema, quero vincular o plano a uma placa, para que o cliente possa utilizar seu plano automaticamente ao estacionar seu veículo.
+Como administrador do sistema, quero reservar uma vaga para cada cliente com plano contratado, para que não corra o risco de não haver vaga disponível para ele ao chegar no estacionamento.
+Como administrador do sistema, quero gerar relatórios do consumo do estacionamento, especificando cliente ou placa, para identificar quais estão utilizando o plano de forma adequada, e quais estão excedendo.
+
+-- Uso do sistema --
+
+Como cliente, quero obter um histórico de consumo por período, especificando o plano ou a placa, para controlar meu tempo de saldo do plano.
+Como cliente, quero um relatório detalhado do meu consumo, para verificar eventuais cobranças adicionais.
+Como cliente, quero ter a possibilidade de alterar o veículo autorizado do plano, para o caso de troca ou mesmo de empréstimo de um outro veículo, utilizando assim meu plano já contratado, sem a necessidade de contratar um novo plano.
