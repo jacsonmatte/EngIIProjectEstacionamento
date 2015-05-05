@@ -1,0 +1,33 @@
+Requisitos funcionais
+
+Tela de login para acesso do administrador e do cliente com uma opção para indicar qual o tipo de acesso.
+
+Cadastro de vagas (inclusão, remoção e edição das informações de vagas)
+
+Cadastro de cliente, acessível pelo próprio cliente, onde ele deve inserir suas informações para registrar-se no sistema.
+As informações necessárias são: nome, cpf/cnpj, endereço (logradouro, número, cep, bairro, cidade e estado)
+No momento do cadastro, não deve ser permitido o recadastro de um cpf/cnpj já registrado, nem permitir a duplicidade de nomes de usuário
+
+Cadastro de plano, contendo descrição, quantidade de horas, valor mensal, valor da hora excedente.
+Atualização de valor do plano...
+
+Escolha do plano a partir do acesso cliente;
+Escolha do plano para um cliente pelo administrador;
+
+Como administrador, quero que o sistema disponibilize um código (uma espécie de senha) para o cliente no momento da contratação do plano, que será usada para acessar o estacionamento.
+Gerar código para o cliente ao aderir a um plano. Será o seu token de acesso.
+
+Registrar reservas dos veículos... (hora de entrada e saída, vaga utilizada)
+Sinalizar que o veículo de fato, entrou no estacionamento (através da liberação do token de entrada)...
+
+Gerar, no início do mês, as mensalidades referentes ao ano anterior, cobrando o valor do plano para cada cliente e, eventualmente, taxas excedentes, caso haja.
+
+Efetuar reserva através do acesso do cliente, indicando a vaga e a data e horas desejadas.
+Verificar disponibilidade de vagas para efetuar a reserva.
+
+Gerar relatórios do estacionamento para o administrador, podendo ser geral ou específico de um cliente ou período.
+Gerar relatório das mensalidades para o administrador, podendo ser geral ou específico de um cliente ou período.
+Gerar o relatório de consumo específico para o cliente.
+Gerar o relatório de mensalidades para um cliente.
+
+OBS: Nenhum dado deve ser excluído de fato, apenas deve ser ocultado para visualização habitual, havendo ainda a possibilidade de visualiza-los com um parâmetro especial.
