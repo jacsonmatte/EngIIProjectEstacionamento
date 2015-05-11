@@ -1,4 +1,4 @@
-Requisitos funcionais
+﻿Requisitos funcionais
 
 Tela de login para acesso do administrador e do cliente com uma opção para indicar qual o tipo de acesso.
 
@@ -20,7 +20,7 @@ Gerar código para o cliente ao aderir a um plano. Será o seu token de acesso.
 Registrar reservas dos veículos... (hora de entrada e saída, vaga utilizada)
 Sinalizar que o veículo de fato, entrou no estacionamento (através da liberação do token de entrada)...
 
-Gerar, no início do mês, as mensalidades referentes ao ano anterior, cobrando o valor do plano para cada cliente e, eventualmente, taxas excedentes, caso haja.
+Gerar, no início do mês, as mensalidades referentes ao mês anterior, cobrando o valor do plano para cada cliente e, eventualmente, taxas excedentes, caso haja.
 
 Efetuar reserva através do acesso do cliente, indicando a vaga e a data e horas desejadas.
 Verificar disponibilidade de vagas para efetuar a reserva.
