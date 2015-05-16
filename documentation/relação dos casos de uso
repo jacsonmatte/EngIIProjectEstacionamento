@@ -1,0 +1,24 @@
+Atores: administrador, cliente e o próprio sistema
+
+1. Casos de uso do administrador
+1.a. Cadastrar vagas
+1.b. Editar vagas
+1.c. Cadastrar planos
+1.d. Editar planos
+1.e. Ativar plano para o cliente (caso a gente decida que o administrador vai poder fazer isto)
+1.f. Gerar relatório de utilização do estacionamento
+1.g. Gerar relatório de clientes
+1.h. Gerar relatório de mensalidades
+
+2. Casos de uso do cliente
+2.a. Cadastrar-se no sistema
+2.b. Aderir/mudar plano
+2.c. Efetuar reserva
+2.d. Entrar no estacionamento
+2.e. Gerar relatório do seu consumo
+2.f. Gerar relatório de suas mensalidades
+
+3. Casos de uso do sistema
+3.a. Liberar entrada do estacionamento
+3.b. Liberar saída do estacionamento
+3.b. Gerar mensalidades
