@@ -1,0 +1,66 @@
+CREATE TABLE `tb_vaga` (
+	`id`	SMALLINT NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`identificacao` TEXT NOT NULL,
+	`descricao`	TEXT
+);
+CREATE TABLE `tb_cliente` (
+	`id`	SERIAL NOT NULL PRIMARY KEY,
+	`nome`	TEXT NOT NULL,
+	`cpf_cnpj`	TEXT NOT NULL,
+	`telefone`	TEXT NOT NULL,
+	`email`	TEXT NOT NULL,
+	`logradouro`	TEXT NOT NULL,
+	`numero`	INTEGER NOT NULL,
+	`cep`	INTEGER NOT NULL,
+	`bairro`	TEXT NOT NULL,
+	`cidade`	TEXT NOT NULL,
+	`estado`	INTEGER NOT NULL,
+	`observacao` TEXT
+);
+CREATE TABLE `tb_usuario` (
+	`id`	SERIAL NOT NULL PRIMARY KEY,
+	`username`	TEXT NOT NULL UNIQUE,
+	`senha`	TEXT NOT NULL,
+	`cliente`	INTEGER NOT NULL, -- -1 para usuário administrador
+	FOREIGN KEY fk_tb_plano_contratado_cliente REFERENCES tb_cliente (id)
+);
+CREATE TABLE `tb_plano` (
+	`id`	SERIAL NOT NULL PRIMARY KEY,
+	`descricao`	TEXT NOT NULL,
+	`horas`	SMALLINT NOT NULL,
+	`valor`	NUMERIC NOT NULL,
+	`valor_hora_excedente`	NUMERIC NOT NULL,
+	`observacao` TEXT
+);
+CREATE TABLE `tb_plano_contratado` (
+	`id` SERIAL NOT NULL,
+	`plano`	INTEGER NOT NULL,
+	`cliente`	INTEGER NOT NULL,
+	`data_contratacao`	DATE NOT NULL DEFAULT date(now()),
+	`token`	TEXT NOT NULL,
+	`ativo` BOOLEAN NOT NULL DEFAULT TRUE,
+	`observacao` TEXT,
+	PRIMARY KEY (plano, cliente),
+	FOREIGN KEY fk_tb_plano_contratado_plano REFERENCES tb_plano (id),
+	FOREIGN KEY fk_tb_plano_contratado_cliente REFERENCES tb_cliente (id)
+);
+CREATE TABLE `tb_estacionamento` (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`data_hora_entrada`	TIMESTAMP NOT NULL,
+	`data_hora_saida`	TIMESTAMP,
+	`token`	TEXT NOT NULL,
+	`observacao` TEXT,
+	FOREIGN KEY fk_tb_estacionamento_token REFERENCES tb_plano_contratado (token)
+);
+CREATE TABLE `tb_mensalidade` (
+	`id`	INTEGER NOT NULL,
+	`ano`	SMALLINT NOT NULL,
+	`mes`	SMALLINT NOT NULL,
+	`cliente`	INTEGER NOT NULL,
+	`consumo`	SMALLINT NOT NULL,
+	`excedente`	SMALLINT NOT NULL,
+	`valor`	NUMERIC NOT NULL,
+	`valor_excedente`	NUMERIC NOT NULL,
+	`data_hora_geracao TIMESTAMP NOT NULL DEFAULT now(),
+	PRIMARY KEY (id, mes, cliente)
+);
