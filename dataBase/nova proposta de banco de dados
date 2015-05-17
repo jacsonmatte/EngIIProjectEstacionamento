@@ -61,6 +61,6 @@ CREATE TABLE `tb_mensalidade` (
 	`excedente`	SMALLINT NOT NULL,
 	`valor`	NUMERIC NOT NULL,
 	`valor_excedente`	NUMERIC NOT NULL,
-	`data_hora_geracao TIMESTAMP NOT NULL DEFAULT now(),
+	`data_hora_geracao` TIMESTAMP NOT NULL DEFAULT now(),
 	PRIMARY KEY (id, mes, cliente)
 );
