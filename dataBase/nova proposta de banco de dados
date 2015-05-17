@@ -1,7 +1,14 @@
+CREATE TABLE `tb_vaga_tipo`( -- ao invés de uma tabela pode ser usado um enumerador na aplicação, pois serão poucos tipos
+	`id`	SMALLINT NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`descricao`	TEXT
+);
+
 CREATE TABLE `tb_vaga` (
 	`id`	SMALLINT NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`tipo` SMALLINT NOT NULL
 	`identificacao` TEXT NOT NULL,
-	`descricao`	TEXT
+	`descricao`	TEXT,
+	FOREIGN KEY fk_tb_vaga_tipo REFERENCES tb_vaga_tipo (id) 
 );
 CREATE TABLE `tb_cliente` (
 	`id`	SERIAL NOT NULL PRIMARY KEY,
