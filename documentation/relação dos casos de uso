@@ -3,9 +3,9 @@ Atores: administrador, cliente e o próprio sistema
 1. Casos de uso do administrador
 1.a. Cadastrar vagas 		(Geovani)
 1.b. Editar vagas 			(Geovani)	
-1.c. Cadastrar planos
-1.d. Editar planos
-1.e. Ativar plano para o cliente (caso a gente decida que o administrador vai poder fazer isto)
+1.c. Cadastrar planos (Aristides)
+1.d. Editar planos (Aristides)
+1.e. Ativar plano para o cliente (caso a gente decida que o administrador vai poder fazer isto) (Aristides)
 1.f. Gerar relatório de utilização do estacionamento
 1.g. Gerar relatório de clientes
 1.h. Gerar relatório de mensalidades
@@ -17,8 +17,8 @@ Atores: administrador, cliente e o próprio sistema
 2.d. Entrar no estacionamento
 2.e. Gerar relatório do seu consumo
 2.f. Gerar relatório de suas mensalidades
+2.g. Acessar estacionamento
+2.h. Sair do estacionamento
 
 3. Casos de uso do sistema
-3.a. Liberar entrada do estacionamento
-3.b. Liberar saída do estacionamento
-3.b. Gerar mensalidades
+3.a. Gerar mensalidades
