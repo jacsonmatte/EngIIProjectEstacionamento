@@ -1,8 +1,8 @@
 Atores: administrador, cliente e o próprio sistema
 
 1. Casos de uso do administrador
-1.a. Cadastrar vagas
-1.b. Editar vagas
+1.a. Cadastrar vagas 		(Geovani)
+1.b. Editar vagas 			(Geovani)	
 1.c. Cadastrar planos
 1.d. Editar planos
 1.e. Ativar plano para o cliente (caso a gente decida que o administrador vai poder fazer isto)
