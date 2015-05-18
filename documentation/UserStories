@@ -4,13 +4,12 @@ Importante: Para simplificar a descrição da história, usaremos os termos admi
 Como administrador, quero um sistema de gerenciamento do estacionamento, que contemple funcionalidades gerenciais (administração) e funcionalidades acessórias para o cliente do meu estabelecimento, que provê serviço de estacionamento mediante contratação de um plano e reserva de horário.
 Como administrador, quero um cadastro das vagas existentes no estacionamento para que eu possa identificá-las com um número, código e tipo.
 Como administrador, quero um cadastro de clientes, para que o próprio cliente possa registrar-se no sistema a qualquer momento.
-Como administrador, quero cadastrar planos de utilização do estacionamento, definindo o número de horas, o custo e o custo da hora excedente, para oferecer estes planos aos meus clientes.
+Como administrador, quero cadastrar planos de utilização do estacionamenComo administrador, quero que o sistema controle o status da reserva, indicando se ela está to, definindo o número de horas, o custo e o custo da hora excedente, para oferecer estes planos aos meus clientes.
 Como administrador, quero disponibilizar aos clientes cadastrados, a opção de selecionar o plano que lhe é mais adequado.
-Como administrador, quero que o sistema disponibilize um código (uma espécie de senha) para o cliente no momento da contratação do plano, que será usada para acessar o estacionamento.
 Como administrador, quero registrar o horário de entrada e saída dos veículos e a vaga utilizada, identificando-os pela credencial de acesso, para posteriormente gerar a cobrança e verificar o consumo do serviço.
 Como administrador, quero que o cliente possa visualizar o estado de reservas com antecedência, para que possa programar suas atividades de acordo com a disponibilidade de vagas.
 Como administrador, quero que o sistema controle o status da reserva, indicando se ela está pendente, em utilização, utiliza ou cancelada.
-Como administrador, quero permitir que o cliente programe sua reserva, indicando a hora de entrada e possivelmente a hora de saída, para que ele garanta a possibilidade de utilizar o estacionamento ao chegar no estabelecimento.
+Como administrador, quero permitir que o cliente programe sua reserva, indicando a hora de entrada e possivelmente a hora de saída, para que ele garanta a possibilidade de utilizar o estacionamento ao chegar no estabelecimento. O sistema deverá gerar um token para esta reserva.
 Como administrador, quero que o cliente tenha possibilidade de gerar um novo código do plano, para alterá-lo.
 Como administrador, quero gerar relatórios do consumo do estacionamento, especificando cliente e/ou período, para identificar quais estão utilizando o plano de forma adequada, e quais estão excedendo.
 Como administrador, quero que o sistema disponibilize os mesmos relatórios para os clientes, obviamente mostrando apenas dados pertinentes a ele próprio, para que o mesmo possa consultar a utilização do serviço.
