@@ -11,6 +11,6 @@ Como administrador, quero registrar o horário de entrada e saída dos veículos
 Como administrador, quero que o cliente possa visualizar o estado de reservas com antecedência, para que possa programar suas atividades de acordo com a disponibilidade de vagas.
 Como administrador, quero que o sistema controle o status da reserva, indicando se ela está pendente, em utilização, utiliza ou cancelada.
 Como administrador, quero permitir que o cliente programe sua reserva, indicando a hora de entrada e possivelmente a hora de saída, para que ele garanta a possibilidade de utilizar o estacionamento ao chegar no estabelecimento.
-Como administrador quero que o cliente tenha possibilidade de gerar um novo código, para alterá-lo.
+Como administrador, quero que o cliente tenha possibilidade de gerar um novo código do plano, para alterá-lo.
 Como administrador, quero gerar relatórios do consumo do estacionamento, especificando cliente e/ou período, para identificar quais estão utilizando o plano de forma adequada, e quais estão excedendo.
 Como administrador, quero que o sistema disponibilize os mesmos relatórios para os clientes, obviamente mostrando apenas dados pertinentes a ele próprio, para que o mesmo possa consultar a utilização do serviço.
