@@ -6,9 +6,9 @@ Atores: administrador, cliente e o próprio sistema
 1.c. Cadastrar planos (Aristides) (OK)
 1.d. Editar planos (Aristides) (OK)
 1.e. Ativar plano para o cliente (caso a gente decida que o administrador vai poder fazer isto) (Aristides) (OK)
-1.f. Gerar relatório de utilização do estacionamento
-1.g. Gerar relatório de clientes
-1.h. Gerar relatório de mensalidades
+1.f. Gerar relatório de utilização do estacionamento (Aristides)
+1.g. Gerar relatório de clientes (Aristides)
+1.h. Gerar relatório de mensalidades (Aristides)
 
 2. Casos de uso do cliente
 2.a. Cadastrar-se no sistema
