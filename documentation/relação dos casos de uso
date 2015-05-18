@@ -11,7 +11,7 @@ Atores: administrador, cliente e o próprio sistema
 1.h. Gerar relatório de mensalidades (Aristides)
 
 2. Casos de uso do cliente
-2.a. Cadastrar-se no sistema
+2.a. Cadastrar-se no sistema (JACSON) OK
 2.b. Aderir/mudar plano
 2.c. Efetuar reserva
 2.d. Entrar no estacionamento
