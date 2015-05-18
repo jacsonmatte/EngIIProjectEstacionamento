@@ -12,10 +12,10 @@ Atores: administrador, cliente e o próprio sistema
 
 2. Casos de uso do cliente
 2.a. Cadastrar-se no sistema (JACSON) OK
-2.b. Aderir/mudar plano
-2.c. Efetuar reserva
-2.d. Entrar no estacionamento
-2.e. Gerar relatório do seu consumo
+2.b. Aderir/mudar plano (Matheus/Patric)
+2.c. Efetuar reserva (Matheus/Patric)
+2.d. Entrar no estacionamento (Matheus/Patric)
+2.e. Gerar relatório do seu consumo (Matheus/Patric)
 2.f. Gerar relatório de suas mensalidades
 2.g. Acessar estacionamento
 2.h. Sair do estacionamento
