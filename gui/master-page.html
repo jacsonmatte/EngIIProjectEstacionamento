@@ -8,44 +8,33 @@
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	</head>
-	<body>
-		<!-- <div class='row'> -->
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Bem vindo, Fulano de Tal!</a>
+	<body style='background: #6699CC'>
+		<div class="container-fluid bg-info" style='padding: 10px 0px 10px 0px;'>
+			<div class="row offset-3">
+				<div class="col-sm-3 text-center" style='background: #BBB'>
+					<div>
+						CLIENTE - Painel de controle
+						<ul class="nav nav-pills nav-stacked"> <!-- colocar class='active' na li atual-->
+							<li class='active'><a href="cliente/Home.html">Home&nbsp;<span class="glyphicon glyphicon-home"></a></li>
+							<li><a href="cliente/Planos.html">Planos&nbsp;<span class="glyphicon glyphicon-book"></a></li>
+							<li><a href="cliente/Reservas.html">Reservas&nbsp;<span class="glyphicon glyphicon-lock"></a></li>
+							<li><a href="cliente/Relatorios.html">Relatórios&nbsp;<span class="glyphicon glyphicon-list-alt"></a></li>
+							<li><a href="cliente/MeusDados.html">Meus dados&nbsp;<span class="glyphicon glyphicon-tags"></a></li>
+						</ul>
+					</div>
+					<div>
+						<a href="cliente/MeusDados.html"><img src='img/exit.png' width='50px' alt='' /></a><br/>Sair do sistema
+					</div>
+				</div>
+				<div id='divConteudo' class='col-sm-9 panel-body'><!-- conteudo principal -->
+					O conteúdo deve ser colocado aqui. Ou melhor, o conteúdo sera uma página separada que irá incluir esta master page.
+				</div>   
 			</div>
-		  </div>
-		</nav>
-		<!-- </div> -->
-		<div class="container-fluid">
-			<div class="row-fluid">
-			<div class="span2">
-			  <div id='divMenuCliente' class='col-md-3'>
-				<ul class="nav nav-pills nav-stacked"> <!-- colocar class='active' na li atual-->
-					<li class='active'><a href="cliente/Home.html">Home&nbsp;<span class="glyphicon glyphicon-home"></a></li>
-					<li><a href="cliente/Planos.html">Planos&nbsp;<span class="glyphicon glyphicon-book"></a></li>
-					<li><a href="cliente/Reservas.html">Reservas&nbsp;<span class="glyphicon glyphicon-lock"></a></li>
-					<li><a href="cliente/Relatorios.html">Relatórios&nbsp;<span class="glyphicon glyphicon-list-alt"></a></li>
-					<li><a href="cliente/MeusDados.html">Meus dados&nbsp;<span class="glyphicon glyphicon-tags"></a></li>
-				</ul>
-			</div>
-			</div>
-			<div class="span10">
-			  <div id='divContent' class='col-md-9'>
-				O conteúdo deve ser colocado aqui...
-			</div>
-			</div>
-		  </div>
 		</div>
-		<!-- <div class='row'> -->
-			<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Control Parking - Sistema de gerenciamento de estacionamentos | &copy 2015 | Desenvolvido por ESII</a>
+		<footer class='panel-footer'>
+			<div class="text-center">
+				Control Parking - Sistema de gerenciamento de estacionamentos | &copy 2015 | Desenvolvido por ESII
 			</div>
-		  </div>
-		</nav>
-		<!-- </div> -->
+		</footer>
 	</body>
 </html>
