@@ -1,0 +1,13 @@
+/* backgrounds */
+
+.bg-all { background-color: #9FC5F8 }
+.bg-menu { background-color: #CCC }
+.bg-content { background-color: #597EAA }
+
+.menu div { padding: 5% 15% 5% 15% }
+.menu-item { background-color: #FFD966; margin-top: 10%; margin-bottom: 15%; border: solid 1px black}
+.menu-item a { color: #000 }
+.radius-10 { border-radius: 10px }
+.simple-border-black { border: solid 2px black }
+.simple-border-red { border: solid 5px red }
+.offset-top-and-bottom-1 { padding: 1% 0px 1% 0px }
