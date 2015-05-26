@@ -7,7 +7,15 @@
 	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	  <link rel='stylesheet' href='css/cp.css'/> 
+	  <link rel='stylesheet' href='css/cp.css'/>
+	  <script type='text/javascript'>
+	  
+		function onlyDigitAllow(e) { };
+		
+		function formatDecimal(e, n) { };
+		
+		
+	  </script>
 	</head>
 	<body class='bg-all'>
 		<div class="container-fluid bg-info bg-all">
@@ -16,20 +24,47 @@
 					<div class='text-center bg-menu radius-10 simple-border-black'>
 						CLIENTE - Painel de controle
 						<ul class="nav nav-pills nav-stacked"> <!-- colocar class='active' na li atual-->
-							<li class='menu-item'><a href="cliente/Home.html">HOME&nbsp;<span class="glyphicon glyphicon-home"></a></li>
-							<li class='menu-item'><a href="cliente/Planos.html">PLANOS&nbsp;<span class="glyphicon glyphicon-book"></a></li>
-							<li class='menu-item'><a href="cliente/Reservas.html">RESERVAS&nbsp;<span class="glyphicon glyphicon-lock"></a></li>
-							<li class='menu-item'><a href="cliente/Relatorios.html">RELATÓRIOS&nbsp;<span class="glyphicon glyphicon-list-alt"></a></li>
-							<li class='menu-item'><a href="cliente/MeusDados.html">MEUS DADOS&nbsp;<span class="glyphicon glyphicon-tags"></a></li>
+							<li class='cmd-item margin-top-and-bottom-10'><a href="cliente/Home.html">HOME&nbsp;<span class="glyphicon glyphicon-home"></a></li>
+							<li class='cmd-item margin-top-and-bottom-10'><a href="cliente/Planos.html">PLANOS&nbsp;<span class="glyphicon glyphicon-book"></a></li>
+							<li class='cmd-item margin-top-and-bottom-10'><a href="cliente/Reservas.html">RESERVAS&nbsp;<span class="glyphicon glyphicon-lock"></a></li>
+							<li class='cmd-item margin-top-and-bottom-10'><a href="cliente/Relatorios.html">RELATÓRIOS&nbsp;<span class="glyphicon glyphicon-list-alt"></a></li>
+							<li class='cmd-item margin-top-and-bottom-10'><a href="cliente/MeusDados.html">MEUS DADOS&nbsp;<span class="glyphicon glyphicon-tags"></a></li>
 						</ul>
 						<div class='simple-border-red radius-10'>
 							<a href="cliente/Logout.html"><img src='img/exit.png' width='50px' alt='' /></a><br/>Sair do sistema
 						</div>
 					</div>
 				</div>
-				<div class='col-sm-9 content'> 
-					<div id='divConteudo' class='panel-body simple-border-black bg-content'><!-- conteudo principal -->
-						O conteúdo deve ser colocado aqui. Ou melhor, o conteúdo sera uma página separada que irá incluir esta master page.
+				<div class='col-sm-9 content'>
+					<div id='divConteudo' class='panel-body simple-border-black bg-content text-center'><!-- conteudo principal -->
+						<h3>ADMIN - Cadastro de Planos</h3>
+						<form role="form" class='text-center'>
+							<div class="form-group col-sm-6">
+							  <label for="txtNome">Nome:</label>
+							  <input type="text" class="form-control" id="txtNomePlano" placeholder="Ex: Plano executivo 1, Plano passeio...">
+							</div>
+							<div class="form-group col-sm-6">
+							  <label for="txtValor">Valor:</label>
+							  <input type="text" class="form-control" id="txtValorPlano" placeholder="Digite o valor do plano">
+							</div>
+							<div class="form-group col-sm-6">
+							  <label for="txtQuantidadeHoras">Quantidade de horas:</label>
+							  <input type="text" class="form-control" id="txtQuantidadeHoras" placeholder="Digite a quantidade de horas">
+							</div>
+							<div class="form-group col-sm-6">
+							  <label for="txtValorHoraExcedente">Hora excedente:</label>
+							  <input type="text" class="form-control" id="txtValorHoraExcedente" placeholder="Digite o valor da hora excedente">
+							</div>
+							<div class="form-group col-sm-12">
+								<label for="txtDescricao">Descrição:</label>
+								<textarea class="form-control" id="txtDescricao" placeholder='Digite alguma descrição para o plano (opcional)'>
+								</textarea>
+							  </div>
+							<div class="form-group col-sm-12">
+								<input type="button" id='btnCancelar' class="btn btn-danger min-border-white" value='Cancelar' /> &nbsp;
+								<input type="button" id='btnSalvar' class="btn cmd-item" value='Salvar' />
+							</div>
+						</form>
 					</div>
 				</div>				
 			</div>
