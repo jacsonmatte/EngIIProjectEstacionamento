@@ -1,0 +1,4 @@
+variáveis de sessão
+
+user_type : 1 - adm, 2 - cliente
+username

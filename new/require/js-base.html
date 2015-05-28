@@ -1,0 +1,33 @@
+<script type='text/javascript'>
+	var errorMessage = "Oops! Parece que tivemos um problema...<br/>Tente recarregar a página!";
+		  
+	function onlyDigitAllow(e) { };
+			
+	function formatDecimal(e, n) { };
+			
+	function getPageContent(x) {
+				
+		$.ajax({
+			url: 'ajax/get_page.php?user_type=1',
+			method: 'POST',
+			data: { pageId: x },
+			dataType: 'html',
+			success: setContent,
+			error: function(erro) {
+				setContent(errorMessage);
+			}
+		});
+	}
+			
+			
+	function setContent(htmlStr) {
+
+		$("#divConteudo").empty();
+		if (htmlStr.indexOf("<b>Parse error</b>:") != -1)
+			$("#divConteudo").append(errorMessage);
+		else
+			$("#divConteudo").append(htmlStr);
+	
+	}
+
+</script>
