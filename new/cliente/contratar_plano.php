@@ -1,6 +1,6 @@
 <?php
-	$_SESSION['user_type'] = 1;
-	require '../require/adm-aut.php';
+	$_SESSION['user_type'] = 2;
+	require '../require/cliente-aut.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 	<head>
 		<title>Control Parking - Contratar plano</title>
 		<?php
-			include '../include/meta.html';
+			require '../require/meta.html';
 			require '../require/js-base.html';
 		?>
 	</head>

@@ -3,40 +3,100 @@
 	<head>
 		<title>Control Parking - Cadastro de usuário</title>
 		<?php
-			include '../include/meta.html';
+			require '../require/meta.html';
 			require '../require/js-base.html';
 		?>
+		
+		<script>
+			
+			$(document).ready(function() {
+				$("#txtDataNascimento").mask("99/99/9999");
+				$("#txtTelefone1").mask("(99) 9999-9999");
+				$("#txtTelefone2").mask("(99) 9999-9999");
+				$("#txtCpfCnpj").mask("999.999.999-99");
+				$("#txtCep").mask("99.999-999");
+			});
+			
+			
+		</script>
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</head>
-	<body class='bg-all'>
-		<div class="container-fluid bg-info bg-all">
-			<div class="row offset-top-and-bottom-1 bg-all"> 
+	<body class='bg-content'>
+		<div class="container-fluid bg-info bg-content">
+			<div class="row offset-top-and-bottom-1 bg-content"> 
 				<div class="col-sm-3">
 				</div>
 				<div class="col-sm-6 text-center">
-					<h3>Cadastro de Planos</h3>
+					<h3>Novo cadastro de usuário</h3>
 					<form role='form' class='text-center'>
 						<div class='form-group col-sm-6'>
-							<label for='txtNome'>Nome:</label>
-							<input type='text' class='form-control' id='txtNome' placeholder='Ex: Plano executivo 1, Plano passeio...'>
+							<label for='txtNomeCompleto'>Nome completo:</label>
+							<input type='text' class='form-control' id='txtNomeCompleto' placeholder='Ex: Pedro Pedreira, João Joaninha...'>
 						</div>
 						<div class='form-group col-sm-6'>
-							<label for='txtValor'>Valor:</label>
-							<input type='text' class='form-control' id='txtValor' placeholder='Digite o valor do plano'>
+							<label for='txtDataNascimento'>Data de nascimento:</label>
+							<input type='text' class='form-control' id='txtDataNascimento'>
 						</div>
 						<div class='form-group col-sm-6'>
-							<label for='txtQuantidadeHoras'>Quantidade de horas:</label>
-							<input type='text' class='form-control' id='txtQuantidadeHoras' placeholder='Digite a quantidade de horas'>
+							<label> Tipo de pessoa:</label>
+							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' checked='checked' /> Física
+							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' /> Jurídica
+							<input type='text' class='form-control' id='txtCpfCnpj' />
 						</div>
 						<div class='form-group col-sm-6'>
-							<label for='txtValorHoraExcedente'>Hora excedente:</label>
-							<input type='text' class='form-control' id='txtValorHoraExcedente' placeholder='Digite o valor da hora excedente'>
+							<label for='txtTelefone'>Telefone: </label>
+							<input type='radio' name='rdbDigitosTelefone' id='rdbTelefone8Digitos' checked='checked' /> 8
+							<input type='radio' name='rdbDigitosTelefone' id='rdbTelefone9Digitos' /> 9 dígitos
+							<input type='text' class='form-control' id='txtTelefone1'/>
 						</div>
-						<div class='form-group col-sm-12'>
-							<label for='txtDescricao'>Descri&ccedil;&atilde;o:</label>
-							<textarea class='form-control' id='txtDescricao' placeholder='Digite alguma descri&ccedil;&atilde;o para o plano (opcional)'></textarea>
+						<div class='form-group col-sm-6'>
+							<label for='txtLogradouro'>Logradouro:</label>
+							<input type='text' class='form-control' id='txtLogradouro' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
+						</div>
+						<div class='form-group col-sm-3'>
+							<label for='txtNumero'>Número:</label>
+							<input type='text' class='form-control' id='txtNumero' placeholder='Digite o valor da hora excedente'>
+						</div>
+						<div class='form-group col-sm-3'>
+							<label for='txtCep'>CEP:</label>
+							<input type='text' class='form-control' id='txtCep'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtBairro'>Bairro:</label>
+							<input type='text' class='form-control' id='txtBairro' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtComplemento'>Complemento:</label>
+							<input type='text' class='form-control' id='txtComplemento' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtCidade'>Cidade:</label>
+							<input type='text' class='form-control' id='txtTelefone' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='sltEstado'>Estado:</label>
+							<select class='form-control'>
+								
+							</select>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtEmail'>e-Mail:</label>
+							<input type='text' class='form-control' id='txtTelefone' placeholder='Ex: email@email.com'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtUsername'>Username:</label>
+							<input type='text' class='form-control' id='txtUsername' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtSenha'>Senha:</label>
+							<input type='password' class='form-control' id='txtSenha' placeholder='*******'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<label for='txtConfirmacaoSenha'>Confirmação de senha:</label>
+							<input type='password' class='form-control' id='txtConfirmacaoSenha' placeholder='*******'>
 						</div>
 						<div class='form-group col-sm-12 text-right'>
-							<span id='spnErroSalvarPlano'></span>
+							<span id='spnErroSalvarPlano'></span> &nbsp;
 							<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
 							<input type='button' id='btnSalvar' class='btn cmd-item' value='Salvar' />
 						</div>
@@ -53,52 +113,7 @@
 		</footer>
 	</body>
 </html>
-	
-	
-	  
-	  
-
-    <style type="text/css">
-          .container{
-      position: relative;
-          top:100px;
-            left:400px;
-            height: 326px;
-            width: 570px;   
-            background-color: #888;
-            border: solid 3px black;
-            border: solid 3px black;
-          border-top-right-radius: 15px;
-            border-top-left-radius: 15px;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px; 
-    }
-
-    .botao_sair{
-      position: absolute;
-          top:270px;
-            left:500px;
-            height: 42px;
-            width: 42px;
-          border: solid 3px black;
-          border-top-right-radius: 10px;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px; 
-            color: black; 
-
-    }
-    input{
-      text-align: center;
-
-    }
-    
-	  </style>
-    </head>
-
-	  <body>
-
-
+<!--	
     <div class="container">
 
       <form class="form-cad">
@@ -165,14 +180,5 @@
 
      <button type="submit" id="botao_sair" name="sair" class="btn-danger botao_sair" >&#10008; Sair</button>
 
-      <script>
-	   jQuery(function($){
-       $("#inputData").mask("99/99/9999");
-       $("#inputTelefone").mask("(99) 9999-9999");
-       $("#inputCPF").mask("999.999.999-99");
-       $("#inputCEP").mask("99.999-999");
-		});
-	  </script>
 
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>

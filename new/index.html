@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.css" rel="stylesheet" media="screen" />
+		<link href='css/cp.css' rel='stylesheet' />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type='text/javascript'>
+		
+			function Logar() {
+				if ($("#txtUsername").val() == 'admin' && $("#txtSenha").val() == 'ok')
+					location.href = 'adm/home.php?user_type=1';
+				else if ($("#txtUsername").val() == 'cliente' && $("#txtSenha").val() == 'ok')
+					location.href = 'cliente/home.php?user_type=2';
+				else
+					$("#spnErroAcessoSistema").text("Login inválido...");
+			}
+			
+		</script>
+		
+	</head>
+	<body class='bg-content full-height'>
+		<div class="container-fluid bg-info bg-content full-height">
+			<div class="row offset-top-and-bottom-1 bg-content full-height"> 
+				<div class="col-sm-3 full-height">
+				</div>
+				<div class="col-sm-6 text-center offset-top-15 full-height">
+					<div class='form-group col-sm-6'>
+						<label for='txtUsername'>Username:</label>
+						<input type='text' class='form-control' id='txtUsername' placeholder='Coloque seu nome de usuário'>
+					</div>
+					<div class='form-group col-sm-6'>
+						<label for='txtSenha'>Senha:</label>
+						<input type='password' class='form-control' id='txtSenha' placeholder='*******'>
+					</div>
+					<div class='form-group col-sm-12 text-right'>
+						<span id='spnErroAcessoSistema'></span> &nbsp;
+						<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Não consigo acessar' /> &nbsp;
+						<input type='button' id='btnSalvar' class='btn cmd-item' value='Logar' onclick='Logar();' />
+					</div>
+				</div>
+				<div class="col-sm-3">
+				</div>
+			</div>
+		</div>
+		<footer class='panel-footer'>
+			<div class="text-center">
+				Control Parking - Sistema de gerenciamento de estacionamentos | &copy 2015 | Desenvolvido por Non Static Void
+			</div>
+		</footer>
+	</body>
+</html>

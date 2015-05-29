@@ -1,11 +1,12 @@
 <?php
+	
 	if (!isset($_SESSION)) {
-		session_start();
+		session.start();
 		$_SESSION['user_type'] = $_GET['user_type'];
-		$_SESSION['username'] = 'adm';
+		$_SESSION['username'] = 'cliente';
 	}
 	
-	require '../require/adm-aut.php';
+	require '../require/cliente-aut.php';
 ?>
 
 <!DOCTYPE html>
@@ -19,9 +20,8 @@
 	</head>
 	<?php
 		require '../require/menu-1.html';
-		$_SESSION['user_type'] = $_GET['user_type'];
-		$_SESSION['username'] = 'adm';
-		require '../require/menu-adm.html';
+		
+		require '../require/menu-cliente.html';
 		require '../require/menu-2-content-1.html';
 		echo "Bem vindo, <b>" . $_SESSION['username'] . "</b>!<br/>";
 		require '../require/content-2-footer.html';
