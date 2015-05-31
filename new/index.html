@@ -3,9 +3,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/bootstrap.css" rel="stylesheet" media="screen" />
-		<link href='css/cp.css' rel='stylesheet' />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link href='css/cp.css' rel='stylesheet' />
 		<script type='text/javascript'>
 		
 			function Logar() {
@@ -17,15 +18,21 @@
 					$("#spnErroAcessoSistema").text("Login inválido...");
 			}
 			
+			function exibirOpcaoRedefinirSenha() {
+				$('#divLogin').toggle();
+				$('#divRedefinirSenha').toggle();
+			}
+			
+			
 		</script>
 		
 	</head>
 	<body class='bg-content full-height'>
 		<div class="container-fluid bg-info bg-content full-height">
-			<div class="row offset-top-and-bottom-1 bg-content full-height"> 
+			<div id='div1' class="row offset-top-and-bottom-1 bg-content full-height"> 
 				<div class="col-sm-3 full-height">
 				</div>
-				<div class="col-sm-6 text-center offset-top-15 full-height">
+				<div id='divLogin' class="col-sm-6 text-center offset-top-15 full-height collapse in panel-collapse">
 					<div class='form-group col-sm-6'>
 						<label for='txtUsername'>Username:</label>
 						<input type='text' class='form-control' id='txtUsername' placeholder='Coloque seu nome de usuário'>
@@ -36,8 +43,24 @@
 					</div>
 					<div class='form-group col-sm-12 text-right'>
 						<span id='spnErroAcessoSistema'></span> &nbsp;
-						<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Não consigo acessar' /> &nbsp;
-						<input type='button' id='btnSalvar' class='btn cmd-item' value='Logar' onclick='Logar();' />
+						<input type='button' class='btn cmd-item' value='Logar' onclick='Logar();' /> &nbsp;
+						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' onclick='exibirOpcaoRedefinirSenha();'/> &nbsp;
+						<input type='button' class='btn cmd-item' value='Criar conta' onclick='location.href = "cliente/criar_cadastro.php";' />
+					</div>
+				</div>
+				<div id='divRedefinirSenha' class="col-sm-6 text-center offset-top-15 full-height collapse panel-collapse">
+					<div class='form-group col-sm-6'>
+						<label for='txtUsername'>e-Mail:</label>
+						<input type='text' class='form-control' id='txtEmail' placeholder='Insira seu e-mail cadastrado'>
+					</div>
+					<div class='form-group col-sm-6'>
+						<label for='txtSenha'>CPF/CNPJ:</label>
+						<input type='text' class='form-control' id='txtCpfCnpj' placeholder='... ou seu CPF/CNPJ'>
+					</div>
+					<div class='form-group col-sm-12 text-right'>
+						<span id='spnErroAcessoSistema'></span> &nbsp;
+						<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' onclick='exibirOpcaoRedefinirSenha();'/> &nbsp;
+						<input type='button' id='btnSalvar' class='btn cmd-item' value='Redefinir senha' onclick='RedefinirSenha();' />
 					</div>
 				</div>
 				<div class="col-sm-3">
