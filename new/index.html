@@ -7,23 +7,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link href='css/cp.css' rel='stylesheet' />
-		<script type='text/javascript'>
-		
-			function Logar() {
-				if ($("#txtUsername").val() == 'admin' && $("#txtSenha").val() == 'ok')
-					location.href = 'adm/home.php?user_type=1';
-				else if ($("#txtUsername").val() == 'cliente' && $("#txtSenha").val() == 'ok')
-					location.href = 'cliente/home.php?user_type=2';
-				else
-					$("#spnErroAcessoSistema").text("Login inválido...");
-			}
-			
-			function exibirOpcaoRedefinirSenha() {
-				$('#divLogin').toggle();
-				$('#divRedefinirSenha').toggle();
-			}
-			
-		</script>
 		
 	</head>
 	<body class='bg-content full-height'>
@@ -42,8 +25,8 @@
 					</div>
 					<div class='form-group col-sm-12 text-right'>
 						<span id='spnErroAcessoSistema'></span> &nbsp;
-						<input type='button' class='btn cmd-item' value='Logar' onclick='Logar();' /> &nbsp;
-						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' onclick='exibirOpcaoRedefinirSenha();'/> &nbsp;
+						<input type='button' class='btn cmd-item' value='Logar' id='Logar' /> &nbsp;
+						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' id='exibirOpcaoRedefinirSenha'/> &nbsp;
 						<input type='button' class='btn cmd-item' value='Criar conta' onclick='location.href = "cliente/criar_cadastro.php";' />
 					</div>
 				</div>
@@ -58,7 +41,7 @@
 					</div>
 					<div class='form-group col-sm-12 text-right'>
 						<span id='spnErroAcessoSistema'></span> &nbsp;
-						<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' onclick='exibirOpcaoRedefinirSenha();'/> &nbsp;
+						<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
 						<input type='button' id='btnSalvar' class='btn cmd-item' value='Redefinir senha' onclick='RedefinirSenha();' />
 					</div>
 				</div>
@@ -73,3 +56,25 @@
 		</footer>
 	</body>
 </html>
+<script type="text/javascript">
+	$( "#Logar" ).click(function() {
+		if ($("#txtUsername").val() == 'admin' && $("#txtSenha").val() == 'ok')
+			location.href = 'adm/home.php?user_type=1';
+		else if ($("#txtUsername").val() == 'cliente' && $("#txtSenha").val() == 'ok')
+			location.href = 'cliente/home.php?user_type=2';
+		else
+			$("#spnErroAcessoSistema").text("Login inválido...");
+	});
+	
+	$( "#exibirOpcaoRedefinirSenha" ).click(function() {
+		$('#divLogin').toggle();
+		$('#divRedefinirSenha').toggle();
+	});
+	
+	$( "#btnCancelar").click(function() {
+		$('#divLogin').toggle();
+		$('#divRedefinirSenha').toggle();
+	});
+	
+</script>
+
