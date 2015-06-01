@@ -21,20 +21,20 @@
 	<h3>Controle de Reservas</h3>
 	<form role='form' class='text-center' id="form-pesquisa">
 		
-		<div class='form-group col-sm-4' style="border:solid 3px #000">
-			<h4>Consulta:</h4><br/>
+		<div class='form-group col-sm-4 text-left'  style="border:solid 3px #000">
+			<h4>Consulta de Vagas:</h4><br/>
 			<label for='dt_inicio'>Data de Início:</label>
 			<input type='date' class='form-control' id='dt_inicio' name="data_inicio"><br/>
 			<label for='dt_fim'>Data Final:</label>
 			<input type='date'  class='form-control' id='dt_fim' name="data_fim"><br/>
-			<button type='submit' id='btn_pesquisa' class='btn btn-success btn-medium min-border-white' value='Pesquisar'>Pesquisar <span class='glyphicon glyphicon-search'/></button>
+			<center><button type='submit' id='btn_pesquisa' class='btn btn-success btn-medium min-border-white' value='Pesquisar'>Pesquisar <span class='glyphicon glyphicon-search'/></button>
 			<hr/>
 		</div>
 
 	</form>	
 	<form role='form' class='text-center' id="form-reserva">
-		<div class='form-group col-md-offset-6' >
-			<h4>Efetuar Reserva:</h4><br/>
+		<div class='form-group col-md-offset-6 text-left' >
+			<h4 class='text-center'>Efetuar Reserva:</h4><br/>
 			<label for='vaga'>Vagas Disponíveis:</label>
 			<select class='form-control' id='vaga'>
 				<option> Vagas</option>
