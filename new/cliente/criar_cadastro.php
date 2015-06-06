@@ -29,69 +29,69 @@
 				<div class="col-sm-6 text-center">
 					<h3>Novo cadastro de usuário</h3>
 					<form role='form' class='text-center'>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
 							<input type='text' class='form-control' id='txtNomeCompleto' placeholder='Ex: Pedro Pedreira, João Joaninha...'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtDataNascimento'>Data de nascimento:</label>
 							<input type='text' class='form-control' id='txtDataNascimento'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label> Tipo de pessoa:</label>
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' checked='checked' /> Física
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' /> Jurídica
 							<input type='text' class='form-control' id='txtCpfCnpj' />
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtTelefone'>Telefone: </label>
 							<input type='radio' name='rdbDigitosTelefone' id='rdbTelefone8Digitos' checked='checked' /> 8
 							<input type='radio' name='rdbDigitosTelefone' id='rdbTelefone9Digitos' /> 9 dígitos
 							<input type='text' class='form-control' id='txtTelefone1'/>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtLogradouro'>Logradouro:</label>
 							<input type='text' class='form-control' id='txtLogradouro' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group col-sm-3'>
+						<div class='form-group text-left col-sm-3'>
 							<label for='txtNumero'>Número:</label>
 							<input type='text' class='form-control' id='txtNumero' placeholder='Digite o valor da hora excedente'>
 						</div>
-						<div class='form-group col-sm-3'>
+						<div class='form-group text-left col-sm-3'>
 							<label for='txtCep'>CEP:</label>
 							<input type='text' class='form-control' id='txtCep'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtBairro'>Bairro:</label>
 							<input type='text' class='form-control' id='txtBairro' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group col-sm-6'>
-							<label for='txtComplemento'>Complemento:</label>
+						<div class='form-group text-left col-sm-6'>
+							<label class='' for='txtComplemento'>Complemento:</label>
 							<input type='text' class='form-control' id='txtComplemento' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtCidade'>Cidade:</label>
 							<input type='text' class='form-control' id='txtTelefone' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='sltEstado'>Estado:</label>
 							<select class='form-control'>
 								
 							</select>
 						</div>
-						<div class='form-group col-sm-6'>
-							<label for='txtEmail'>e-Mail:</label>
+						<div class='form-group text-left col-sm-6'>
+							<label for='txtEmail'>E-Mail:</label>
 							<input type='text' class='form-control' id='txtTelefone' placeholder='Ex: email@email.com'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtUsername'>Username:</label>
 							<input type='text' class='form-control' id='txtUsername' placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtSenha'>Senha:</label>
 							<input type='password' class='form-control' id='txtSenha' placeholder='*******'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group text-left col-sm-6'>
 							<label for='txtConfirmacaoSenha'>Confirmação de senha:</label>
 							<input type='password' class='form-control' id='txtConfirmacaoSenha' placeholder='*******'>
 						</div>

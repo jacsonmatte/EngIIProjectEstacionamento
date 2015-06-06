@@ -1,8 +1,8 @@
 /* backgrounds */
 
-.bg-all { background-color: #9FC5F8 }
+.bg-all { background-color: rgba(14, 46, 115, 0.36) }
 .bg-menu { background-color: #CCC }
-.bg-content { background-color: #597EAA }
+.bg-content { background-color: #AACBD5 }
 
 .menu div { padding: 5% 15% 5% 15% }
 .cmd-item { background-color: #FFD966; border: solid 1px black; font-weight: bold }
