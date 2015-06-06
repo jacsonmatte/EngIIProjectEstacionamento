@@ -42,23 +42,33 @@
 		</div>
 		<div class='form-group col-sm-9 text-left'>
 			<div class='col-sm-12 text-left form-group'>
-				<input class='form-control' type='date' id='dteDataInicial'/>
+				<div class='col-sm-4'>
+					<input class='form-control' type='date' id='dteDataInicial'/>
+				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input class='form-control' type='date' id='dteDataFinal'/>
+				<div class='col-sm-4'>
+					<input class='form-control' type='date' id='dteDataFinal'/>
+				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input class='form-control' type='text' id='txtIdentificacaoCliente' placeholder='Identificação do cliente'/>
+				<div class='col-sm-6'>
+					<input class='form-control' type='text' id='txtIdentificacaoCliente' placeholder='Identificação do cliente'/>
+				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input class='form-control' type='text' id='txtVaga' placeholder='Vaga'/>
+				<div class='col-sm-3'>
+					<input class='form-control' type='text' id='txtVaga' placeholder='Vaga'/>
+				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<select class='form-control' id='sltPlanos'>
-					<option>Plano 1</option>
-					<option>Plano 2</option>
-					<option>Plano 3</option>
-				</select>
+				<div class='col-sm-6'>
+					<select class='form-control' id='sltPlanos'>
+						<option>Plano 1</option>
+						<option>Plano 2</option>
+						<option>Plano 3</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class='form-group col-sm-12 text-right'>
