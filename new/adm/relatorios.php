@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
-		<title>Control Parking - Cadastrar vaga</title>
+		<title>Control Parking - Relatórios</title>
 		<?php
 			require '../require/meta.html';
 			require '../require/js-base.html';
@@ -43,12 +43,12 @@
 		<div class='form-group col-sm-9 text-left'>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
-					<input class='form-control' type='date' id='dteDataInicial'/>
+					<input class='form-control' type='date' id='dteDataInicial' placeholder='Data Inicial'/>
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
-					<input class='form-control' type='date' id='dteDataFinal'/>
+					<input class='form-control' type='date' id='dteDataFinal' placeholder='Data Final'/>
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
