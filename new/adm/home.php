@@ -4,7 +4,6 @@
 		$_SESSION['user_type'] = $_GET['user_type'];
 		$_SESSION['username'] = 'adm';
 	}
-	
 	require '../require/adm-aut.php';
 ?>
 

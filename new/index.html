@@ -7,21 +7,21 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link href='css/cp.css' rel='stylesheet' />
-		
+		<title>Control Parking - Login</title>
 	</head>
 	<body class='bg-content full-height'>
 		<div class="container-fluid bg-info bg-content full-height">
-			<div id='div1' class="row offset-top-and-bottom-1 bg-content full-height"> 
+			<div id='div1' class="row offset-top-and-bottom-15 bg-content"> 
 				<div class="col-sm-3 full-height">
 				</div>
-				<div id='divLogin' class="col-sm-6 text-center offset-top-15 full-height collapse in panel-collapse">
+				<div id='divLogin' class="col-sm-6 text-center collapse in">
 					<div class='form-group col-sm-6'>
-						<label for='txtUsername'>Username:</label>
-						<input type='text' class='form-control' id='txtUsername' placeholder='Coloque seu nome de usuário'>
+						<!-- <label for='txtUsername'>Username:</label> -->
+						<input type='text' class='form-control' id='txtUsername' placeholder='Informe seu nome de usuário ...'>
 					</div>
 					<div class='form-group col-sm-6'>
-						<label for='txtSenha'>Senha:</label>
-						<input type='password' class='form-control' id='txtSenha' placeholder='*******'>
+						<!-- <label for='txtSenha'>Senha:</label> -->
+						<input type='password' class='form-control' id='txtSenha' placeholder='... e a sua senha'>
 					</div>
 					<div class='form-group col-sm-12 text-right'>
 						<span id='spnErroAcessoSistema'></span> &nbsp;
@@ -30,13 +30,13 @@
 						<input type='button' class='btn cmd-item' value='Criar conta' onclick='location.href = "cliente/criar_cadastro.php";' />
 					</div>
 				</div>
-				<div id='divRedefinirSenha' class="col-sm-6 text-center offset-top-15 full-height collapse panel-collapse">
+				<div id='divRedefinirSenha' class="col-sm-6 text-center collapse">
 					<div class='form-group col-sm-6'>
-						<label for='txtUsername'>e-Mail:</label>
-						<input type='text' class='form-control' id='txtEmail' placeholder='Insira seu e-mail cadastrado'>
+						<!-- <label for='txtUsername'>e-Mail:</label> -->
+						<input type='text' class='form-control' id='txtEmail' placeholder='Insira seu e-mail cadastrado ...'>
 					</div>
 					<div class='form-group col-sm-6'>
-						<label for='txtSenha'>CPF/CNPJ:</label>
+						<!-- <label for='txtSenha'>CPF/CNPJ:</label> -->
 						<input type='text' class='form-control' id='txtCpfCnpj' placeholder='... ou seu CPF/CNPJ'>
 					</div>
 					<div class='form-group col-sm-12 text-right'>
