@@ -5,7 +5,7 @@
 		$_SESSION['user_type'] = $_GET['user_type'];
 		$_SESSION['username'] = 'cliente';
 	}
-	
+	//teste
 	require '../require/cliente-aut.php';
 ?>
 
