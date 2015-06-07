@@ -1,5 +1,5 @@
 <?php
-	//$_SESSION['user_type'] = 1;
+	$_SESSION['user_type'] = 2;
 	require '../require/cliente-aut.php';
 ?>
 
@@ -34,16 +34,16 @@
 		<div class='form-group col-sm-9 text-left'>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
-					<input class='form-control' type='date' id='dteDataInicial'/>
+					<input class='form-control' type='date' id='dteDataInicial' placeholder='Data Inicial'/>
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
-					<input class='form-control' type='date' id='dteDataFinal'/>
+					<input class='form-control' type='date' id='dteDataFinal' placeholder='Data Final'/>
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<div class='col-sm-3'>
+				<div class='col-sm-4'>
 					<input class='form-control' type='text' id='txtSituacao' placeholder='Situação Reserva'/>
 				</div>
 			</div>
