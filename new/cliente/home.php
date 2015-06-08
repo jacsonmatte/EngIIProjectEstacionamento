@@ -1,4 +1,4 @@
-<?php session_start(); require '../require/cliente-aut.php'; ?>
+<?php require '../require/cliente-aut.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
