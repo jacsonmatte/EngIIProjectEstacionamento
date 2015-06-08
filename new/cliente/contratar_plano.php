@@ -1,5 +1,4 @@
 <?php
-	$_SESSION['user_type'] = 2;
 	require '../require/cliente-aut.php';
 ?>
 

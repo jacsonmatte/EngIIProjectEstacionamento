@@ -1,5 +1,4 @@
 <?php
-	$_SESSION['user_type'] = 1;
 	require '../require/adm-aut.php';
 ?>
 

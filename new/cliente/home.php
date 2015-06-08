@@ -1,13 +1,4 @@
-<?php
-	
-	if (!isset($_SESSION)) {
-		session_start();
-		$_SESSION['user_type'] = $_GET['user_type'];
-		$_SESSION['username'] = 'cliente';
-	}
-	//teste
-	require '../require/cliente-aut.php';
-?>
+<?php session_start(); require '../require/cliente-aut.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,7 +11,6 @@
 	</head>
 	<?php
 		require '../require/menu-1.html';
-		
 		require '../require/menu-cliente.html';
 		require '../require/menu-2-content-1.html';
 		echo "Bem vindo, <b>" . $_SESSION['username'] . "</b>!<br/>";
