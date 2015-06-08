@@ -278,7 +278,7 @@ Basic information about the customer like first and last name are stored in the 
 DROP TABLE IF EXISTS `estacionamento`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `estacionamento`.`usuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `senha` VARCHAR(45) NULL,
   `login` VARCHAR(45) NULL,
   `cliente_id_cliente` INT(11) NOT NULL,
