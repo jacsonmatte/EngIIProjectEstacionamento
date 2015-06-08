@@ -1,4 +1,4 @@
-<?php session_start(); require '../require/adm-aut.php'; ?>
+<?php require '../require/adm-aut.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
