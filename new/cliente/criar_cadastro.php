@@ -15,10 +15,18 @@
         			$("#txtCpfCnpj").mask("99.999.999/9999-99");	  
     			}     
 			}  
+
+			function habilita_tel(v){
+				if (v == 1) {  
+        			$("#txtTelefone").mask("(99) 9999-9999");
+    			} else {  
+        			$("#txtTelefone").mask("(99) 99999-9999");		  
+    			}   
+
+			}
 			
 			$(document).ready(function() {
 				$("#txtDataNascimento").mask("99/99/9999");
-				$("#txtTelefone").mask("(99) 9999-9999");
 				$("#txtCep").mask("99.999-999");
 			});
 
@@ -74,7 +82,23 @@
 					alert("O Campo email é obrigatório!");
 					document.getElementById('txtEmail').focus();
 					return false;				
-				}			
+				}else if(document.cadastro.login.value==""){
+					alert("O Campo login é obrigatório!");
+					document.getElementById('txtUsername').focus();
+					return false;
+				}else if(document.cadastro.senha.value==""){
+					alert("O Campo senha é obrigatório!");
+					document.getElementById('txtsenha').focus();
+					return false;
+				}else if(document.cadastro.conf_senha.value==""){
+					alert("O Campo de confirmação de senha é obrigatório!");
+					document.getElementById('txtconfirmacaosenha').focus();
+					return false;
+				}else if(document.cadastro.conf_senha.value!=document.cadastro.senha.value){
+					alert("As senhas digitadas nao são iguais!");
+					document.getElementById('txtsenha').focus();
+					return false;
+				}							
 			}
 
 			
@@ -236,18 +260,20 @@
 						<div class='form-group  text-left col-sm-6'>
 							<label> Tipo de pessoa:</label>
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> Física
-							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> Jurídica
+							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> Jurídica (CNPJ)
 							<input type='text' class='form-control' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj" onBlur="validaCPF_CNPJ(cadastro.cpf_cnpj);"/>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtTelefone'>Telefone: </label>
+							<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick="habilita_tel(1)" /> 8 dígitos
+							<input type='radio' name='rdbTelefone' id='rdbTelefone2' onclick="habilita_tel(2)"/> 9 dígitos
 							<input type='text' class='form-control' name="telefone" id='txtTelefone'/>
 						</div>
-						<div class='form-group  text-left col-sm-9'>
+						<div class='form-group  text-left col-sm-7'>
 							<label for='txtLogradouro'>Logradouro:</label>
 							<input type='text' class='form-control' id='txtLogradouro' name="logradouro" placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group  text-left col-sm-3'>
+						<div class='form-group  text-left col-sm-5'>
 							<label for='txtNumero'>Número:</label>
 							<input type='text' class='form-control' id='txtNumero' name="numero" placeholder='nº'>
 						</div>
@@ -265,7 +291,7 @@
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtCidade'>Cidade:</label>
-							<input type='text' class='form-control' id='txtcidade' name="cidade" placeholder='Ex: Chapecó...'>
+							<input type='text' class='form-control' id='txtCidade' name="cidade" placeholder='Ex: Chapecó...'>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='sltEstado'>Estado:</label>
@@ -303,7 +329,19 @@
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtEmail'>e-Mail:</label>
-							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='Ex: email@email.com'>
+							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='Ex: email@email.com'/>
+						</div>
+						<div class='form-group text-left col-sm-6'>
+							<label for='txtUsername'>Username:</label>
+							<input type='text' class='form-control' id='txtUsername' name="login"/>
+						</div>
+						<div class='form-group text-left col-sm-6'>
+							<label for='txtsenha'>Senha:</label>
+							<input type='password' class='form-control' id='txtsenha' name="senha" placeholder='*******'>
+						</div>
+						<div class='form-group text-left col-sm-6'>
+							<label for='txtconfirmacaosenha'>Confirmação de senha:</label>
+							<input type='password' class='form-control' id='txtconfirmacaosenha' name="conf_senha" placeholder='*******'>
 						</div>
 						
 						<div class='form-group col-sm-12 text-right'>
@@ -341,21 +379,42 @@
 	 			$cep=$_POST["cep"];
 	 			$bairro=$_POST["bairro"];
 	 			$telefone=$_POST["telefone"];
-	 			
-	 			
-				$sql="INSERT INTO cliente values('NULL', '$nome','$cpf_cnpj','$email', '$logradouro','$numero', '$cep', '$bairro', '$cidade', '$estado', '$telefone', '0')";
-					
-				$limite=dbConsulta($sql,'estacionamento', $conexao);
+	 			$login=$_POST["login"];
+	 			$senha=$_POST["senha"];
+	 			$conf_senha=$_POST["conf_senha"];
+
+	 			$testa="SELECT * FROM usuario WHERE usuario.senha='$senha' or usuario.login='$login'";
+	 			$pega=dbConsulta($testa,'estacionamento', $conexao);
+	 			$numrow = @mysql_num_rows($pega);
+				if($numrow > 0){
+	 				echo "<script>alert('Já existe um usuário com esse login ou senha !!');</script>";
+	 			}else{
+	 				
+					$sql="INSERT INTO cliente values('NULL', '$nome','$cpf_cnpj','$email', '$logradouro','$numero', '$cep', '$bairro', '$cidade', '$estado', '$telefone')";
+					$limite=dbConsulta($sql,'estacionamento', $conexao);
 				
-				if(!$limite){
-					echo "<script>alert('Não foi possível cadastrar o cliente !!');</script>";
-				}else{
+					if(!$limite){
+						die("Erro ao Cadastrar !");
+					}
+					$conexao=dbConnect("localhost","root","");
+					$sql="SELECT id_cliente FROM cliente where cpf_cnpj='$cpf_cnpj'";
+					$busca_id=dbConsulta($sql,'estacionamento', $conexao);
+
+					while($pega=mysql_fetch_array($busca_id)){
+						$id=$pega["id_cliente"];
+					}
+					$sql="INSERT INTO usuario values('NULL', '$senha','$login', '$id')";
+	 				$limite=dbConsulta($sql,'estacionamento', $conexao);
+	 				if(!$limite){
+						die("Erro ao Cadastrar !");
+					}else{
 						
-					mysql_close($conexao);
-					echo "<script>alert('Usuário Cadastrado com Sucesso !!');</script>";
+						echo "<script>alert('Usuário Cadastrado com Sucesso !!');</script>";
+						mysql_close($conexao);
 					
+					}
 		
-					}	
+				}	
 			}		
 
 
