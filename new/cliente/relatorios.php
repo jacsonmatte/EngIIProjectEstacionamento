@@ -22,13 +22,13 @@
 	<form role='form' class='text-center'>
 		<div class='form-group col-sm-3 text-left'>
 			<div class='col-sm-12 text-left form-group'>
-				<input type='radio' name='relatorio' id='rdbRelatorioMeusPlanos' /> Meus Planos
+				<input type='radio' name='relatorio' id='rdbRelatorioPlanos' /><label for='rdbRelatorioPlanos'>&nbsp;Planos</label>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input type='radio' name='relatorio' id='rdbRelatorioUsoPlanos' /> Uso de Planos
+				<input type='radio' name='relatorio' id='rdbRelatorioUso' /><label for='rdbRelatorioUso'>&nbsp;Uso</label>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input type='radio' name='relatorio' id='rdbRelatorioMinhasReservas' /> Minhas Reservas
+				<input type='radio' name='relatorio' id='rdbRelatorioReservas' /><label for='rdbRelatorioReservas'>&nbsp;Reservas</label>
 			</div>
 		</div>
 		<div class='form-group col-sm-9 text-left'>
@@ -43,11 +43,6 @@
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<div class='col-sm-4'>
-					<input class='form-control' type='text' id='txtSituacao' placeholder='Situação Reserva'/>
-				</div>
-			</div>
-			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-6'>
 					<select class='form-control' id='sltPlanos'>
 						<option>Plano 1</option>
@@ -58,11 +53,59 @@
 			</div>
 		</div>
 		<div class='form-group col-sm-12 text-right'>
-			<span id='spnErroGerarRelatorio'></span>
+			<span id='spnErroGerarRelatorio' class='help-inline'></span>&nbsp;
 			<input type='button' id='btnGerar' class='btn cmd-item' value='Gerar' />
 		</div>
 	</form>
+	<!-- Modal do relatório -->
+	<div class="modal fade" id="divRelatorio" role="dialog">
+		<div class="modal-dialog">		
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id='h4TituloRelatorio' >Relatório exemplo</h4>
+				</div>
+				<div class="modal-body" id='divConteudoRelatorio'>
+					Aqui colocamos a table gerada dinamicamente
+				</div>
+		  </div>
+		</div>
+	</div>
 	<?php
 		require '../require/content-2-footer.html';
 	?>
+	
+	<script type='text/javascript'>
+	
+		$("#btnGerar").click(function() {
+			
+			$("#spnErroGerarRelatorio").text('');
+			
+			// obter os radio checados para ver se foi escolhido algum tipo de relatório
+			var opt = $('input[name=relatorio]:checked');
+			
+			if (opt.length == 1) {
+				
+				// verificar o tipo de relatório selecionado e os filtros necessários
+				
+				// se tiver tudo ok, chama o relatório por ajax
+				// recebe o retorno json
+				// chama a função que monta a tabela com o objeto json (ainda será criada)
+				// coloca a tabela na divConteudoRelatorio 
+				//$("#divConteudoRelatorio").empty();
+				//$("#divConteudoRelatorio").append(conteudo);
+				// exibe o modal
+				$("#divRelatorio").modal();
+			}
+			else
+				$("#spnErroGerarRelatorio").text('É necessário escolher um tipo de relatório');
+			
+		});
+		
+	
+	</script>
+	
+	
+	
 </html>
