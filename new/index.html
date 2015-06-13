@@ -17,15 +17,17 @@
 				<div id='divLogin' class="col-sm-6 text-center collapse in">
 					<div class='form-group col-sm-6'>
 						<!-- <label for='txtUsername'>Username:</label> -->
-						<input type='text' class='form-control' id='txtUsername' placeholder='Informe seu nome de usuário ...'>
-					</div>
-					<div class='form-group col-sm-6'>
-						<!-- <label for='txtSenha'>Senha:</label> -->
-						<input type='password' class='form-control' id='txtSenha' placeholder='... e a sua senha'>
-					</div>
-					<div class='form-group col-sm-12 text-right'>
-						<span id='spnErroAcessoSistema'></span> &nbsp;
-						<input type='button' class='btn cmd-item' value='Logar' id='btnLogar' /> &nbsp;
+						 <form id="formulario" class="form-horizontal" role="form" action="validation.php" method="POST">
+								<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Informe seu nome de usuário ...'>
+							</div>
+							<div class='form-group col-sm-6'>
+								<!-- <label for='txtSenha'>Senha:</label> -->
+								<input type='password' class='form-control' id='txtSenha' name="senha" placeholder='... e a sua senha'>
+							</div>
+							<div class='form-group col-sm-12 text-right'>
+								<span id='spnErroAcessoSistema'></span> &nbsp;
+								<input type='submit' class='btn cmd-item' value='Logar'  /> &nbsp;
+						</form>
 						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' id='exibirOpcaoRedefinirSenha'/>
 					</div>
 					<div class='form-group col-sm-12 text-right'>

@@ -12,4 +12,11 @@ function dbConsulta($sql, $app, $connect){
     ($a = mysql_query($sql)) or (die ("error: ".mysql_error()));
     return $a;
 }
+
+function validaLogin($user, $senha){
+	 $sql = "SELECT `senha`, `login` FROM `usuario` WHERE login='$user' and senha='$senha'";
+	 $con = dbConnect("localhost","root","");
+	 $result =dbConsulta($sql,"estacionamento",$con);
+	 return mysql_num_rows($result);
+}
 ?>
