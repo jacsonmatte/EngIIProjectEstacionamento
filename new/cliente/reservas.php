@@ -1,22 +1,23 @@
-<?php require '../require/adm-aut.php'; ?>
+<?php
+	require '../require/cliente-aut.php';
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
-		<title>Control Parking - Reservas</title>
+		<title>Control Parking - Cadastrar plano</title>
 		<?php
-			require '../require/meta.html';
+			include '../require/meta.html';
 			require '../require/js-base.html';
 		?>
 	</head>
 	<?php
 		require '../require/menu-1.html';
-		$_SESSION['username'] = 'teste';
-		require '../require/menu-adm.html';
+		require '../require/menu-cliente.html';
 		require '../require/menu-2-content-1.html';
 	?> 
-	<h3>Reservas</h3>
-		<form role='form' class='text-center'>
+	<h3>Controle de Reservas</h3>
+	<form role='form' class='text-center' id="form-pesquisa">
 		<div class='form-group col-sm-3 text-left'>
 			<label for='txtPesquisaDataInicial'>Data inicial:</label>
 			<input type='date' class='form-control' id='txtPesquisaDataInicial'>

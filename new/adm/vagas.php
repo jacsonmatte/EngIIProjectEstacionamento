@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
-		<title>Control Parking - Reservas</title>
+		<title>Control Parking - Vagas</title>
 		<?php
 			require '../require/meta.html';
 			require '../require/js-base.html';
@@ -11,19 +11,14 @@
 	</head>
 	<?php
 		require '../require/menu-1.html';
-		$_SESSION['username'] = 'teste';
 		require '../require/menu-adm.html';
 		require '../require/menu-2-content-1.html';
 	?> 
-	<h3>Reservas</h3>
+	<h3>Vagas</h3>
 		<form role='form' class='text-center'>
 		<div class='form-group col-sm-3 text-left'>
-			<label for='txtPesquisaDataInicial'>Data inicial:</label>
-			<input type='date' class='form-control' id='txtPesquisaDataInicial'>
-		</div>
-		<div class='form-group col-sm-3 text-left'>
-			<label for='txtPesquisaDataFinal'>Data final:</label>
-			<input type='date' class='form-control' id='txtPesquisaDataFinal'>
+			<label for='txtPesquisaNumeroVaga'>Número:</label>
+			<input type='text' class='form-control' id='txtPesquisaNumeroVaga'>
 		</div>
 		<div class='form-group col-sm-3 text-left'>
 			<label for='sltPesquisaSituacao'>Situação:</label>
@@ -42,11 +37,11 @@
 			</select>
 		</div>
 		<div class='form-group col-sm-12 text-right'>
-			<span id='spnErroPesquisarReservas'></span>
+			<span id='spnErroPesquisarVagas'></span>
 			<input type='button' id='btnPesquisar' class='btn cmd-item' value='Pesquisar' />
 		</div>
-		<div id='divResultadoPesquisaReservas' class='form-group col-sm-12 text-center'>
-			<strong>Nenhuma reserva encontrada ou pesquisada por enquanto</strong>
+		<div id='divResultadoPesquisaVagas' class='form-group col-sm-12 text-center'>
+			<strong>Nenhuma vaga encontrada ou pesquisada por enquanto</strong>
 		</div>
 	</form>
 	<?php
