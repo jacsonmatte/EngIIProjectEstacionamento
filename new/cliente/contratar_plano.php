@@ -18,7 +18,7 @@
 		require '../require/menu-2-content-1.html';
 	?> 
 	<h3>Contratar Plano</h3>
-	<form role='form' class='text-center'>
+	<form role='form' class='text-left'>
 		<div class='form-group col-sm-6'>
 			<label for='sltPlano'>Plano:</label>
 			<select class='form-control' id='sltPlano'>
