@@ -248,7 +248,7 @@
 				</div>
 				<div class="col-sm-6 text-center">
 					<h3>Cadastro de usuário</h3>
-					<form role='form' class='text-center' method="post" actions="" name="cadastro" onsubmit="return validaCampo(); return false;">
+					<form role='form' class='text-center' method="post" actions="criar_cadastro.php" name="cadastro" onsubmit="return validaCampo(); return false;">
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
 							<input type='text' class='form-control' id='txtNomeCompleto' name="nome" placeholder='Ex: Pedro Pedreira, João Joaninha...'>
@@ -368,20 +368,20 @@
 				require_once("../bd/conectBd.php");
 				$conexao=dbConnect("localhost","root","");
 
-				$nome=$_POST["nome"];
-	 			$cpf_cnpj=$_POST["cpf_cnpj"];
-	 			$data_nasc=$_POST["dt_nasc"];
-	 			$email=$_POST["email"];
-	 			$estado=$_POST["estado"];
-	 			$cidade=$_POST["cidade"];
-	 			$logradouro=$_POST["logradouro"];
-	 			$numero=$_POST["numero"];
-	 			$cep=$_POST["cep"];
-	 			$bairro=$_POST["bairro"];
-	 			$telefone=$_POST["telefone"];
-	 			$login=$_POST["login"];
-	 			$senha=$_POST["senha"];
-	 			$conf_senha=$_POST["conf_senha"];
+				$nome=addslashes($_POST["nome"]);
+	 			$cpf_cnpj=addslashes($_POST["cpf_cnpj"]);
+	 			$data_nasc=addslashes($_POST["dt_nasc"]);
+	 			$email=addslashes($_POST["email"]);
+	 			$estado=addslashes($_POST["estado"]);
+	 			$cidade=addslashes($_POST["cidade"]);
+	 			$logradouro=addslashes($_POST["logradouro"]);
+	 			$numero=addslashes($_POST["numero"]);
+	 			$cep=addslashes($_POST["cep"]);
+	 			$bairro=addslashes($_POST["bairro"]);
+	 			$telefone=addslashes($_POST["telefone"]);
+	 			$login=addslashes($_POST["login"]);
+	 			$senha=addslashes($_POST["senha"]);
+	 			$conf_senha=addslashes($_POST["conf_senha"]);
 
 	 			$testa="SELECT * FROM usuario WHERE usuario.senha='$senha' or usuario.login='$login'";
 	 			$pega=dbConsulta($testa,'estacionamento', $conexao);
@@ -390,7 +390,7 @@
 	 				echo "<script>alert('Já existe um usuário com esse login ou senha !!');</script>";
 	 			}else{
 	 				
-					$sql="INSERT INTO cliente values('NULL', '$nome','$cpf_cnpj','$email', '$logradouro','$numero', '$cep', '$bairro', '$cidade', '$estado', '$telefone')";
+					$sql="INSERT INTO cliente values('NULL','$nome','$cpf_cnpj','$email', '$logradouro','$numero', '$cep', '$bairro', '$cidade', '$estado', '$telefone')";
 					$limite=dbConsulta($sql,'estacionamento', $conexao);
 				
 					if(!$limite){
@@ -403,7 +403,7 @@
 					while($pega=mysql_fetch_array($busca_id)){
 						$id=$pega["id_cliente"];
 					}
-					$sql="INSERT INTO usuario values('NULL', '$senha','$login', '$id')";
+					$sql="INSERT INTO usuario values('NULL','$senha','$login', '$id')";
 	 				$limite=dbConsulta($sql,'estacionamento', $conexao);
 	 				if(!$limite){
 						die("Erro ao Cadastrar !");
