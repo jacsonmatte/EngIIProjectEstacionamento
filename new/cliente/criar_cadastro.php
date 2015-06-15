@@ -360,7 +360,11 @@
 				Control Parking - Sistema de gerenciamento de estacionamentos | &copy 2015 | Desenvolvido por Non Static Void
 			</div>
 		</footer>
-
+		<script type="text/javascript">
+			$( "#btnCancelar").click(function() {
+				$(location).attr('href', '../index.html');
+			});
+		</script>
 		<?php
 
 			if(isset($_POST["btnSalvar"])){
