@@ -19,4 +19,19 @@ function validaLogin($user, $senha){
 	 $result =dbConsulta($sql,"estacionamento",$con);
 	 return mysql_num_rows($result);
 }
+
+function verificaAtributos($email, $Cpf_Cnpj){
+    if(!empty($_POST['email']) and !empty($_POST['Cpf_Cnpj'])){
+        $sql = "SELECT * FROM `cliente` WHERE cliente.email='$email' and cliente.cpf_cnpj='$Cpf_Cnpj'";
+    }else if(empty ( $Cpf_Cnpj )){
+        $sql = "SELECT * FROM `cliente` WHERE cliente.email='$email'";
+    }else if(empty ( $email )){
+        $sql = "SELECT * FROM `cliente` WHERE cliente.cpf_cnpj='$Cpf_Cnpj'";
+    }
+
+     $con = dbConnect("localhost","root","");
+     $result =dbConsulta($sql,"estacionamento",$con);
+     return mysql_num_rows($result);
+}     
+
 ?>
