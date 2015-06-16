@@ -17,6 +17,10 @@ if(isset($_POST["login"]) and isset($_POST["senha"])){
 		    header("Location:cliente/home.php");
 	   }
    }
+   
+   if($res == 0){
+	   header("Location:index.html?id=0");
+   }
 	
 }
 	

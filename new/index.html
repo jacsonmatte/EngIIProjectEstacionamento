@@ -90,8 +90,12 @@
 </html>
 <script type="text/javascript">
 
-
-	 
+	$(document).ready(function() {
+		var x = window.location.href;
+		x = x.split('?');
+		if(x[1]=='id=0') $('#spnErroAcessoSistema').html("<div style='color:red;'>Usuário ou senha inválido</div>");
+	 });
+	
 
 	$("#btnLogar").click(function() {
 	
