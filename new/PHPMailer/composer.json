@@ -24,16 +24,10 @@
     },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "*",
-        "phpunit/phpunit": "4.3.*"
+        "phpunit/phpunit": "4.1.*"
     },
     "autoload": {
-        "classmap": [
-            "class.phpmailer.php",
-            "class.smtp.php",
-            "class.pop3.php",
-            "extras/EasyPeasyICS.php",
-            "extras/ntlm_sasl_client.php"
-        ]
+        "classmap": ["class.phpmailer.php", "class.pop3.php", "class.smtp.php"]
     },
     "license": "LGPL-2.1"
 }
