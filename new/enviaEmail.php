@@ -73,12 +73,18 @@ $enviado = $mail->Send();
 $mail->ClearAllRecipients();
 $mail->ClearAttachments();
 if ($enviado) {
- 	echo "<script language=javascript>alert( 'Email Enviado Com Sucesso Com a Nova Senha !' );</script>";
-	echo("<script type='text/javascript'>location.href='index.html';</script>");
+	$sql="UPDATE usuario SET usuario.senha = '$nova_senha' where usuario.cliente_id_cliente='$id'";
+	$busca_id=dbConsulta($sql,'estacionamento', $conexao);
+	if(!$busca_id){
+		die("Erro ao Atualizar a Senha !!!");
+	}else{	
+ 		echo "<script language=javascript>alert( 'Email Enviado Com Sucesso Com a Nova Senha !' );</script>";
+		echo("<script type='text/javascript'>location.href='index.html';</script>");
+	}	
 } else {
-  	echo "<script language=javascript>alert( 'Nao foi Possivel enviar o Email' );</script>";
+  	echo "<script language=javascript>alert( 'Nao foi Possivel enviar o Email, verifique se o Email e valido ou tente mais tarde !!! ' );</script>";
 	echo("<script type='text/javascript'>location.href='index.html';</script>");
-  	echo "<b>Informações do erro:</b> " . $mail->ErrorInfo;
+  	
 }
 
 ?>

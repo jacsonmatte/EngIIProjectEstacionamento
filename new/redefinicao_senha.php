@@ -13,7 +13,7 @@
 	
 	
 	if(empty($_POST['email']) and empty($_POST['Cpf_Cnpj'])){	
-		echo "<script language=javascript>alert( 'Email ou CPF/CNPJ Invalidos !' );</script>";
+		echo "<script language=javascript>alert( 'Email e CPF/CNPJ Invalidos !' );</script>";
 		echo("<script type='text/javascript'>location.href='index.html';</script>");
 	}else{
 		$cont=verificaAtributos($email,$Cpf_Cnpj);
@@ -39,13 +39,8 @@
 			$email=$pega["email"];
 		}
 
-		$sql="UPDATE usuario SET usuario.senha = '$nova_senha' where usuario.cliente_id_cliente='$id'";
-		$busca_id=dbConsulta($sql,'estacionamento', $conexao);
-		if(!$busca_id){
-			die("Erro ao Atualizar a Senha !!!");
-		}else{
-			include("enviaEmail.php");
-		}
+		include("enviaEmail.php");
+		
 	}else{
 		echo "<script language=javascript>alert( 'Email ou CPF/CNPJ nao Cadastrados !' );</script>";
 		echo("<script type='text/javascript'>location.href='index.html';</script>");
