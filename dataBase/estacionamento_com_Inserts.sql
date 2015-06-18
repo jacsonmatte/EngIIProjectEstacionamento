@@ -21,12 +21,28 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema estacionamento
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `estacionamento` ;
+
+-- -----------------------------------------------------
+-- Schema estacionamento
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `estacionamento` ;
+USE `estacionamento` ;
+
+
 
 --
 -- Estrutura da tabela `cliente`
 --
 
-CREATE TABLE IF NOT EXISTS `cliente` (
+CREATE TABLE IF NOT EXISTS `estacionamento`.`cliente` (
 `id_cliente` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL COMMENT 'tempo em de estacionamento',
   `cpf_cnpj` varchar(30) NOT NULL COMMENT 'o custo em relação ao tempo',
@@ -53,7 +69,7 @@ INSERT INTO `cliente` (`id_cliente`, `nome`, `cpf_cnpj`, `email`, `logradouro`, 
 -- Estrutura da tabela `estacionamento`
 --
 
-CREATE TABLE IF NOT EXISTS `estacionamento` (
+CREATE TABLE IF NOT EXISTS `estacionamento`.`estacionamento` (
 `id_estacionamento` int(11) NOT NULL,
   `dh_entrada` varchar(100) NOT NULL COMMENT 'o custo em relação ao tempo',
   `dh_saida` varchar(45) DEFAULT NULL,
@@ -78,7 +94,7 @@ INSERT INTO `estacionamento` (`id_estacionamento`, `dh_entrada`, `dh_saida`, `nr
 -- Estrutura da tabela `mensalidade`
 --
 
-CREATE TABLE IF NOT EXISTS `mensalidade` (
+CREATE TABLE IF NOT EXISTS `estacionamento`.`mensalidade` (
 `id_mensalidade` int(11) NOT NULL,
   `ano` varchar(100) NOT NULL COMMENT 'o custo em relação ao tempo',
   `mes` varchar(45) DEFAULT NULL,
@@ -100,21 +116,22 @@ INSERT INTO `mensalidade` (`id_mensalidade`, `ano`, `mes`, `val_plano`, `val_exe
 -- Estrutura da tabela `plano`
 --
 
-CREATE TABLE IF NOT EXISTS `plano` (
-`id` int(11) NOT NULL,
-  `horas` int(11) NOT NULL COMMENT 'tempo em de estacionamento',
+CREATE TABLE IF NOT EXISTS `estacionamento`.`plano` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(20) NOT NULL,
   `valor` double NOT NULL COMMENT 'o custo em relação ao tempo',
-  `valor_exente` double DEFAULT NULL,
-  `descr` varchar(45) DEFAULT NULL,
-  `observacao` varchar(45) DEFAULT NULL
+  `horas` int(11) NOT NULL COMMENT 'tempo em de estacionamento',
+  `valor_excedente` double DEFAULT NULL,
+  `descr` varchar(45) DEFAULT NULL
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Table storing all customers. Holds foreign keys to the addre';
 
 --
 -- Extraindo dados da tabela `plano`
 --
 
-INSERT INTO `plano` (`id`, `horas`, `valor`, `valor_exente`, `descr`, `observacao`) VALUES
-(1, 1, 2, 0.35, 'vaga para carro', NULL);
+INSERT INTO `plano` (`id`, `nome`, `valor`, `horas`, `valor_excedente`, `descr`) VALUES
+(1, 'Plano1', 20.0, 3, 0.5,'plano 1');
 
 -- --------------------------------------------------------
 
@@ -122,7 +139,7 @@ INSERT INTO `plano` (`id`, `horas`, `valor`, `valor_exente`, `descr`, `observaca
 -- Estrutura da tabela `plano_contratado`
 --
 
-CREATE TABLE IF NOT EXISTS `plano_contratado` (
+CREATE TABLE IF NOT EXISTS `estacionamento`.`plano_contratado` (
   `id_cliente` int(11) NOT NULL,
   `cliente_id_cliente` int(11) NOT NULL,
   `plano_id_plano` int(11) NOT NULL,
@@ -143,7 +160,7 @@ INSERT INTO `plano_contratado` (`id_cliente`, `cliente_id_cliente`, `plano_id_pl
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario` (
+CREATE TABLE IF NOT EXISTS `estacionamento`.`usuario` (
 `id` int(11) NOT NULL,
   `senha` varchar(45) DEFAULT NULL,
   `login` varchar(45) DEFAULT NULL,
@@ -164,7 +181,8 @@ INSERT INTO `usuario` (`id`, `senha`, `login`, `cliente_id_cliente`) VALUES
 -- Estrutura da tabela `vaga`
 --
 
-CREATE TABLE IF NOT EXISTS `vaga` (
+
+CREATE TABLE IF NOT EXISTS `estacionamento`.`vaga` (
 `id_vaga` int(11) NOT NULL,
   `nro_vaga` varchar(50) NOT NULL COMMENT 'tempo em de estacionamento',
   `descricao` varchar(100) NOT NULL COMMENT 'o custo em relação ao tempo',
