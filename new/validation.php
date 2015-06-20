@@ -7,21 +7,19 @@ if(isset($_POST["login"]) && isset($_POST["senha"])){
    require "bd/conectBd.php";
    $res = validaLogin($mysql['username'], $mysql['password']);
    if($res > 0 && $mysql['username'] == "admin"){
-	   $_SESSION['user_type'] = 1;
+		$_SESSION['user_type'] = 1;
 		$_SESSION['username'] = $mysql['username'];
-	  header("Location: adm/home.php");
-   }else{
-	   if($res > 0){
+		header("Location: adm/home.php");
+   }
+   else if($res > 0){
+		   $_SESSION['id_cliente'] = $res;
 		   $_SESSION['user_type'] = 2;
 		   $_SESSION['username'] = $mysql['username'];
-		    header("Location:cliente/home.php");
+		   header("Location:cliente/home.php");
 	   }
    }
-   
-   if($res == 0){
+   else {
 	   header("Location:index.html?id=0");
    }
-	
-}
 	
 ?>

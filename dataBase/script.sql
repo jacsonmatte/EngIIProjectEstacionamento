@@ -75,8 +75,7 @@ CREATE TABLE IF NOT EXISTS `estacionamento`.`estacionamento` (
   `cliente_id_cliente` INT(11) NOT NULL,
   `status` INT NULL,
   `token` CHAR(6) NOT NULL,
-  `codi_gerado` VARCHAR(6) NULL,
-  PRIMARY KEY (`id_estacionamento`, `vaga_id_vaga`, `cliente_id_cliente`),
+  PRIMARY KEY (`id_estacionamento`),
   INDEX `fk_estacionamento_vaga1_idx` (`vaga_id_vaga` ASC),
   INDEX `fk_estacionamento_cliente1_idx` (`cliente_id_cliente` ASC),
   UNIQUE INDEX `token_UNIQUE` (`token` ASC),
@@ -181,9 +180,9 @@ DROP TABLE IF EXISTS `estacionamento`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `estacionamento`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `senha` VARCHAR(45) NULL,
-  `login` VARCHAR(45) NULL,
-  `cliente_id_cliente` INT(11) NULL,
+  `senha` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(45) NOT NULL,
+  `cliente_id_cliente` INT(11) NOT NULL,
   PRIMARY KEY (`id`, `cliente_id_cliente`),
   INDEX `fk_usuario_cliente1_idx` (`cliente_id_cliente` ASC),
   CONSTRAINT `fk_usuario_cliente1`
