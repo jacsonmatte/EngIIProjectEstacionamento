@@ -33,7 +33,7 @@ function verificaAtributos($email, $Cpf_Cnpj){
      $con = dbConnect("localhost","root","");
      $result =dbConsulta($sql,"estacionamento",$con);
      return mysql_num_rows($result);
-<<<<<<< HEAD
+
 }     
 function loadCliente($login){
 	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado,telefone FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
@@ -54,8 +54,5 @@ function loadCliente($login){
 	}
 	return $dados;
 }
-=======
-}
 
->>>>>>> origin/gh-pages
 ?>
