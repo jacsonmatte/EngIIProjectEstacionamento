@@ -247,10 +247,25 @@
 
 <?php
 	require "../bd/conectBd.php";
+	if(isset($_POST["nome"])){
+		$nome = addslashes($_POST["nome"]);
+		$cpf_cnpj = addslashes($_POST["cpf_cnpj"]);
+		$email = addslashes($_POST["email"]);
+		$logradouro = addslashes($_POST["logradouro"]);
+		$nro = addslashes($_POST["nro"]);
+		$cep = addslashes($_POST["cep"]);
+		$bairro = addslashes($_POST["bairro"]);
+		$cidade = addslashes($_POST["cidade"]);
+		$estado = addslashes($_POST["estado"]);
+		$telefone = addslashes($_POST["telefone"]);
+		gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $_SESSION['username']);
+		
+	}
 	$dados = loadCliente($_SESSION['username']);
 ?>
 	
 <!DOCTYPE html>
+
 <html lang="pt-br">
 	<head>
 		<title>Control Parking - Contratar plano</title>
@@ -272,7 +287,7 @@
 				</div>
 				<div class="col-sm-10 text-center">
 					<h3>Cadastro de usuário</h3>
-					<form role='form' class='text-center' method="post" actions="" name="meusdados" >
+					<form role='form' class='text-center' method="post" actions="meusdados.php" name="meusdados" >
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
 							<input type='text' class='form-control' id='txtNomeCompleto' name="nome"  value="<?php echo $dados['nome']; ?>">
@@ -296,7 +311,7 @@
 						</div>
 						<div class='form-group  text-left col-sm-5'>
 							<label for='txtNumero'>Número:</label>
-							<input type='text' class='form-control' id='txtNumero' name="numero" value="<?php echo $dados['nro']; ?>">
+							<input type='text' class='form-control' id='txtNumero' name="nro" value="<?php echo $dados['nro']; ?>">
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtCep'>CEP:</label>
