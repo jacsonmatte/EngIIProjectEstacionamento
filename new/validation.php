@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_POST["login"]) and isset($_POST["senha"])){
+if(isset($_POST["login"]) && isset($_POST["senha"])){
 
    $mysql['username'] = addslashes($_POST['login']);
    $mysql['password'] = addslashes($_POST['senha']);

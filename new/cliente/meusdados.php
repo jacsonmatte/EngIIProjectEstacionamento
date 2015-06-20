@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
@@ -242,8 +245,11 @@
     	
 	</head>
 
-
-
+<?php
+	require "../bd/conectBd.php";
+	$dados = loadCliente($_SESSION['username']);
+?>
+	
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
@@ -269,47 +275,41 @@
 					<form role='form' class='text-center' method="post" actions="" name="meusdados" >
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
-							<input type='text' class='form-control' id='txtNomeCompleto' name="nome" placeholder='Ex: Pedro Pedreira, João Joaninha...'>
+							<input type='text' class='form-control' id='txtNomeCompleto' name="nome"  value="<?php echo $dados['nome']; ?>">
 						</div>
-						<div class='form-group text-left col-sm-6'>
-							<label for='txtDataNascimento'>Data de nascimento:</label>
-							<input type='text' class='form-control' name="dt_nasc" id='txtDataNascimento'>
-						</div>
+						
 						<div class='form-group  text-left col-sm-6'>
 							<label> Tipo de pessoa:</label>
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> Física
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> Jurídica (CNPJ)
-							<input type='text' class='form-control' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj" onBlur="validaCPF_CNPJ(cadastro.cpf_cnpj);"/>
+							<input type='text' class='form-control' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj" onBlur="validaCPF_CNPJ(cadastro.cpf_cnpj);" value="<?php echo $dados['cpf_cnpj']; ?>"/>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtTelefone'>Telefone: </label>
 							<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick="habilita_tel(1)" /> 8 dígitos
 							<input type='radio' name='rdbTelefone' id='rdbTelefone2' onclick="habilita_tel(2)"/> 9 dígitos
-							<input type='text' class='form-control' name="telefone" id='txtTelefone'/>
+							<input type='text' class='form-control' name="telefone" id='txtTelefone' value="<?php echo $dados['telefone']; ?>"/>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtLogradouro'>Logradouro:</label>
-							<input type='text' class='form-control' id='txtLogradouro' name="logradouro" placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
+							<input type='text' class='form-control' id='txtLogradouro' name="logradouro" value="<?php echo $dados['logradouro']; ?>">
 						</div>
 						<div class='form-group  text-left col-sm-5'>
 							<label for='txtNumero'>Número:</label>
-							<input type='text' class='form-control' id='txtNumero' name="numero" placeholder='nº'>
+							<input type='text' class='form-control' id='txtNumero' name="numero" value="<?php echo $dados['nro']; ?>">
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtCep'>CEP:</label>
-							<input type='text' class='form-control' name="cep" id='txtCep' onBlur="ValidaCep(cadastro.cep);">
+							<input type='text' class='form-control' name="cep" id='txtCep' onBlur="ValidaCep(cadastro.cep);" value="<?php echo $dados['cep']; ?>">
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtBairro'>Bairro:</label>
-							<input type='text' class='form-control' id='txtBairro' name="bairro" placeholder='Ex: Bairro XXX...'>
+							<input type='text' class='form-control' id='txtBairro' name="bairro" value="<?php echo $dados['bairro']; ?>">
 						</div>
-						<div class='form-group  text-left col-sm-6'>
-							<label for='txtComplemento'>Complemento:</label>
-							<input type='text' class='form-control' id='txtComplemento' name="complemento" placeholder='Complemento...'>
-						</div>
+						
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtCidade'>Cidade:</label>
-							<input type='text' class='form-control' id='txtCidade' name="cidade" placeholder='Ex: Chapecó...'>
+							<input type='text' class='form-control' id='txtCidade' name="cidade" value="<?php echo $dados['cidade']; ?>">
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='sltEstado'>Estado:</label>
@@ -347,7 +347,7 @@
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtEmail'>e-Mail:</label>
-							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='Ex: email@email.com'/>
+							<input type='email' class='form-control' id='txtEmail' name="email" value="<?php echo $dados['email']; ?>"/>
 						</div>				
 						<div class='form-group col-sm-12 text-right'>
 							<span id='spnErroSalvarPlano'></span> &nbsp;
