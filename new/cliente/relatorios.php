@@ -13,7 +13,6 @@
 	</head>
 	<?php
 		require '../require/menu-1.html';
-		$_SESSION['username'] = 'teste';
 		require '../require/menu-cliente.html';
 		require '../require/menu-2-content-1.html';
 	?> 
