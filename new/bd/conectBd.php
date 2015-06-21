@@ -16,6 +16,7 @@ function validaLogin($user, $senha){
 	$sql = "SELECT `cliente_id_cliente` FROM `usuario` WHERE login='$user' and senha='$senha'";
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"estacionamento",$con);
+	if(!$result) return 0;
 	return mysql_fetch_array($result)[0];
 }
 
