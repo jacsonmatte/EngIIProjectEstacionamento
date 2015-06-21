@@ -77,15 +77,14 @@ CREATE TABLE IF NOT EXISTS `estacionamento`.`estacionamento` (
   `vaga_id_vaga` int(11) NOT NULL,
   `cliente_id_cliente` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL,
-  `token` char(6) NOT NULL,
-  `codi_gerado` varchar(6) DEFAULT NULL
+  `token` char(6) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Table storing all customers. Holds foreign keys to the addre';
 
 --
 -- Extraindo dados da tabela `estacionamento`
 --
 
-INSERT INTO `estacionamento` (`id_estacionamento`, `dh_entrada`, `dh_saida`, `nro_vaga`, `vaga_id_vaga`, `cliente_id_cliente`, `status`, `token`, `codi_gerado`) VALUES
+INSERT INTO `estacionamento` (`id_estacionamento`, `dh_entrada`, `dh_saida`, `nro_vaga`, `vaga_id_vaga`, `cliente_id_cliente`, `status`, `token`) VALUES
 (1, '09/05/2015 às 19h', '09/05/2015 às 20h', '00001', 1, 1, 1, '1', '1');
 
 -- --------------------------------------------------------
@@ -161,10 +160,10 @@ INSERT INTO `plano_contratado` (`id_cliente`, `cliente_id_cliente`, `plano_id_pl
 --
 
 CREATE TABLE IF NOT EXISTS `estacionamento`.`usuario` (
-`id` int(11) NOT NULL,
-  `senha` varchar(45) DEFAULT NULL,
-  `login` varchar(45) DEFAULT NULL,
-  `cliente_id_cliente` int(11) NOT NULL DEFAULT '0'
+  `id` int(11) NOT NULL,
+  `senha` varchar(45) DEFAULT NOT NULL,
+  `login` varchar(45) DEFAULT NOT NULL,
+  `cliente_id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
@@ -210,7 +209,7 @@ ALTER TABLE `cliente`
 -- Indexes for table `estacionamento`
 --
 ALTER TABLE `estacionamento`
- ADD PRIMARY KEY (`id_estacionamento`,`vaga_id_vaga`,`cliente_id_cliente`), ADD UNIQUE KEY `token_UNIQUE` (`token`), ADD KEY `fk_estacionamento_vaga1_idx` (`vaga_id_vaga`), ADD KEY `fk_estacionamento_cliente1_idx` (`cliente_id_cliente`);
+ ADD PRIMARY KEY (`id_estacionamento`), ADD KEY `fk_estacionamento_vaga1_idx` (`vaga_id_vaga`), ADD KEY `fk_estacionamento_cliente1_idx` (`cliente_id_cliente`);
 
 --
 -- Indexes for table `mensalidade`
