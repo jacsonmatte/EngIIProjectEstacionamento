@@ -330,33 +330,142 @@
 							<label for='sltEstado'>Estado:</label>
 							<select class='form-control' id="txtEstado" name="estado">
 								<option selected>Selecione um Estado...</option>
-                            	<option value="AC">AC</option>
-                            	<option value="AL">AL</option>
-                            	<option value="AP">AP</option>
-                            	<option value="AM">AM</option>
-                            	<option value="BA">BA</option>
-                            	<option value="CE">CE</option>
-                            	<option value="DF">DF</option>
-                            	<option value="ES">ES</option>
-                            	<option value="GO">GO</option>
-                            	<option value="MA">MA</option>
-                            	<option value="MT">MT</option>
-                            	<option value="MS">MS</option>
-                            	<option value="MG">MG</option>
-                            	<option value="PA">PA</option>
-                            	<option value="PB">PB</option>
-                            	<option value="PR">PR</option>
-                            	<option value="PE">PE</option>
-                            	<option value="PI">PI</option>
-                            	<option value="RJ">RJ</option>
-                            	<option value="RN">RN</option>
-                            	<option value="RS">RS</option>
-                            	<option value="RO">RO</option>
-                            	<option value="RR">RR</option>
-                            	<option value="SC">SC</option>
-                            	<option value="SP">SP</option>
-                            	<option value="SE">SE</option>
-                            	<option value="TO">TO</option>
+								<?php if ($dados['estado'] == "AC") { ?>
+										<option value="AC"  selected="selected">AC</option>
+								<?php }else{ ?>
+										<option value="AC">AC</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "AL"){ ?>
+										<option value="AL"  selected="selected">AL</option>
+								<?php }else{ ?>
+										<option value="AL">AL</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "AP"){ ?>
+										<option value="AP"  selected="selected">AP</option>
+								<?php }else{ ?>
+										<option value="AP">AP</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "AM"){ ?>
+										<option value="AM"  selected="selected">AM</option>
+								<?php }else{ ?>
+										<option value="AM">AM</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "AM"){ ?>
+										<option value="BA"  selected="selected">BA</option>
+								<?php }else{ ?>
+										<option value="BA">BA</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "CE"){ ?>
+										<option value="CE"  selected="selected">CE</option>
+								<?php }else{ ?>
+										<option value="CE">CE</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "DF"){ ?>
+										<option value="DF"  selected="selected">DF</option>
+								<?php }else{ ?>
+										<option value="DF">DF</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "ES"){ ?>
+										<option value="ES"  selected="selected">ES</option>
+								<?php }else{ ?>
+										<option value="ES">ES</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "GO"){ ?>
+										<option value="GO"  selected="selected">GO</option>
+								<?php }else{ ?>
+										<option value="GO">GO</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "MA"){ ?>
+										<option value="MA"  selected="selected">MA</option>
+								<?php }else{ ?>
+										<option value="MA">MA</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "MT"){ ?>
+										<option value="MT"  selected="selected">MT</option>
+								<?php }else{ ?>
+										<option value="MT">MT</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "MS"){ ?>
+										<option value="MS"  selected="selected">MS</option>
+								<?php }else{ ?>
+										<option value="MS">MS</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "MG"){ ?>
+										<option value="MG"  selected="selected">MG</option>
+								<?php }else{ ?>
+										<option value="MG">MG</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "PA"){ ?>
+										<option value="PA"  selected="selected">PA</option>
+								<?php }else{ ?>
+										<option value="PA">PA</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "PB"){ ?>
+										<option value="PB"  selected="selected">PB</option>
+								<?php }else{ ?>
+										<option value="PB">PB</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "PR"){ ?>
+										<option value="PR"  selected="selected">PR</option>
+								<?php }else{ ?>
+										<option value="PR">PR</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "PE"){ ?>
+										<option value="PE"  selected="selected">PE</option>
+								<?php }else{ ?>
+										<option value="PE">PE</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "PI"){ ?>
+										<option value="PI"  selected="selected">PI</option>
+								<?php }else{ ?>
+										<option value="PI">PI</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "RJ"){ ?>
+										<option value="RJ"  selected="selected">RJ</option>
+								<?php }else{ ?>
+										<option value="RJ">RJ</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "RN"){ ?>
+										<option value="RN"  selected="selected">RN</option>
+								<?php }else{ ?>
+										<option value="RN">RN</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "RS"){ ?>
+										<option value="RS"  selected="selected">RS</option>
+								<?php }else{ ?>
+										<option value="RS">RS</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "RO"){ ?>
+										<option value="RO"  selected="selected">RO</option>
+								<?php }else{ ?>
+										<option value="RO">RO</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "RR"){ ?>
+										<option value="RR"  selected="selected">RR</option>
+								<?php }else{ ?>
+										<option value="RR">RR</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "SC"){ ?>
+										<option value="SC"  selected="selected">SC</option>
+								<?php }else{ ?>
+										<option value="SC">SC</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "SP"){ ?>
+										<option value="SP"  selected="selected">SP</option>
+								<?php }else{ ?>
+										<option value="SP">SP</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "SE"){ ?>
+										<option value="SE"  selected="selected">SE</option>
+								<?php }else{ ?>
+										<option value="SE">SE</option>
+								<?php } ?>
+								<?php if ($dados['estado'] == "TO"){ ?>
+										<option value="TO"  selected="selected">TO</option>
+								<?php }else{ ?>
+										<option value="TO">TO</option>
+								<?php } ?>
+                            	
 								
 							</select>
 						</div>
