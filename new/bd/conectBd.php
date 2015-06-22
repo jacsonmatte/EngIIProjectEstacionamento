@@ -1,7 +1,6 @@
 <?php
 
 // conexão padrão local (1), servidor 000 (2) ou outro (3)
-$CONNECT = 1;
 
 function dbConnect2(){
     $connect = @mysql_connect("localhost", "root", "");
@@ -9,6 +8,7 @@ function dbConnect2(){
 }
 
 function dbConnect($host, $user, $pass){
+	$CONNECT = 1;
 	if ($CONNECT == 1)
 		return @mysql_connect("localhost", "root", "");
 	else if ($CONNECT == 2)
@@ -19,6 +19,7 @@ function dbConnect($host, $user, $pass){
  
 //Conecta na BD e executa uma consulta
 function dbConsulta($sql, $app, $connect){
+	$CONNECT = 1;
 	if ($CONNECT == 1)
 		mysql_select_db("estacionamento", $connect);
 	else if ($CONNECT == 2)
@@ -26,7 +27,7 @@ function dbConsulta($sql, $app, $connect){
 	else
 		mysql_select_db($app, $connect);
 	
-    mysql_set_charset('UTF8',$connect);
+    mysql_set_charset('UTF8', $connect);
     ($a = mysql_query($sql)) or (die ("error: ".mysql_error()));
     return $a;
 }
