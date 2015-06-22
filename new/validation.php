@@ -17,9 +17,10 @@ if(isset($_POST["login"]) && isset($_POST["senha"])){
 		   $_SESSION['username'] = $mysql['username'];
 		   header("Location:cliente/home.php");
 	   }
-   }
-   else {
+	   else {
 	   header("Location:index.html?id=0");
+	}
    }
+   
 	
 ?>
