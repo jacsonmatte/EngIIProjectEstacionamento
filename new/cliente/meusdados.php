@@ -212,6 +212,24 @@
     			return false;
     
 			}
+
+			function valida_senha(senha, senhaRep){
+				if (senha.value != senhaRep.value) {
+					alert("Senha não confere");
+					document.getElementById('btnSalvar').disabled = true;
+				}else{
+
+					if (senha.value == senhaRep.value) {
+						document.getElementById('btnSalvar').disabled = false;
+					};
+				}
+
+			}
+
+			function salva(){
+				alert("Dados Gravados com Sucesso!");
+			}
+
 			function valida_cpf( valor ) {
  
     			// Garante que o valor é uma string
@@ -258,7 +276,9 @@
 		$cidade = addslashes($_POST["cidade"]);
 		$estado = addslashes($_POST["estado"]);
 		$telefone = addslashes($_POST["telefone"]);
-		gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $_SESSION['username']);
+		$senha = addslashes($_POST["senha"]);
+		//print_r($senha);
+		gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $_SESSION['username']);
 		
 	}
 	$dados = loadCliente($_SESSION['username']);
@@ -287,7 +307,7 @@
 				</div>
 				<div class="col-sm-10 text-center">
 					<h3>Cadastro de usuário</h3>
-					<form role='form' class='text-center' method="post" actions="meusdados.php" name="meusdados" >
+					<form role='form' class='text-center' method="post" actions="meusdados.php" name="cadastro" >
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
 							<input type='text' class='form-control' id='txtNomeCompleto' name="nome"  value="<?php echo $dados['nome']; ?>">
@@ -295,36 +315,24 @@
 						
 						<div class='form-group  text-left col-sm-6'>
 							<label> Tipo de pessoa:</label>
-							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> Física
-							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> Jurídica (CNPJ)
+
+							<?php if (strlen($dados['cpf_cnpj']) == 14) { ?>
+								<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' checked onclick="habilita(1)" /> Física
+							<?php  }else {?>
+								<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica'  onclick="habilita(1)" /> Física
+							<?php }?>
+							<?php if (strlen($dados['cpf_cnpj']) == 18) { ?>
+								<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' checked onclick="habilita(2)"/> Jurídica (CNPJ)
+							<?php  }else {?>
+								<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> Jurídica (CNPJ)
+							<?php }?>
+							
 							<input type='text' class='form-control' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj" onBlur="validaCPF_CNPJ(cadastro.cpf_cnpj);" value="<?php echo $dados['cpf_cnpj']; ?>"/>
-						</div>
-						<div class='form-group  text-left col-sm-6'>
-							<label for='txtTelefone'>Telefone: </label>
-							<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick="habilita_tel(1)" /> 8 dígitos
-							<input type='radio' name='rdbTelefone' id='rdbTelefone2' onclick="habilita_tel(2)"/> 9 dígitos
-							<input type='text' class='form-control' name="telefone" id='txtTelefone' value="<?php echo $dados['telefone']; ?>"/>
-						</div>
-						<div class='form-group  text-left col-sm-6'>
-							<label for='txtLogradouro'>Logradouro:</label>
-							<input type='text' class='form-control' id='txtLogradouro' name="logradouro" value="<?php echo $dados['logradouro']; ?>">
-						</div>
-						<div class='form-group  text-left col-sm-5'>
-							<label for='txtNumero'>Número:</label>
-							<input type='text' class='form-control' id='txtNumero' name="nro" value="<?php echo $dados['nro']; ?>">
-						</div>
-						<div class='form-group  text-left col-sm-6'>
-							<label for='txtCep'>CEP:</label>
-							<input type='text' class='form-control' name="cep" id='txtCep' onBlur="ValidaCep(cadastro.cep);" value="<?php echo $dados['cep']; ?>">
-						</div>
-						<div class='form-group  text-left col-sm-6'>
-							<label for='txtBairro'>Bairro:</label>
-							<input type='text' class='form-control' id='txtBairro' name="bairro" value="<?php echo $dados['bairro']; ?>">
 						</div>
 						
 						<div class='form-group  text-left col-sm-6'>
-							<label for='txtCidade'>Cidade:</label>
-							<input type='text' class='form-control' id='txtCidade' name="cidade" value="<?php echo $dados['cidade']; ?>">
+							<label for='txtLogradouro'>Logradouro:</label>
+							<input type='text' class='form-control' id='txtLogradouro' name="logradouro" value="<?php echo $dados['logradouro']; ?>">
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='sltEstado'>Estado:</label>
@@ -470,13 +478,56 @@
 							</select>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
+							<label for='txtNumero'>Número:</label>
+							<input type='text' class='form-control' id='txtNumero' name="nro" value="<?php echo $dados['nro']; ?>">
+						</div>
+						<div class='form-group  text-left col-sm-6'>
+							<label for='txtCep'>CEP:</label>
+							<input type='text' class='form-control' name="cep" id='txtCep' onBlur="ValidaCep(cadastro.cep);" value="<?php echo $dados['cep']; ?>">
+						</div>
+						<div class='form-group  text-left col-sm-6'>
+							<label for='txtBairro'>Bairro:</label>
+							<input type='text' class='form-control' id='txtBairro' name="bairro" value="<?php echo $dados['bairro']; ?>">
+						</div>
+						
+						<div class='form-group  text-left col-sm-6'>
+							<label for='txtCidade'>Cidade:</label>
+							<input type='text' class='form-control' id='txtCidade' name="cidade" value="<?php echo $dados['cidade']; ?>">
+						</div>
+						<div class='form-group  text-left col-sm-6'>
 							<label for='txtEmail'>e-Mail:</label>
 							<input type='email' class='form-control' id='txtEmail' name="email" value="<?php echo $dados['email']; ?>"/>
+						</div>
+						
+						<div class='form-group  text-left col-sm-6'>
+							<label for='txtTelefone'>Telefone: </label>
+							<?php if (strlen($dados['telefone']) == 14) { ?>
+								<input type='radio' name='rdbTelefone' id='rdbTelefone1' checked onclick="habilita_tel(1)" /> 8 dígitos
+							<?php  }else {?>
+								<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick="habilita_tel(1)" /> 8 dígitos
+							<?php }?>
+
+							<?php if (strlen($dados['telefone']) == 15) { ?>
+								<input type='radio' name='rdbTelefone' id='rdbTelefone2' checked onclick="habilita_tel(2)"/> 9 dígitos
+							<?php  }else {?>
+								<input type='radio' name='rdbTelefone' id='rdbTelefone2' onclick="habilita_tel(2)"/> 9 dígitos
+							<?php }?>
+							
+							<input type='text' class='form-control' name="telefone" id='txtTelefone' value="<?php echo $dados['telefone']; ?>"/>
+						</div>
+						<div class='form-group  text-left col-sm-6'>
+
+							<label for='txtEmail'>senha:</label>
+							<input type='password' class='form-control' id='txtsenha' name="senha"  value="<?php echo $dados['senha']; ?>"/>
+						</div>
+						<div class='form-group  text-left col-sm-6'>
+							<label for='txtEmail'>Repetir Senha:</label>
+							<input type='password' class='form-control' id='txtSenhaRep' name="senhaRep" onBlur="valida_senha(cadastro.senha, cadastro.senhaRep);" value="<?php echo $dados['senha']; ?>"/>
 						</div>				
 						<div class='form-group col-sm-12 text-right'>
 							<span id='spnErroSalvarPlano'></span> &nbsp;
 							<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
-							<input type='submit' name="btnSalvar" id='btnSalvar' class='btn cmd-item' value='Salvar' />
+							<input type='submit' name="btnSalvar" id='btnSalvar' onclick="salva();" class='btn cmd-item' value='Salvar' />
 						</div>
 					</form>
 				</div>

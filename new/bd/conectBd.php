@@ -59,7 +59,7 @@ function verificaAtributos($email, $Cpf_Cnpj){
 
 
 function loadCliente($login){
-	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado,telefone FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
+	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado,telefone, senha FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
 	$con = dbConnect("localhost","root","");
 	$result =dbConsulta($sql,"estacionamento",$con);
 	$dados = array();
@@ -74,14 +74,20 @@ function loadCliente($login){
 			$dados["cidade"]=$row["cidade"];
 			$dados["estado"]=$row["estado"];
 			$dados["telefone"]=$row["telefone"];
+            $dados["senha"] = $row["senha"]; 
 	}
 	return $dados;
 }
 
-function gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $login){
+function gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $login){
 	$sql = "UPDATE cliente, usuario SET nome='$nome',cpf_cnpj='$cpf_cnpj',email='$email',logradouro='$logradouro',nro='$nro',cep='$cep',bairro='$bairro',cidade='$cidade', estado='$estado',telefone='$telefone' WHERE cliente.id_cliente=usuario.cliente_id_cliente and  usuario.login='$login'";
-	$con = dbConnect("localhost","root","");
+    $con = dbConnect("localhost","root","");
 	$result =dbConsulta($sql,"estacionamento",$con);
+    $sql = "UPDATE usuario SET senha = '$senha' WHERE login='$login'";
+    $con = dbConnect("localhost","root","");
+    $result =dbConsulta($sql,"estacionamento",$con);
+
+
 	
 }
 ?>
