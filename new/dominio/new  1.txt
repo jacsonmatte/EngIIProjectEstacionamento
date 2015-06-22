@@ -1,6 +1,0 @@
-log de alterações
-database
-chave primária é apenas o id
-o id do cliente é só fk
-
-senha e login não podem ser nulos

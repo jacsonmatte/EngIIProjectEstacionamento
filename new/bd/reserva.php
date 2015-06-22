@@ -12,30 +12,50 @@ function buscarVagasLivres($dataHoraInicial, $dataHoraFinal, $tipoVaga) {
 	return $result;
 }
 
-function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $user) {
+function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 	
 	$con = dbConnect("localhost","root","");
+	$res = dbConsulta("SELECT 1 FROM estacionamento WHERE vaga = '$vaga' AND dh_entrada >= '$dataHoraInicial'") 
+	
+	if (mysql_num_rows($res) > 0)
+		return -2;
 	
 	$token = '';
 	while (1) {
 		for ($i = 0; $i < 9; $i++)
 			$token = $token . rand(0, 9);
 		
-		$result = dbConsulta("SELECT 1 FROM estacionamento WHERE token = '$token' AND dh_saida IS NULL","estacionamento",$con);
+		$res = dbConsulta("SELECT 1 FROM estacionamento WHERE token = '$token' AND dh_saida IS NULL","estacionamento",$con);
 		if(mysql_num_rows($result) == 0) break;
 	}
 	
 	$sql = "INSERT INTO estacionamento (id_estacionamento, dh_entrada, dh_saida, nro_vaga, vaga_id_vaga, cliente_id_cliente, status, token)
-	 VALUES (NULL, '$dataHoraInicial', '$dataHoraFinal', '', '$vaga', '$user', '1', '$token')";
+	 VALUES (NULL, '$dataHoraInicial', '$dataHoraFinal', '', '$vaga', '$cliente', '4', '$token')";
 	
-	$result = dbConsulta($sql,"estacionamento",$con);
-	if ($result)
+	$res = dbConsulta($sql,"estacionamento",$con);
+	if ($res)
 		$idReserva = mysql_insert_id();
-	else return 1;
+	else return -1;
 	
-	$result = dbConsulta("SELECT token FROM estacionamento WHERE id_estacionamento = '$idReserva'", "estacionamento", $con);
-	return mysql_fetch_array($result)[0];
+	$res = dbConsulta("SELECT token FROM estacionamento WHERE id_estacionamento = '$idReserva'", "estacionamento", $con);
+	mysqli_close($con);
+	return mysql_fetch_array($res)[0];
 	
 }
 
+function buscarReservas($cliente, $dataInicial, $dataFinal, $tipoVaga, $situacao) {
+
+	$sql = "SELECT * FROM estacionamento e WHERE cliente_id_cliente = '$cliente'";
+	
+	if ($dataInicial != '' && $dataFinal != '')
+		$sql = $sql . " AND (dh_entrada BETWEEN '$dataInicial' AND '$dataFinal' OR dh_saida BETWEEN '$dataInicial' AND '$dataFinal')";
+	if ($tipoVaga > 0)
+		$sql = $sql . " AND (SELECT tipo FROM vaga WHERE id_vaga = e.vaga_id_vaga) = '$tipoVaga'";
+	if ($situacao > 0)
+		$sql = $sql . " AND status = '$status'";
+
+	$con = dbConnect("localhost","root","");
+	
+	mysqli_close($con);
+}
 ?>

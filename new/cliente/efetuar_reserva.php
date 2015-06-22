@@ -20,8 +20,10 @@
 			}
 			
 			function resultadoReserva(resultado) {
-				if (!resultado || resultado == undefined)
+				if (resultado == undefined || resultado == -1)
 					$('#spnErroEfetuarReserva').text('Reserva não efetuada');
+				else if (resultado == -2)
+					$('#spnErroEfetuarReserva').text('Já existe uma reserva nesta vaga e horário');
 				else {
 					$("#spnToken").text(resultado);
 					$("#divReservaEfetuada").modal();
@@ -38,17 +40,17 @@
 			}
 			
 			function setarOpcoesVagasDisponiveis() {
-				alert($("#hddHtmlSelectVagasDisponiveis").val());
+				//alert($("#hddHtmlSelectVagasDisponiveis").val());
 				$("#sltVaga").html($("#hddHtmlSelectVagasDisponiveis").val());
 				habilitarOpcoesReserva(true);
 			}
 			function setarHiddenOpcoesVagas(html) {
-				alert(html);
+				//alert(html);
 				$("#hddHtmlSelectVagasDisponiveis").val(html);
 			}
 			
 			function setarCamposReserva(dataHoraEntrada, dataHoraSaida, vaga) {
-				alert("setando campos reserva: " + dataHoraEntrada + " " + dataHoraSaida + " " + vaga);
+				//alert("setando campos reserva: " + dataHoraEntrada + " " + dataHoraSaida + " " + vaga);
 				if (dataHoraEntrada && dataHoraEntrada != '')
 					$('#txtDataHoraEntrada').val(dataHoraEntrada);
 				if (dataHoraSaida && dataHoraSaida != '')
@@ -156,7 +158,6 @@
 		</div>
 		<?php
 			if (isset($_POST['tipoRequisicao'])) {
-				//echo "<script type='text/javascript'>alert('" . $_POST['tipoRequisicao'] . "');</script>";
 				if ($_POST['tipoRequisicao'] == 'pesquisa') {
 					// buscar vagas
 					$vagasLivres = buscarVagasLivres($_POST['pesquisaDataInicial'], $_POST['pesquisaDataFinal'], $_POST['pesquisaTipo']);
@@ -175,12 +176,7 @@
 						echo "<script type='text/javascript'> erroPeriodoEfetuarReserva(); </script>";
 					else {
 						$reserva = efetuarReserva($_POST['vaga'], $_POST['dataHoraEntrada'], $_POST['dataHoraSaida'], $_SESSION['id_cliente']);
-						if (!$reserva) {
-							echo "<script type='text/javascript'> resultadoReserva(); </script>";
-						}
-						else {
-							echo "<script type='text/javascript'> resultadoReserva('" . $reserva . "'); </script>";
-						}
+						echo "<script type='text/javascript'> resultadoReserva('" . $reserva . "'); </script>";
 					}
 				}
 			}

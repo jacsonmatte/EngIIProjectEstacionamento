@@ -9,7 +9,10 @@
 	$TIPO_USUARIO_ADM = 1;
 	$TIPO_USUARIO_CLIENTE = 2;
 	
-	// conexão com o banco
-	
+	// status de reserva
+	$STATUS_RESERVA_UTILIZADA = 1;
+	$STATUS_RESERVA_UTILIZACAO = 2;
+	$STATUS_RESERVA_CANCELADA = 3;
+	$STATUS_RESERVA_RESERVADA = 4;
 	
 ?>
