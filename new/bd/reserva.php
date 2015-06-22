@@ -14,8 +14,11 @@ function buscarVagasLivres($dataHoraInicial, $dataHoraFinal, $tipoVaga) {
 
 function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 	
-	$con = dbConnect("localhost","root","");
-	$res = dbConsulta("SELECT 1 FROM estacionamento WHERE vaga = '$vaga' AND dh_entrada >= '$dataHoraInicial'");
+	$con = dbConnect("localhost", "root","");
+	// verifca se existe alguma reserva para a vaga onde
+	// a data/hora de entrada/saída está no intervalo de uma reserva existente
+	// ou se a reserva pretendida inicia antes e termina depois de alguma reserva existente
+	$res = dbConsulta("SELECT 1 FROM estacionamento WHERE vaga_id_vaga = '$vaga' AND (('$dataHoraInicial' BETWEEN dh_entrada AND dh_saida) OR ('$dataHoraFinal' BETWEEN dh_entrada AND dh_saida) OR ('$dataHoraInicial' <= dh_entrada AND '$dataHoraFinal' >= dh_saida))", "estacionamento", $con);
 	
 	if (mysql_num_rows($res) > 0)
 		return -2;
@@ -26,7 +29,7 @@ function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 			$token = $token . rand(0, 9);
 		
 		$res = dbConsulta("SELECT 1 FROM estacionamento WHERE token = '$token' AND dh_saida IS NULL","estacionamento",$con);
-		if(mysql_num_rows($result) == 0) break;
+		if(mysql_num_rows($res) == 0) break;
 	}
 	
 	$sql = "INSERT INTO estacionamento (id_estacionamento, dh_entrada, dh_saida, nro_vaga, vaga_id_vaga, cliente_id_cliente, status, token)
@@ -47,8 +50,11 @@ function buscarReservas($cliente, $dataInicial, $dataFinal, $tipoVaga, $situacao
 
 	$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga WHERE cliente_id_cliente = '$cliente'";
 	
-	if ($dataInicial != '' && $dataFinal != '')
-		$sql = $sql . " AND (dh_entrada BETWEEN '$dataInicial' AND '$dataFinal' OR dh_saida BETWEEN '$dataInicial' AND '$dataFinal')";
+	if ($dataInicial != '' && $dataFinal != '') {
+		$dataInicial = $dataInicial . "T00:00";
+		$dataFinal = $dataFinal . "T23:59";
+		$sql = $sql . " AND ((dh_entrada >= '$dataInicial' AND dh_entrada <= '$dataFinal') OR (dh_saida >= '$dataInicial' AND dh_saida <= '$dataFinal'))";
+	}
 	if ($tipoVaga > 0)
 		$sql = $sql . " AND (SELECT tipo FROM vaga WHERE id_vaga = e.vaga_id_vaga) = '$tipoVaga'";
 	if ($situacao > 0)

@@ -15,9 +15,7 @@
 		?>
 		<script type='text/javascript' >
 	
-			function erroPeriodoEfetuarReserva() {
-				$('#spnErroEfetuarReserva').text('O período selecionado deve estar entre as datas pesquisadas');
-			}
+			function erroPeriodoEfetuarReserva() { $('#spnErroEfetuarReserva').text('A entrada e a saída devem estar entre as datas pesquisadas'); }
 			
 			function resultadoReserva(resultado) {
 				if (resultado == undefined || resultado == -1)
@@ -40,7 +38,6 @@
 			}
 			
 			function setarOpcoesVagasDisponiveis() {
-				//alert($("#hddHtmlSelectVagasDisponiveis").val());
 				$("#sltVaga").html($("#hddHtmlSelectVagasDisponiveis").val());
 				habilitarOpcoesReserva(true);
 			}
@@ -167,17 +164,21 @@
 							$htmlTempVagas = $htmlTempVagas . "<option value='" . $row['id_vaga'] . "'>" . $row['nro_vaga'] . "</option>";
 					}
 					echo "<script type='text/javascript'>setarHiddenOpcoesVagas(\"" . $htmlTempVagas . "\");</script>";
+					echo "<script type='text/javascript'>setarOpcoesVagasDisponiveis();</script>";
 				}
 				else {
 					// efetuar reserva
 					if (isset($_POST['htmlOpcoesVagas']))
 						echo "<script type='text/javascript'>setarHiddenOpcoesVagas(\"" . $_POST['htmlOpcoesVagas'] . "\");</script>";
-					if ($_POST['dataHoraEntrada'] == '' || (strtotime($_POST['dataHoraEntrada']) > strtotime($_POST['pesquisaDataFinalSelecionada']) || strtotime($_POST['dataHoraEntrada']) < strtotime($_POST['pesquisaDataInicialSelecionada'])) || (strtotime($_POST['dataHoraSaida']) > strtotime($_POST['pesquisaDataFinalSelecionada']) || strtotime($_POST['dataHoraSaida']) < strtotime($_POST['pesquisaDataInicialSelecionada'])))
+					if ($_POST['dataHoraEntrada'] == '' || $_POST['dataHoraSaida'] == '' || (strtotime($_POST['dataHoraEntrada']) > strtotime($_POST['pesquisaDataFinalSelecionada']) || strtotime($_POST['dataHoraEntrada']) < strtotime($_POST['pesquisaDataInicialSelecionada'])) || (strtotime($_POST['dataHoraSaida']) > strtotime($_POST['pesquisaDataFinalSelecionada']) || strtotime($_POST['dataHoraSaida']) < strtotime($_POST['pesquisaDataInicialSelecionada']))) {
 						echo "<script type='text/javascript'> erroPeriodoEfetuarReserva(); </script>";
+						
+					}
 					else {
 						$reserva = efetuarReserva($_POST['vaga'], $_POST['dataHoraEntrada'], $_POST['dataHoraSaida'], $_SESSION['id_cliente']);
 						echo "<script type='text/javascript'> resultadoReserva('" . $reserva . "'); </script>";
 					}
+					echo "<script type='text/javascript'>setarOpcoesVagasDisponiveis();</script>";
 				}
 			}
 			
@@ -187,7 +188,6 @@
 			else if (isset($_POST['pesquisaDataInicialSelecionada']) && isset($_POST['pesquisaDataFinalSelecionada']) && isset($_POST['pesquisaTipoSelecionado'])) {
 				echo "<script type='text/javascript'>setarCamposPesquisa('" . $_POST['pesquisaDataInicialSelecionada'] . "', '" . $_POST['pesquisaDataFinalSelecionada'] . "', '". $_POST['pesquisaTipoSelecionado'] . "');</script>";
 			}
-			echo "<script type='text/javascript'>setarOpcoesVagasDisponiveis();</script>";
 			if (isset($_POST['dataHoraEntrada']) && isset($_POST['dataHoraSaida']) && isset($_POST['vaga'])) {
 				echo "<script type='text/javascript'>setarCamposReserva('" . $_POST['dataHoraEntrada']. "', '" . $_POST['dataHoraSaida'] . "', '" . $_POST['vaga'] . "');</script>";
 			}
