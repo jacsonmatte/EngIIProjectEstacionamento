@@ -15,7 +15,7 @@
 		$descricao = addslashes($_POST["txtDescricao"]);
 
 			if($id_plano == ""){
-				echo "<script>alert('Por favor, selecione um plano!!');</script>";
+				echo "<script>alert('Por favor $nomecliente, selecione um plano!!');</script>";
 
 			}else{
 
