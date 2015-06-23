@@ -7,6 +7,8 @@ function dbConnect2(){
     return $connect;
 }
 
+
+//coment
 function dbConnect($host, $user, $pass){
 	$CONNECT = 1;
 	if ($CONNECT == 1)

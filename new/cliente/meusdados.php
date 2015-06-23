@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	//comment
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
