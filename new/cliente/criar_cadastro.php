@@ -413,9 +413,11 @@
 						die("Erro ao Cadastrar !");
 					}else{
 						
-						echo "<script>alert('Usuário Cadastrado com Sucesso !!');</script>";
+						echo "<script>alert('Usuário Cadastrado com Sucesso !!'); location.href = '../index.html';</script>";
+						
+						
 						mysql_close($conexao);
-					
+
 					}
 		
 				}	
