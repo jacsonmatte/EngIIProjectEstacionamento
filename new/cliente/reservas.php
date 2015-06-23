@@ -68,29 +68,37 @@
 			<?php
 				$reservas = false;
 				if (isset($_GET['search'])) {
-					if ((isset($_POST["pesquisaDataInicial"]) && isset($_POST['pesquisaDataFinal']) && isset($_POST["pesquisaSituacao"]) && isset($_POST['pesquisaTipo'])) || $_GET['search'] == 'all') {
+					$pesquisaDataInicial = ''; $pesquisaDataFinal = ''; $pesquisaTipo = ''; $pesquisaSituacao = '';
+					if (isset($_POST["pesquisaDataInicial"]) && isset($_POST['pesquisaDataFinal']) && isset($_POST["pesquisaSituacao"]) && isset($_POST['pesquisaTipo'])) {
+						$pesquisaDataInicial = $_POST["pesquisaDataInicial"];
+						$pesquisaDataFinal = $_POST['pesquisaDataFinal'];
+						$pesquisaTipo = $_POST["pesquisaSituacao"];
+						$pesquisaSituacao = $_POST['pesquisaTipo'];
+					}
 						
-					if (isset($_POST["pesquisaDataInicial"]) && isset($_POST['pesquisaDataFinal']) && $_POST["pesquisaDataInicial"] > $_POST["pesquisaDataFinal"] && $_GET['search'] != 'all')
+					if ($pesquisaDataInicial > $pesquisaDataFinal)
 						echo "<strong>A data final deve ser maior que a data inicial</strong>";
 					else {
-						if ($_GET['search'] == 'all')
-							$reservas = buscarReservas($_SESSION['id_cliente'], '', '', '', '');
-						else
-							$reservas = buscarReservas($_SESSION['id_cliente'], $_POST["pesquisaDataInicial"], $_POST["pesquisaDataFinal"], $_POST["pesquisaTipo"], $_POST["pesquisaSituacao"]);
+						$reservas = buscarReservas($_SESSION['id_cliente'], $pesquisaDataInicial, $pesquisaDataFinal, $pesquisaTipo, $pesquisaSituacao);
 						
-							if (!$reservas)
-								echo "<strong style='color: #FFF'>Oops! Parece que tivemos um problema...</strong>";
-							else if (mysql_num_rows($reservas) == 0)
-								echo "<strong>Nenhuma reserva encontrada</strong>";
-							else {
-								$i = 0;
-								$html = "<table style='width: 100%;'  id='tbReservas'><tr class='bg-all' style='color: #FFF'><th style='text-align: center'>Código</th><th style='text-align: center'>Entrada</th><th style='text-align: center'>Saída</th><th style='text-align: center'>Vaga</th><th style='text-align: center'>Token</th><th style='text-align: center'>Status</th></tr>";
-								while ($row = mysql_fetch_assoc($reservas)) {
-									$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $row['status'] . "</td></tr>"; 	
-									$i++;
-								}
-								echo $html . "</table>";
+						if (!$reservas)
+							echo "<strong style='color: #FFF'>Oops! Parece que tivemos um problema...</strong>";
+						else if (mysql_num_rows($reservas) == 0)
+							echo "<strong>Nenhuma reserva encontrada</strong>";
+						else {
+							$i = 0;
+							$html = "<table style='width: 100%;'  id='tbReservas'><tr class='bg-all' style='color: #FFF'><th style='text-align: center'>Código</th><th style='text-align: center'>Entrada</th><th style='text-align: center'>Saída</th><th style='text-align: center'>Vaga</th><th style='text-align: center'>Token</th><th style='text-align: center'>Status</th></tr>";
+							while ($row = mysql_fetch_assoc($reservas)) {
+								$status = '';
+								if ($row['status'] == $STATUS_RESERVA_CANCELADA) $status = 'Cancelada';
+								else if ($row['status'] == $STATUS_RESERVA_UTILIZADA) $status = 'Concluída';
+								else if ($row['status'] == $STATUS_RESERVA_RESERVADA) $status = 'Em aberto';
+								else $status = 'Em utilização';
+								
+								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td></tr>"; 	
+								$i++;
 							}
+							echo $html . "</table>";
 						}
 					}
 				}
