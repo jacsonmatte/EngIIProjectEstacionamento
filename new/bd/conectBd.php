@@ -7,8 +7,6 @@ function dbConnect2(){
     return $connect;
 }
 
-
-//coment
 function dbConnect($host, $user, $pass){
 	$CONNECT = 1;
 	if ($CONNECT == 1)
@@ -61,7 +59,7 @@ function verificaAtributos($email, $Cpf_Cnpj){
 
 
 function loadCliente($login){
-	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado, telefone FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
+	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado,telefone, senha FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
 	$con = dbConnect("localhost","root","");
 	$result =dbConsulta($sql,"estacionamento",$con);
 	$dados = array();
@@ -76,26 +74,20 @@ function loadCliente($login){
 			$dados["cidade"]=$row["cidade"];
 			$dados["estado"]=$row["estado"];
 			$dados["telefone"]=$row["telefone"];
+            $dados["senha"] = $row["senha"]; 
 	}
 	return $dados;
 }
 
-function gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $login){
+function gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $login){
 	$sql = "UPDATE cliente, usuario SET nome='$nome',cpf_cnpj='$cpf_cnpj',email='$email',logradouro='$logradouro',nro='$nro',cep='$cep',bairro='$bairro',cidade='$cidade', estado='$estado',telefone='$telefone' WHERE cliente.id_cliente=usuario.cliente_id_cliente and  usuario.login='$login'";
-	$con = dbConnect("localhost","root","");
+    $con = dbConnect("localhost","root","");
 	$result =dbConsulta($sql,"estacionamento",$con);
+    $sql = "UPDATE usuario SET senha = '$senha' WHERE login='$login'";
+    $con = dbConnect("localhost","root","");
+    $result =dbConsulta($sql,"estacionamento",$con);
+
+
 	
-}
-
-function buscaMensalidade($mes, $ano, $nome){
-	//$sql = "SELECT c.id_cliente, c.nome, m.id_mensalidade, m.mes, m.ano, m.val_plano, m.val_execed, FROM mensalidade m JOIN	cliente c ON m.cliente_id_cliente = c.id_cliente WHERE m.mes = '$mes' AND m.ano = '$ano' AND c.nome like '$nome'";
-	$sql = "SELECT nome, mes, ano, (m.val_plano+m.val_execed) soma FROM mensalidade m JOIN cliente c ON c.id_cliente = m.cliente_id_cliente";
-	if ($nome <> '') $sql = $sql . " WHERE c.nome LIKE '%$nome%'";
-	//if ($mes <> '') $sql = $sql . " AND m.mes = '$mes'";
-	//if ($ano <> '') $sql = $sql . " AND m.ano = '$ano'";
-
-	$con = dbConnect("localhost","root","");
-	$result = dbConsulta($sql,"mensalidade", $con);
-	return $result;
 }
 ?>
