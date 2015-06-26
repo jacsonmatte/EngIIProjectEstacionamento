@@ -16,7 +16,6 @@ function dbConnect($host, $user, $pass){
 	else
 		return @mysql_connect($host, $user, $pass);
 }
- 
 //Conecta na BD e executa uma consulta
 function dbConsulta($sql, $app, $connect){
 	$CONNECT = 1;
@@ -55,9 +54,6 @@ function verificaAtributos($email, $Cpf_Cnpj){
      return mysql_num_rows($result);
 }
 
-
-
-
 function loadCliente($login){
 	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado, telefone FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
 	$con = dbConnect("localhost","root","");
@@ -91,6 +87,15 @@ function buscaMensalidade($mes, $ano, $nome){
 	if ($nome <> '') $sql = $sql . " WHERE c.nome LIKE '%$nome%'";
 	//if ($mes <> '') $sql = $sql . " AND m.mes = '$mes'";
 	//if ($ano <> '') $sql = $sql . " AND m.ano = '$ano'";
+
+	$con = dbConnect("localhost","root","");
+	$result = dbConsulta($sql,"mensalidade", $con);
+	return $result;
+}
+
+function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
+	
+	$sql = "SELECT c.nome, p.nome, p.valor, p.horas, p.valor_excedente, o.data_contrato FROM plano p JOIN plano_contratado o ON p.id = o.plano_id_plano JOIN cliente c ON c.id_cliente = o.cliente_id_cliente WHERE p.horas BETWEEN $qtdMinhrs AND $qtdMaxhrs AND p.valor BETWEEN $VloMin AND $VloMax";
 
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
