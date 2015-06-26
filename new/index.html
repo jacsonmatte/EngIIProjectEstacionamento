@@ -34,43 +34,44 @@
 	<body class='bg-content full-height'>
 		<div class="container-fluid bg-info bg-content full-height">
 			<div id='div1' class="row offset-top-and-bottom-15 bg-content"> 
-				<div class="col-sm-3 full-height">
+				<div class="col-sm-6 full-height">
 				</div>
 				
 				<div id='divLogin' class="col-sm-6 text-center collapse in">
-				<div class='form-group col-sm-15 text-center'>
-							<img src="img/logo.jpg"> 
-					</div>
 					<div class='form-group col-sm-6'>
 						<!-- <label for='txtUsername'>Username:</label> -->
 						 <form id="formulario" class="form-horizontal" role="form" action="validation.php" method="POST">
-								<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Informe seu nome de usuário ...'>
-							</div>
-							<div class='form-group col-sm-6'>
-								<!-- <label for='txtSenha'>Senha:</label> -->
-								<input type='password' class='form-control' id='txtSenha' name="senha" placeholder='... e a sua senha'>
-							</div>
-							<div class='form-group col-sm-12 text-right'>
-								<span id='spnErroAcessoSistema'></span> &nbsp;
-								<input type='submit' class='btn cmd-item' value='Logar'  /> &nbsp;
+								<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Nome de usuário'>
+					</div>
+					
+					<div class='form-group col-sm-6'>
+						<!-- <label for='txtSenha'>Senha:</label> -->
+						<input type='password' class='form-control' id='txtSenha' name="senha" placeholder='Senha'>
+					</div>
+							
+					<div class='form-group col-sm-12 text-right'>
+						<span id='spnErroAcessoSistema'></span> &nbsp;
+						<input type='submit' class='btn cmd-item' value='Logar'  /> &nbsp;
 						</form>
 						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' id='exibirOpcaoRedefinirSenha'/>
 					</div>
+					
 					<div class='form-group col-sm-12 text-right'>
 						Ainda não tem uma conta? <a href='cliente/criar_cadastro.php'>Cadastre-se!</a>
 					</div>
+				
 				</div>
 				<div id='divRedefinirSenha' class="col-sm-6 text-left collapse">
 					<form id="redefinir" name="redefinir" class="form-horizontal" role="form" action="redefinicao_senha.php" method="post">
 						<div class='form-group col-sm-6'><br/> 
 						<!-- <label for='txtUsername'>e-Mail:</label> -->
-							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='Insira seu e-mail cadastrado ...'>
+							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='E-mail cadastrado'>
 						</div>
 						<div class='form-group col-sm-6'>
 							<!-- <label for='txtSenha'>CPF/CNPJ:</label> -->
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> CPF
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> CNPJ
-							<input type='text' class='form-control' id="txtCpfCnpj" name="Cpf_Cnpj"  placeholder="Ou seu CPF/CNPJ ...">
+							<input type='text' class='form-control' id="txtCpfCnpj" name="Cpf_Cnpj"  placeholder="CPF ou CNPJ">
 						</div>
 					
 						<div class='form-group col-sm-12 text-right'>
