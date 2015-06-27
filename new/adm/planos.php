@@ -47,13 +47,15 @@
 			</div>
 			<?php
 				if(isset($_POST['btnPesquisar'])){
-					if(isset($_POST['qtdMinhrs']) && isset($_POST['qtdMaxhrs']) && isset($_POST['VloMin']) && isset($_POST['VloMax'])){ //Valores preenchidos
+					if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL)
+						echo "<strong>Preencha todos os campos!</strong>";
+					else{
 						if((($_POST['qtdMinhrs']) < ($_POST['qtdMaxhrs'])) && (($_POST['VloMin']) < ($_POST['VloMax']))){ // Min < Max E Min < Max
 							
 							$dados = buscaPlanos($_POST['qtdMinhrs'], $_POST['qtdMaxhrs'], $_POST['VloMin'], $_POST['VloMax']);
 
-							if (mysql_num_rows($dados) > 0) {	
-					                          
+							if (mysql_num_rows($dados) > 0){
+
 								echo '<table width="100%">';
 								echo '<thead><tr>';
 								echo '<th>Cliente</th>';
@@ -85,12 +87,11 @@
 						}
 						else // ValorMin >= ValorMax
 							echo "<strong>Valor mínimo do plano deve ser menor que o valor máximo do plano</strong>";
-					}
+					}	
 				}
 				else
 					echo "<strong>Nenhuma pesquisa realizada por enquanto</strong>";
 				?>
-			
 		</form>
 	<?php
 		require '../require/content-2-footer.html';
