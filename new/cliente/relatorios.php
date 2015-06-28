@@ -17,16 +17,16 @@
 		require '../require/menu-2-content-1.html';
 	?> 
 	<h3>Relatórios</h3>
-	<form role='form' class='text-center'>
+	<form role='form' class='text-center' action='gerar_relatorio.php'>
 		<div class='form-group col-sm-3 text-left'>
 			<div class='col-sm-12 text-left form-group'>
-				<input type='radio' name='relatorio' id='rdbRelatorioPlanos' /><label for='rdbRelatorioPlanos'>&nbsp;Planos</label>
+				<input type='radio' value='planos' name='relatorio' id='rdbRelatorioPlanos' /><label for='rdbRelatorioPlanos'>&nbsp;Planos</label>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input type='radio' name='relatorio' id='rdbRelatorioUso' /><label for='rdbRelatorioUso'>&nbsp;Uso</label>
+				<input type='radio' value='uso' name='relatorio' id='rdbRelatorioUso' /><label for='rdbRelatorioUso'>&nbsp;Uso</label>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
-				<input type='radio' name='relatorio' id='rdbRelatorioReservas' /><label for='rdbRelatorioReservas'>&nbsp;Reservas</label>
+				<input type='radio' value='reservas' name='relatorio' id='rdbRelatorioReservas' /><label for='rdbRelatorioReservas'>&nbsp;Reservas</label>
 			</div>
 		</div>
 		<div class='form-group col-sm-9 text-left'>
@@ -52,7 +52,7 @@
 		</div>
 		<div class='form-group col-sm-12 text-right'>
 			<span id='spnErroGerarRelatorio' class='help-inline'></span>&nbsp;
-			<input type='button' id='btnGerar' class='btn cmd-item' value='Gerar' />
+			<input type='submit' id='btnGerar' class='btn cmd-item' value='Gerar' />
 		</div>
 	</form>
 	<!-- Modal do relatório -->
@@ -76,30 +76,30 @@
 	
 	<script type='text/javascript'>
 	
-		$("#btnGerar").click(function() {
+		// $("#btnGerar").click(function() {
 			
-			$("#spnErroGerarRelatorio").text('');
+			// $("#spnErroGerarRelatorio").text('');
 			
-			// obter os radio checados para ver se foi escolhido algum tipo de relatório
-			var opt = $('input[name=relatorio]:checked');
+			// // obter os radio checados para ver se foi escolhido algum tipo de relatório
+			// var opt = $('input[name=relatorio]:checked');
 			
-			if (opt.length == 1) {
+			// if (opt.length == 1) {
 				
-				// verificar o tipo de relatório selecionado e os filtros necessários
+				// // verificar o tipo de relatório selecionado e os filtros necessários
 				
-				// se tiver tudo ok, chama o relatório por ajax
-				// recebe o retorno json
-				// chama a função que monta a tabela com o objeto json (ainda será criada)
-				// coloca a tabela na divConteudoRelatorio 
-				//$("#divConteudoRelatorio").empty();
-				//$("#divConteudoRelatorio").append(conteudo);
-				// exibe o modal
-				$("#divRelatorio").modal();
-			}
-			else
-				$("#spnErroGerarRelatorio").text('É necessário escolher um tipo de relatório');
+				// // se tiver tudo ok, chama o relatório por ajax
+				// // recebe o retorno json
+				// // chama a função que monta a tabela com o objeto json (ainda será criada)
+				// // coloca a tabela na divConteudoRelatorio 
+				// //$("#divConteudoRelatorio").empty();
+				// //$("#divConteudoRelatorio").append(conteudo);
+				// // exibe o modal
+				// $("#divRelatorio").modal();
+			// }
+			// else
+				// $("#spnErroGerarRelatorio").text('É necessário escolher um tipo de relatório');
 			
-		});
+		// });
 		
 	
 	</script>
