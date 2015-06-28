@@ -37,7 +37,7 @@
 		$pdf->SetFont('Arial', 'B', 14);
 		$pdf->Ln(); // adiciona uma quebra de linha
 		if ($dataInicial <> '' && $dataFinal <> '')
-			$pdf->Cell(190, 10, utf8_decode("Período: " . $dataInicial . " a " . $dataFinal), 1, 0, 'C');
+			$pdf->Cell(190, 10, utf8_decode("Período: " . $dataInicial . " a " . $dataFinal), 1, 0, 'C');  // usar o utf_decode ao inserir texto com acento
 		else
 			$pdf->Cell(190, 10, utf8_decode("Período: tudo"), 1, 0, 'C');
 		$pdf->Ln();
@@ -46,8 +46,8 @@
 			$i = 0;
 			$pdf->SetFillColor(0, 45, 91);
 			$pdf->SetTextColor(255, 255, 255);
-			$pdf->Cell(50, 10, "Nome", 1, 0, 'C', true); // usar o utf_decode ao inserir texto com acento
-			$pdf->Cell(20, 10, "Valor", 1, 0, 'C', true); // o último parâmetro habilita a mudança de cor de fundo da célula
+			$pdf->Cell(50, 10, "Nome", 1, 0, 'C', true); // o último parâmetro habilita a mudança de cor de fundo da célula
+			$pdf->Cell(20, 10, "Valor", 1, 0, 'C', true);
 			$pdf->Cell(20, 10, "Horas", 1, 0, 'C', true);
 			$pdf->Cell(40, 10, "Hora exced.", 1, 0, 'C', true);
 			$pdf->Cell(60, 10, utf8_decode("Contratação"), 1, 0, 'C', true);
@@ -131,5 +131,6 @@
 		$pdf->Cell(190, 10, utf8_decode("Relatório gerado por Control Parking"));
 	}
 	
-	$pdf->Output();
+	$pdf->Output(); // escreve o pdf na resposta da requisição (IMPORTANTE: deve ser a única coisa enviada como dado na resposta da requisição, por isto não pode ter nenhum echo, print ou var_dump antes ou depois e também é necessário garantir que não vá ocorrer nenhum erro ou warning
+
 ?>
