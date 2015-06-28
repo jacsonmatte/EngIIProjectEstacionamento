@@ -83,7 +83,7 @@
 					if ($pesquisaDataInicial > $pesquisaDataFinal)
 						echo "<strong>A data final deve ser maior que a data inicial</strong>";
 					else {
-						$reservas = buscarReservas_efetuadas($pesquisaDataInicial, $pesquisaDataFinal, $pesquisaTipo, $pesquisaSituacao);
+						$reservas = buscarReservas(0, $pesquisaDataInicial, $pesquisaDataFinal, $pesquisaTipo, $pesquisaSituacao);
 						
 						if (!$reservas)
 							echo "<strong style='color: #FFF'>Oops! Parece que tivemos um problema...</strong>";

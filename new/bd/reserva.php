@@ -47,9 +47,12 @@ function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 }
 
 function buscarReservas($cliente, $dataInicial, $dataFinal, $tipoVaga, $situacao) {
+	if($cliente==0){
+		$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga";
+	}else{
 
-	$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga WHERE cliente_id_cliente = '$cliente'";
-	
+		$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga WHERE cliente_id_cliente = '$cliente'";
+	}
 	if ($dataInicial != '' && $dataFinal != '') {
 		$dataInicial = $dataInicial . "T00:00";
 		$dataFinal = $dataFinal . "T23:59";
@@ -67,26 +70,4 @@ function buscarReservas($cliente, $dataInicial, $dataFinal, $tipoVaga, $situacao
 
 }
 
-function buscarReservas_efetuadas($dataInicial, $dataFinal, $tipoVaga, $situacao){
-	
-	$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga";
-	
-	if ($dataInicial != '' && $dataFinal != '') {
-		$dataInicial = $dataInicial . "T00:00";
-		$dataFinal = $dataFinal . "T23:59";
-		$sql = $sql . " AND ((dh_entrada >= '$dataInicial' AND dh_entrada <= '$dataFinal') OR (dh_saida >= '$dataInicial' AND dh_saida <= '$dataFinal'))";
-	}
-	if ($tipoVaga > 0)
-		$sql = $sql . " AND (SELECT tipo FROM vaga WHERE id_vaga = e.vaga_id_vaga) = '$tipoVaga'";
-	if ($situacao > 0)
-		$sql = $sql . " AND status = '$situacao'";
-
-	$con = dbConnect("localhost", "root", "");
-	$res = dbConsulta($sql, "estacionamento", $con);
-	
-	return $res;
-
-
-
-}
 ?>
