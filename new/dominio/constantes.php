@@ -10,9 +10,9 @@
 	$TIPO_USUARIO_CLIENTE = 2;
 	
 	// status de reserva
-	$STATUS_RESERVA_UTILIZADA = 1;
-	$STATUS_RESERVA_UTILIZACAO = 2;
+	$STATUS_RESERVA_UTILIZADA = 1; // reserva terminada, o veículo já saiu do estacionamento
+	$STATUS_RESERVA_UTILIZACAO = 2; // utilização em curso
 	$STATUS_RESERVA_CANCELADA = 3;
-	$STATUS_RESERVA_RESERVADA = 4;
+	$STATUS_RESERVA_RESERVADA = 4; // reserva efetuada, até o momento do veículo entrar efetivamente
 	
 ?>

@@ -17,7 +17,7 @@
 		require '../require/menu-2-content-1.html';
 	?> 
 	<h3>Relatórios</h3>
-	<form role='form' class='text-center' action='gerar_relatorio.php'>
+	<form role='form' class='text-center' action='gerar_relatorio.php' method='POST'>
 		<div class='form-group col-sm-3 text-left'>
 			<div class='col-sm-12 text-left form-group'>
 				<input type='radio' value='planos' name='relatorio' id='rdbRelatorioPlanos' /><label for='rdbRelatorioPlanos'>&nbsp;Planos</label>
@@ -32,17 +32,17 @@
 		<div class='form-group col-sm-9 text-left'>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
-					<input class='form-control' type='date' id='dteDataInicial' placeholder='Data Inicial'/>
+					<input class='form-control' type='date' id='dteDataInicial' placeholder='Data Inicial' name='datainicial'/>
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
-					<input class='form-control' type='date' id='dteDataFinal' placeholder='Data Final'/>
+					<input class='form-control' type='date' id='dteDataFinal' placeholder='Data Final' name='datafinal'/>
 				</div>
 			</div>
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-6'>
-					<select class='form-control' id='sltPlanos'>
+					<select class='form-control' id='sltPlanos' name='plano'>
 						<option>Plano 1</option>
 						<option>Plano 2</option>
 						<option>Plano 3</option>
@@ -103,7 +103,5 @@
 		
 	
 	</script>
-	
-	
 	
 </html>
