@@ -10,6 +10,20 @@
 			require '../require/meta.html';
 			require '../require/js-base.html';
 		?>
+		<script type='text/javascript' >
+		
+			function erroGerarRelatorio(erro) {
+				if (erro == '1')
+					$("#spnErroGerarRelatorio").text("Erro ao gerar o relatório");
+				else if (erro == '2')
+					$("#spnErroGerarRelatorio").text("Data inicial inválida");
+				else if (erro == '3')
+					$("#spnErroGerarRelatorio").text("Data final inválida");
+				else if (erro == '4')
+					$("#spnErroGerarRelatorio").text("Data inicial não pode ser maior que a data final");
+			}
+		
+		</script>
 	</head>
 	<?php
 		require '../require/menu-1.html';
@@ -22,9 +36,9 @@
 			<div class='col-sm-12 text-left form-group'>
 				<input type='radio' value='planos' name='relatorio' id='rdbRelatorioPlanos' /><label for='rdbRelatorioPlanos'>&nbsp;Planos</label>
 			</div>
-			<div class='col-sm-12 text-left form-group'>
+			<!--<div class='col-sm-12 text-left form-group'>
 				<input type='radio' value='uso' name='relatorio' id='rdbRelatorioUso' /><label for='rdbRelatorioUso'>&nbsp;Uso</label>
-			</div>
+			</div>-->
 			<div class='col-sm-12 text-left form-group'>
 				<input type='radio' value='reservas' name='relatorio' id='rdbRelatorioReservas' /><label for='rdbRelatorioReservas'>&nbsp;Reservas</label>
 			</div>
@@ -38,15 +52,6 @@
 			<div class='col-sm-12 text-left form-group'>
 				<div class='col-sm-4'>
 					<input class='form-control' type='date' id='dteDataFinal' placeholder='Data Final' name='datafinal'/>
-				</div>
-			</div>
-			<div class='col-sm-12 text-left form-group'>
-				<div class='col-sm-6'>
-					<select class='form-control' id='sltPlanos' name='plano'>
-						<option>Plano 1</option>
-						<option>Plano 2</option>
-						<option>Plano 3</option>
-					</select>
 				</div>
 			</div>
 		</div>
@@ -72,10 +77,12 @@
 	</div>
 	<?php
 		require '../require/content-2-footer.html';
+		if (isset($_GET['error']))
+			echo "<script type='text/javascript'> erroGerarRelatorio('" . $_GET['error'] . "'); </script>";
 	?>
 	
 	<script type='text/javascript'>
-	
+		
 		// $("#btnGerar").click(function() {
 			
 			// $("#spnErroGerarRelatorio").text('');
