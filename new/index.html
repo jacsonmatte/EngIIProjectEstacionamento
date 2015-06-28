@@ -33,27 +33,27 @@
 	</head>
 	<body class='bg-content full-height'>
 		<div class="container-fluid bg-info bg-content full-height">
-			<div id='div1' class="row offset-top-and-bottom-15 bg-content"> 
+			<div id='div1' class="row bg-content" > 
 				
-				<div class='col-sm-9 text-center'>
+				<div class='col-sm-9 text-center' style='padding-top: 15%; padding-bottom: 15%'>
 					<h3>Control Parking, o seu sistema de estacionamento!</h3>
 					<img src="img/logo.jpg"> 	
 					<h4>Entre em contato para saber sobre nosso planos!<h4>
 				</div>
 				
-				<div id='divLogin' class="col-sm-3 text-right">
-					<div class='form-group col-sm-9 '>
+				<div id='divLogin' class="col-sm-3 text-right" style='padding-top: 2%'>
+					<div class='form-group col-sm-12 '>
 					<!-- <label for='txtUsername'>Username:</label> -->
 						<form id="formulario" class="form-horizontal" role="form" action="validation.php" method="POST">
 						<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Nome de usuário'>
 					</div>
 					
-					<div class='form-group col-sm-9 '>
+					<div class='form-group col-sm-12 '>
 						<!-- <label for='txtSenha'>Senha:</label> -->
 						<input type='password' class='form-control' id='txtSenha' name="senha" placeholder='Senha'>
 					</div>
 							
-					<div class='form-group col-sm-12 '>
+					<div class='form-group col-sm-12 text-center'>
 						<span id='spnErroAcessoSistema'></span> &nbsp;
 						<input type='submit' class='btn cmd-item' value='Logar'  /> &nbsp;
 						</form>
@@ -65,13 +65,13 @@
 					</div>
 				
 				</div>
-				<div id='divRedefinirSenha' class="col-sm-6 text-left collapse">
+				<div id='divRedefinirSenha' class="col-sm-3 text-left collapse"  style='padding-top: 2%'>
 					<form id="redefinir" name="redefinir" class="form-horizontal" role="form" action="redefinicao_senha.php" method="post">
-						<div class='form-group col-sm-6'><br/> 
+						<div class='form-group col-sm-12'><br/> 
 						<!-- <label for='txtUsername'>e-Mail:</label> -->
 							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='E-mail cadastrado'>
 						</div>
-						<div class='form-group col-sm-6'>
+						<div class='form-group col-sm-12'>
 							<!-- <label for='txtSenha'>CPF/CNPJ:</label> -->
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> CPF
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> CNPJ
@@ -81,7 +81,7 @@
 						<div class='form-group col-sm-12 text-right'>
 							<span id='spnErroAcessoSistema'></span> &nbsp;
 							<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
-							<input type='submit' id='btnSalvar' class='btn cmd-item' value='Redefinir_senha' />
+							<input type='submit' id='btnSalvar' class='btn cmd-item' value='Redefinir Senha' />
 						</div>
 					</form>
 				</div>
