@@ -34,29 +34,33 @@
 	<body class='bg-content full-height'>
 		<div class="container-fluid bg-info bg-content full-height">
 			<div id='div1' class="row offset-top-and-bottom-15 bg-content"> 
-				<div class="col-sm-6 full-height">
+				
+				<div class='col-sm-9 text-center'>
+					<h3>Control Parking, o seu sistema de estacionamento!</h3>
+					<img src="img/logo.jpg"> 	
+					<h4>Entre em contato para saber sobre nosso planos!<h4>
 				</div>
 				
-				<div id='divLogin' class="col-sm-6 text-center collapse in">
-					<div class='form-group col-sm-6'>
-						<!-- <label for='txtUsername'>Username:</label> -->
-						 <form id="formulario" class="form-horizontal" role="form" action="validation.php" method="POST">
-								<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Nome de usuário'>
+				<div id='divLogin' class="col-sm-3 text-right">
+					<div class='form-group col-sm-9 '>
+					<!-- <label for='txtUsername'>Username:</label> -->
+						<form id="formulario" class="form-horizontal" role="form" action="validation.php" method="POST">
+						<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Nome de usuário'>
 					</div>
 					
-					<div class='form-group col-sm-6'>
+					<div class='form-group col-sm-9 '>
 						<!-- <label for='txtSenha'>Senha:</label> -->
 						<input type='password' class='form-control' id='txtSenha' name="senha" placeholder='Senha'>
 					</div>
 							
-					<div class='form-group col-sm-12 text-right'>
+					<div class='form-group col-sm-12 '>
 						<span id='spnErroAcessoSistema'></span> &nbsp;
 						<input type='submit' class='btn cmd-item' value='Logar'  /> &nbsp;
 						</form>
 						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' id='exibirOpcaoRedefinirSenha'/>
 					</div>
 					
-					<div class='form-group col-sm-12 text-right'>
+					<div class='form-group col-sm-12 '>
 						Ainda não tem uma conta? <a href='cliente/criar_cadastro.php'>Cadastre-se!</a>
 					</div>
 				
