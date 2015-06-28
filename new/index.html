@@ -1,76 +1,152 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link href='css/cp.css' rel='stylesheet' />
+		<title>Control Parking - Login</title>
+		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script type='text/javascript' src='js/jquery.maskedinput.js'></script>
+		<script>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Engiiprojectestacionamento : ">
+			$(document).ready(function(){
+				
+				$("#txtCpfCnpj").mask("999.999.999-99");
+		
+			});
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+			function habilita(v) {  
+    			if (v == 1) {  
+        			$("#txtCpfCnpj").mask("999.999.999-99"); 
+    			} else {  
+        			$("#txtCpfCnpj").mask("99.999.999/9999-99");	  
+    			}     
+			} 
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    <title>Projeto Estacionamento</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/jacsonmatte/EngIIProjectEstacionamento">View on GitHub</a>
-
-          <h1 id="project_title">Projeto Estacionamento</h1>
-          <h2 id="project_tagline"></h2>
-
-         
-        </header>
-    </div>
-	<ul class="nav nav-pills">
-	  <li role="presentation" class="active"><a href="#">Home</a></li>
-	  <li role="presentation"><a href="#">Cadastro</a></li>
-	  <li role="presentation"><a href="#">Planos</a></li>
-	  
-	</ul>
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-	<form>
-	  <div class="form-group">
-		<label >Nome</label>
-		<input type="text" class="form-control" placeholder="Entre com o nome">
-	  </div>
-	  <div class="form-group">
-		<label for="exampleInputEmail1">Email</label>
-		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Entre como o email">
-	  </div>
-	  <div class="form-group">
-		<label for="exampleInputPassword1">Senha</label>
-		<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entre com uma senha">
-	  </div>
-	 
-	  <div class="checkbox">
-		<label>
-		  <input type="checkbox"> concordo com os termos de uso.
-		</label>
-	  </div>
-	  <button type="submit" class="btn btn-default">Cadastrar</button>
-	</form>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Engiiprojectestacionamento maintained by <a href="https://github.com/jacsonmatte">jacsonmatte</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+		</script>
+		
+	</head>
+	<body class='bg-content full-height'>
+		<div class="container-fluid bg-info bg-content full-height">
+			<div id='div1' class="row offset-top-and-bottom-15 bg-content"> 
+				<div class="col-sm-6 full-height">
+				</div>
+				
+				<div id='divLogin' class="col-sm-6 text-center collapse in">
+					<div class='form-group col-sm-6'>
+						<!-- <label for='txtUsername'>Username:</label> -->
+						 <form id="formulario" class="form-horizontal" role="form" action="validation.php" method="POST">
+								<input type='text' class='form-control' id='txtUsername' name="login" placeholder='Nome de usuário'>
+					</div>
+					
+					<div class='form-group col-sm-6'>
+						<!-- <label for='txtSenha'>Senha:</label> -->
+						<input type='password' class='form-control' id='txtSenha' name="senha" placeholder='Senha'>
+					</div>
+							
+					<div class='form-group col-sm-12 text-right'>
+						<span id='spnErroAcessoSistema'></span> &nbsp;
+						<input type='submit' class='btn cmd-item' value='Logar'  /> &nbsp;
+						</form>
+						<input type='button' class='btn btn-danger min-border-white' value='Não consigo acessar' id='exibirOpcaoRedefinirSenha'/>
+					</div>
+					
+					<div class='form-group col-sm-12 text-right'>
+						Ainda não tem uma conta? <a href='cliente/criar_cadastro.php'>Cadastre-se!</a>
+					</div>
+				
+				</div>
+				<div id='divRedefinirSenha' class="col-sm-6 text-left collapse">
+					<form id="redefinir" name="redefinir" class="form-horizontal" role="form" action="redefinicao_senha.php" method="post">
+						<div class='form-group col-sm-6'><br/> 
+						<!-- <label for='txtUsername'>e-Mail:</label> -->
+							<input type='email' class='form-control' id='txtEmail' name="email" placeholder='E-mail cadastrado'>
+						</div>
+						<div class='form-group col-sm-6'>
+							<!-- <label for='txtSenha'>CPF/CNPJ:</label> -->
+							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> CPF
+							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> CNPJ
+							<input type='text' class='form-control' id="txtCpfCnpj" name="Cpf_Cnpj"  placeholder="CPF ou CNPJ">
+						</div>
+					
+						<div class='form-group col-sm-12 text-right'>
+							<span id='spnErroAcessoSistema'></span> &nbsp;
+							<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
+							<input type='submit' id='btnSalvar' class='btn cmd-item' value='Redefinir_senha' />
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+			</div>
+		</div>
+		<footer class='panel-footer'>
+			<div class="text-center">
+				Control Parking - Sistema de gerenciamento de estacionamentos | &copy 2015 | Desenvolvido por Non Static Void
+			</div>
+		</footer>
+	</body>
 </html>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		var x = window.location.href;
+		x = x.split('?');
+		if(x[1]=='id=0') $('#spnErroAcessoSistema').html("<div style='color:red;'>Usuário ou senha inválido</div>");
+	 });
+	
+
+	$("#btnLogar").click(function() {
+	
+		$("#spnErroAcessoSistema").text("");
+		
+		if ($("#txtUsername").val() == '') {
+			$("#spnErroAcessoSistema").text("Digite seu nome de usuário");
+			return;
+		}
+		else if ($("#txtSenha").val() == '') {
+			$("#spnErroAcessoSistema").text("Digite sua senha");
+			return;
+		}
+	
+		$.ajax({
+			type: 'POST',
+			url: 'ajax/login.php',
+			data: { action: 'login', username: $("#txtUsername").val(), senha: $("#txtSenha").val() },
+			dataType: 'text',
+			success: function(data) {
+				if (data == 1)
+					location.href = 'adm/home.php';
+				else if (data == 2)
+					location.href = 'cliente/home.php';
+				else if (data == 3)
+					$("#spnErroAcessoSistema").text("Usuário não encontrado");
+				else
+					$("#spnErroAcessoSistema").text("Senha incorreta");
+			},
+			error: function() {
+				alert("Ooops! Parece que tivemos um problema...");
+			}
+			
+		});
+	
+	});
+	
+	$( "#exibirOpcaoRedefinirSenha" ).click(function() {
+		$('#divLogin').toggle();
+		$('#divRedefinirSenha').toggle();
+	});
+	
+	$( "#btnCancelar").click(function() {
+		$('#divLogin').toggle();
+		$('#divRedefinirSenha').toggle();
+	});
+	
+</script>
+
