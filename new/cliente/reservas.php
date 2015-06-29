@@ -25,6 +25,9 @@
 					$("#hddIdReservaCancelar").val(id);
 					$("#btnCancelarReserva").click();
 				});
+				
+				// para usar os recursos do DataTable basta chamar a função para a tabela desejada
+				// IMPORTANTE: a tabela deve conter os elementos thead e tbody
 				$('#tbReservas').DataTable({
 					language: {
 						processing:     "Processando...",
