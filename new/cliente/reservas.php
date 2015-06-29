@@ -107,6 +107,7 @@
 				<option value=' <?php $STATUS_RESERVA_CANCELADA ?>'>Canceladas</option>
 				<option value=' <?php $STATUS_RESERVA_UTILIZACAO ?>'>Em utilização</option>
 				<option value=' <?php $STATUS_RESERVA_UTILIZADA ?>'>Concluídas</option>
+				<option value=' <?php $STATUS_RESERVA_NAO_UTILIZADA ?>'>Não utilizadas</option>
 			</select>
 		</div>
 		<div class='form-group col-sm-3 text-left'>
