@@ -1,15 +1,27 @@
 <?php
 
 function buscarVagasLivres($dataHoraInicial, $dataHoraFinal, $tipoVaga) {
-	$sql = "SELECT * FROM vaga WHERE id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE dh_entrada BETWEEN '$dataHoraInicial' AND '$dataHoraFinal' AND dh_saida IS NULL)";
+	
+	$sql = "SELECT * FROM vaga WHERE id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE situacao = 2";
+	
+	if ($dataHoraInicial <> '' && $dataHoraFinal <> '')
+		$sql .= " OR (situacao = 4 AND (dh_entrada BETWEEN '$dataHoraInicial' AND '$dataHoraFinal' OR dh_saida BETWEEN '$dataHoraInicial' AND '$dataHoraFinal'))";
+	$sql .= ")";
 	
 	if ($tipoVaga > 0)
 		$sql = $sql . " AND tipo = '$tipoVaga'";
 	
-	$con = dbConnect("localhost","root","");
-	$result = dbConsulta($sql,"estacionamento",$con);
+	$con = dbConnect("localhost", "root", "");
+	$result = dbConsulta($sql, "estacionamento", $con);
 	
 	return $result;
+}
+
+function alterarSituacaoReserva($idEstacionamento, $status) {
+	
+	$con = dbConnect("localhost","root","");
+	$result = dbConsulta("UPDATE estacionamento SET status = $status WHERE id_estacionamento = $idEstacionamento", "estacionamento", $con);
+	
 }
 
 function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
@@ -33,7 +45,7 @@ function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 	}
 	
 	$sql = "INSERT INTO estacionamento (id_estacionamento, dh_entrada, dh_saida, nro_vaga, vaga_id_vaga, cliente_id_cliente, status, token)
-	 VALUES (NULL, '$dataHoraInicial', '$dataHoraFinal', '', '$vaga', '$cliente', '4', '$token')";
+	 VALUES (NULL, '$dataHoraInicial', '$dataHoraFinal', '', '$vaga', '$cliente', '$STATUS_RESERVA_RESERVADA', '$token')";
 	
 	$res = dbConsulta($sql,"estacionamento",$con);
 	if ($res)
@@ -48,28 +60,10 @@ function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 
 function buscarReservas($cliente, $dataInicial, $dataFinal, $tipoVaga, $situacao) {
 
-	$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga WHERE cliente_id_cliente = '$cliente'";
-	
-	if ($dataInicial != '' && $dataFinal != '') {
-		$dataInicial = $dataInicial . "T00:00";
-		$dataFinal = $dataFinal . "T23:59";
-		$sql = $sql . " AND ((dh_entrada >= '$dataInicial' AND dh_entrada <= '$dataFinal') OR (dh_saida >= '$dataInicial' AND dh_saida <= '$dataFinal'))";
-	}
-	if ($tipoVaga > 0)
-		$sql = $sql . " AND (SELECT tipo FROM vaga WHERE id_vaga = e.vaga_id_vaga) = '$tipoVaga'";
-	if ($situacao > 0)
-		$sql = $sql . " AND status = '$situacao'";
-
-	$con = dbConnect("localhost", "root", "");
-	$res = dbConsulta($sql, "estacionamento", $con);
-	
-	return $res;
-
-}
-
-function buscarReservas_efetuadas($dataInicial, $dataFinal, $tipoVaga, $situacao){
-	
 	$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga";
+
+	if ($cliente > 0)
+		$sql .= " WHERE cliente_id_cliente = $cliente";
 	
 	if ($dataInicial != '' && $dataFinal != '') {
 		$dataInicial = $dataInicial . "T00:00";
@@ -86,7 +80,6 @@ function buscarReservas_efetuadas($dataInicial, $dataFinal, $tipoVaga, $situacao
 	
 	return $res;
 
-
-
 }
+
 ?>

@@ -14,7 +14,7 @@
 		
 			function erroGerarRelatorio(erro) {
 				if (erro == '1')
-					$("#spnErroGerarRelatorio").text("Erro ao gerar o relatório");
+					$("#spnErroGerarRelatorio").text("Selecione um tipo de relatório");
 				else if (erro == '2')
 					$("#spnErroGerarRelatorio").text("Data inicial inválida");
 				else if (erro == '3')

@@ -22,7 +22,8 @@
 			$(document).ready(function() {
 				$(".cmd").click(function(event) {
 					var id = event.target.id.replace("img", "");
-					alert(id);
+					$("#hddIdReservaCancelar").val(id);
+					$("#btnCancelarReserva").click();
 				});
 				$('#tbReservas').DataTable({
 					language: {
@@ -30,12 +31,12 @@
 						search:         "Buscar:",
 						lengthMenu:     "Exibir _MENU_ itens por página",
 						info:           "Mostrando _START_ a _END_ de _TOTAL_ itens",
-						infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-						infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+						infoEmpty:      "Nenhum registro",
+						infoFiltered:   "",
 						infoPostFix:    "",
 						loadingRecords: "Carregando...",
-						zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-						emptyTable:     "Aucune donnée disponible dans le tableau",
+						zeroRecords:    "Nenhum registro",
+						emptyTable:     "Nenhum registro",
 						paginate: {
 							first:      "<<",
 							previous:   "<",
@@ -43,8 +44,8 @@
 							last:       ">>"
 						},
 						aria: {
-							sortAscending:  ": activer pour trier la colonne par ordre croissant",
-							sortDescending: ": activer pour trier la colonne par ordre décroissant"
+							sortAscending:  ": ordem crescente",
+							sortDescending: ": ordem decrescente"
 						}
 					}
 				});
@@ -67,6 +68,13 @@
 	?> 
 	<h3>Controle de Reservas</h3>
 	<form role='form' class='text-center' id="form-pesquisa" action='reservas.php?search=custom' method='POST'>
+		<?php
+			if (isset($_POST['cancelar']))
+				if ($_POST['cancelar'] > 0)
+					alterarSituacaoReserva($_POST['cancelar'], $STATUS_RESERVA_CANCELADA);
+		?>
+		<input type='hidden' id='hddIdReservaCancelar' name='cancelar'/>
+		<input type='submit' class='hide' id='btnCancelarReserva' />
 		<div class="modal fade" id="divReservas" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -122,7 +130,6 @@
 						$pesquisaTipo = $_POST["pesquisaSituacao"];
 						$pesquisaSituacao = $_POST['pesquisaTipo'];
 					}
-						
 					if ($pesquisaDataInicial > $pesquisaDataFinal)
 						echo "<strong>A data final deve ser maior que a data inicial</strong>";
 					else {
@@ -134,15 +141,16 @@
 							echo "<strong>Nenhuma reserva encontrada</strong>";
 						else {
 							$i = 0;
-							$html = "<table style='width: 100%;' id='tbReservas'><thead><tr class='bg-all' style='color: #FFF'><th style='text-align: center;'>Código</th><th style='text-align: center; border-left: solid 1px #FFF;'>Entrada</th><th style='text-align: center; border-left: solid 1px #FFF;'>Saída</th><th style='text-align: center; border-left: solid 1px #FFF;'>Vaga</th><th style='text-align: center; border-left: solid 1px #FFF;'>Token</th><th style='text-align: center; border-left: solid 1px #FFF;'>Status</th><th style='text-align: center; border-left: solid 1px #FFF;'>Cancelar</th></tr></thead><tbody>";
+							$html = "<table style='width: 100%;' id='tbReservas'><thead><tr class='bg-all' style='color: #FFF'><th style='text-align: center;'>Código</th><th style='text-align: center; border-left: solid 1px #FFF;'>Entrada</th><th style='text-align: center; border-left: solid 1px #FFF;'>Saída</th><th style='text-align: center; border-left: solid 1px #FFF;'>Vaga</th><th style='text-align: center; border-left: solid 1px #FFF;'>Token</th><th style='text-align: center; border-left: solid 1px #FFF;'>Status</th></tr></thead><tbody>";
 							while ($row = mysql_fetch_assoc($reservas)) {
 								$status = '';
 								if ($row['status'] == $STATUS_RESERVA_CANCELADA) $status = 'Cancelada';
 								else if ($row['status'] == $STATUS_RESERVA_UTILIZADA) $status = 'Concluída';
-								else if ($row['status'] == $STATUS_RESERVA_RESERVADA) $status = 'Em aberto';
+								else if ($row['status'] == $STATUS_RESERVA_RESERVADA) $status = 'Em aberto <img id=\"img' . $row['codigo'] . '\" class=\"cmd\" title=\"Cancelar\" src=\"../img/cancel.png\" width=\"20px\" style=\"cursor: pointer\" />';
+								else if ($row['status'] == $STATUS_RESERVA_NAO_UTILIZADA) $status = 'Não utilizada';
 								else $status = 'Em utilização';
 								
-								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td><td><img id='img" . $row['codigo'] . "' class='cmd' src='../img/cancel.png' width='20px' /></td></tr>"; 	
+								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td></tr>"; 	
 								$i++;
 							}
 							echo "<script type='text/javascript'> exibirReservas(\"" . $html . "</tbody></table>\")</script>";
