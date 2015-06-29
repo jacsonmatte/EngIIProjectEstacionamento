@@ -13,7 +13,41 @@
 			require '../require/meta.html';
 			require '../require/js-base.html';
 		?>
+		<style type='text/css'>
+			th {
+				text-align: center;
+			}
+		</style>
 		<script type='text/javascript'>
+			$(document).ready(function() {
+				$('#tbReservas').DataTable({
+					language: {
+						processing:     "Processando...",
+						search:         "Buscar:",
+						lengthMenu:     "Exibir _MENU_ itens por página",
+						info:           "Mostrando _START_ a _END_ de _TOTAL_ itens",
+						infoEmpty:      "Nenhum registro",
+						infoFiltered:   "",
+						infoPostFix:    "",
+						loadingRecords: "Carregando...",
+						zeroRecords:    "Nenhum registro",
+						emptyTable:     "Nenhum registro",
+						paginate: {
+							first:      "<<",
+							previous:   "<",
+							next:       ">",
+							last:       ">>"
+						},
+						aria: {
+							sortAscending:  ": ordem crescente",
+							sortDescending: ": ordem decrescente"
+						}
+					}
+				});
+			});
+
+
+
 		
 			function setarCamposPesquisaData(dataInicial, dataFinal) {
 				$("#txtPesquisaDataInicial").val(dataInicial);
@@ -23,6 +57,7 @@
 			function setarCampoPesquisaSituacao(situacao) { $("sltPesquisaSituacao").val(situacao); }
 			function setarConteudoTabela(html) { $("divResultadoPesquisaReservas").html(html); }
 			function setarCampoPesquisaTipo(tipo) { $("sltPesquisaTipo").val(tipo); }
+			function exibirReservas(html) { $("#divListaReservas").html(html); $("#divReservas").modal(); }
 			
 		</script>
 	</head>
@@ -34,6 +69,21 @@
 	?> 
 	<h3>Controle de Reservas</h3>
 	<form role='form' class='text-center' id="form-pesquisa" action='reservas.php?search=custom' method='POST'>
+		<div class="modal fade" id="divReservas" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" onclick='habilitarOpcoesReserva(false);'>&times;</button>
+						<h4 class="modal-title" id='h4TituloRelatorio' >Reservas</h4>
+					</div>
+					<div class="modal-body" id='divListaReservas'>
+						
+					</div>
+			  </div>
+			</div>
+		</div>	
+
+
 		<div class='form-group col-sm-3 text-left'>
 			<label for='txtPesquisaDataInicial'>Data inicial:</label>
 			<input type='date' class='form-control' id='txtPesquisaDataInicial' name='pesquisaDataInicial'>
@@ -91,7 +141,7 @@
 							echo "<strong>Nenhuma reserva encontrada</strong>";
 						else {
 							$i = 0;
-							$html = "<table style='width: 100%;'  id='tbReservas'><tr class='bg-all' style='color: #FFF'><th style='text-align: center'>Código</th><th style='text-align: center'>Entrada</th><th style='text-align: center'>Saída</th><th style='text-align: center'>Vaga</th><th style='text-align: center'>Token</th><th style='text-align: center'>Status</th></tr>";
+							$html = "<table style='width: 100%;' id='tbReservas'><thead><tr class='bg-all' style='color: #FFF'><th style='text-align: center;'>Código</th><th style='text-align: center; border-left: solid 1px #FFF;'>Entrada</th><th style='text-align: center; border-left: solid 1px #FFF;'>Saída</th><th style='text-align: center; border-left: solid 1px #FFF;'>Vaga</th><th style='text-align: center; border-left: solid 1px #FFF;'>Token</th><th style='text-align: center; border-left: solid 1px #FFF;'>Status</th></tr></thead><tbody>";
 							while ($row = mysql_fetch_assoc($reservas)) {
 								$status = '';
 								if ($row['status'] == $STATUS_RESERVA_CANCELADA) $status = 'Cancelada';
@@ -102,7 +152,7 @@
 								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td></tr>"; 	
 								$i++;
 							}
-							echo $html . "</table>";
+							echo "<script type='text/javascript'> exibirReservas(\"" . $html . "</tbody></table>\")</script>";
 						}
 					}
 				}
