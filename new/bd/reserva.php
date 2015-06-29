@@ -59,7 +59,7 @@ function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente) {
 }
 
 function buscarReservas($cliente, $dataInicial, $dataFinal, $tipoVaga, $situacao) {
-
+	
 	$sql = "SELECT e.id_estacionamento codigo, e.dh_entrada entrada, e.dh_saida saida, v.nro_vaga vaga, e.token token, e.status status FROM estacionamento e JOIN vaga v ON e.vaga_id_vaga = v.id_vaga";
 
 	if ($cliente > 0)
