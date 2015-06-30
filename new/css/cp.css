@@ -12,7 +12,7 @@
 .cmd-item:hover { border: solid 1px #FFD966; }
 .radius-10 { border-radius: 10px }
 .simple-border-black { border: solid 2px black }
-.simple-border-red { border: solid 5px red }
+.simple-border-red { border: solid 2px black }
 .offset-top-and-bottom-1 { padding: 1% 0px 1% 0px }
 .offset-top-and-bottom-15 { padding-top: 15%; padding-bottom: 15% }
 .full-height { height: 100% }

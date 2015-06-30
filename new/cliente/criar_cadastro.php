@@ -269,15 +269,15 @@
 							<input type='radio' name='rdbTelefone' id='rdbTelefone2' onclick="habilita_tel(2)"/> 9 dígitos
 							<input type='text' class='form-control' name="telefone" id='txtTelefone'/>
 						</div>
-						<div class='form-group  text-left col-sm-7'>
+						<div class='form-group  text-left col-sm-6'>
 							<label for='txtLogradouro'>Logradouro:</label>
 							<input type='text' class='form-control' id='txtLogradouro' name="logradouro" placeholder='Ex: Avenida São Pedro, Rua das Lagoas...'>
 						</div>
-						<div class='form-group  text-left col-sm-5'>
+						<div class='form-group  text-left col-sm-2'>
 							<label for='txtNumero'>Número:</label>
-							<input type='text' class='form-control' id='txtNumero' name="numero" placeholder='nº'>
+							<input type='text' class='form-control' id='txtNumero' name="numero" placeholder='Nº'>
 						</div>
-						<div class='form-group  text-left col-sm-6'>
+						<div class='form-group  text-left col-sm-4'>
 							<label for='txtCep'>CEP:</label>
 							<input type='text' class='form-control' name="cep" id='txtCep' onBlur="ValidaCep(cadastro.cep);">
 						</div>

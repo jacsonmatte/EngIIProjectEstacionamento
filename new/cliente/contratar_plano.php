@@ -86,7 +86,7 @@
 
 	<h3>Contratar Plano</h3>
 	<form role='form' class='text-left' method="POST" action="">
-		<div class='form-group col-sm-6'> 
+		<div class='form-group col-sm-3'> 
 			<label for='sltPlano'>Plano: </label> 
 			<select name="sltPlano" class='form-control' id='sltPlano'>
 				<option value="">--</option>
@@ -97,22 +97,22 @@
 			</select>
 		</div>	
 		
-		<div class='form-group col-sm-6'> 
+		<div class='form-group col-sm-3'> 
 			<label for='txtValor'>Valor: </label>
 			<input name='txtValor' type='text' class='form-control' id='txtValor' readonly='true' >
 		</div>
 		
-		<div class='form-group col-sm-6'>
+		<div class='form-group col-sm-3'>
 			<label for='txtQuantidadeHoras'>Quantidade de horas:</label>
 			<input name='txtQuantidadeHoras' type='text' class='form-control' id='txtQuantidadeHoras' readonly='true'>
 		</div>
 		
-		<div class='form-group col-sm-6'>
+		<div class='form-group col-sm-3'>
 			<label for='txtValorHoraExcedente'>Hora excedente:</label>
 			<input name='txtValorHoraExcedente'type='text' class='form-control' id='txtValorHoraExcedente' readonly='true'>
 		</div>
 		
-		<div class='form-group col-sm-12'>
+		<div class='form-group col-sm-6'>
 			<label for='txtDescricao'>Descrição:</label>
 			<textarea name='txtDescricao' class='form-control' id='txtDescricao' readonly='true'></textarea>
 		</div>
