@@ -2,10 +2,10 @@
 
 function buscarVagasLivres($dataHoraInicial, $dataHoraFinal, $tipoVaga) {
 	
-	$sql = "SELECT * FROM vaga WHERE id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE situacao = 2";
+	$sql = "SELECT * FROM vaga WHERE id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = 2";
 	
 	if ($dataHoraInicial <> '' && $dataHoraFinal <> '')
-		$sql .= " OR (situacao = 4 AND (dh_entrada BETWEEN '$dataHoraInicial' AND '$dataHoraFinal' OR dh_saida BETWEEN '$dataHoraInicial' AND '$dataHoraFinal'))";
+		$sql .= " OR (status = 4 AND (dh_entrada BETWEEN '$dataHoraInicial' AND '$dataHoraFinal' OR dh_saida BETWEEN '$dataHoraInicial' AND '$dataHoraFinal'))";
 	$sql .= ")";
 	
 	if ($tipoVaga > 0)

@@ -146,7 +146,7 @@
 							echo "<strong>Nenhuma reserva encontrada</strong>";
 						else {
 							$i = 0;
-							$html = "<table style='width: 100%;' id='tbReservas'><thead><tr class='bg-all' style='color: #FFF'><th style='text-align: center;'>Código</th><th style='text-align: center; border-left: solid 1px #FFF;'>Entrada</th><th style='text-align: center; border-left: solid 1px #FFF;'>Saída</th><th style='text-align: center; border-left: solid 1px #FFF;'>Vaga</th><th style='text-align: center; border-left: solid 1px #FFF;'>Token</th><th style='text-align: center; border-left: solid 1px #FFF;'>Status</th></tr></thead><tbody>";
+							$html = "<table style='max-width: 95%' id='tbReservas'><thead><tr class='bg-all' style='color: #FFF'><th style='text-align: center;'>Código</th><th style='text-align: center; border-left: solid 1px #FFF;'>Entrada</th><th style='text-align: center; border-left: solid 1px #FFF;'>Saída</th><th style='text-align: center; border-left: solid 1px #FFF;'>Vaga</th><th style='text-align: center; border-left: solid 1px #FFF;'>Token</th><th style='text-align: center; border-left: solid 1px #FFF;'>Status</th></tr></thead><tbody>";
 							while ($row = mysql_fetch_assoc($reservas)) {
 								$status = '';
 								if ($row['status'] == $STATUS_RESERVA_CANCELADA) $status = 'Cancelada';
