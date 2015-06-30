@@ -1,6 +1,7 @@
 <?php 
 	require '../require/adm-aut.php'; 
-	require "../bd/conectBd.php";
+	//require "../bd/conectBd.php";
+	require "../bd/mensalidadeDB.php";
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +13,35 @@
 			require '../require/js-base.html';
 		?>
 	</head>
+	<script type="text/javascript">
+	
+			$(document).ready(function() {
+				$('#table_mens').DataTable({
+					language: {
+						processing:     "Processando...",
+						search:         "Buscar:",
+						lengthMenu:     "Exibir _MENU_ itens por página",
+						info:           "Mostrando _START_ a _END_ de _TOTAL_ itens",
+						infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+						infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+						infoPostFix:    "",
+						loadingRecords: "Carregando...",
+						zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+						emptyTable:     "Aucune donnée disponible dans le tableau",
+						paginate: {
+							first:      "<<",
+							previous:   "<",
+							next:       ">",
+							last:       ">>"
+						},
+						aria: {
+							sortAscending:  ": activer pour trier la colonne par ordre croissant",
+							sortDescending: ": activer pour trier la colonne par ordre décroissant"
+						}
+					}
+				});
+			});
+</script>
 	<?php
 		require '../require/menu-1.html';
 		require '../require/menu-adm.html';
@@ -22,24 +52,26 @@
 			<div class='form-group col-sm-3 text-left'>
 			<label for='sltPesquisaMes'>Mês:</label>
 			<select class='form-control' id='sltPesquisaMes' name='mes'>
-				<option value="Janeiro">Janeiro</option>
-				<option value="Fevereiro">Fevereiro</option>
-				<option value="Março">Março</option>
-				<option value="Abril">Abril</option>
-				<option value="Maio">Maio</option>
-				<option value="Junho">Junho</option>
-				<option value="Julho">Julho</option>
-				<option value="Agosto">Agosto</option>
-				<option value="Setembro">Setembro</option>
-				<option value="Outubro">Outubro</option>
-				<option value="Novembro">Novembro</option>
-				<option value="Dezembro">Dezembro</option>
+				<option value="00">Selecione..</option>
+				<option value="01">Janeiro</option>
+				<option value="02">Fevereiro</option>
+				<option value="03">Março</option>
+				<option value="04">Abril</option>
+				<option value="05">Maio</option>
+				<option value="06">Junho</option>
+				<option value="07">Julho</option>
+				<option value="08">Agosto</option>
+				<option value="09">Setembro</option>
+				<option value="10">Outubro</option>
+				<option value="11">Novembro</option>
+				<option value="12">Dezembro</option>
 			</select>
 		</div>
 		
 		<div class='form-group col-sm-3 text-left'>
 			<label for='sltPesquisaAno'>Ano:</label>
 			<select class='form-control' id='sltPesquisaAno' name='ano'>
+				<option value="0000">Selecione..</option>
 				<option value="2014">2014</option>
 				<option value="2015">2015</option>
 				<option value="2016">2016</option>
@@ -47,7 +79,7 @@
 		</div>
 		<div class='form-group col-sm-6 text-left'>
 			<label for='txtPesquisaNomeCliente'>Cliente:</label>
-			<input type='text' class='form-control' id='txtPesquisaNomeCliente' name="nome" value="Nome"/>
+			<input type='text' class='form-control' id='txtPesquisaNomeCliente' name="nome" placeholder="Nome"/>
 		</div>
 		<div class='form-group col-sm-12 text-right'>
 			<span id='spnErroPesquisarMensalidades'></span>
@@ -64,12 +96,12 @@
 					
 					if (mysql_num_rows($dados) > 0) {	
 					
-						echo '<table width="100%">';
+						echo "<table width='100%' id='table_mens' cellpadding='1.5' border='1' class='bg-all'>";
 						echo '<thead><tr>';
-						echo '<th>Nome</th>';
-						echo '<th>Mês</th>';
-						echo '<th>Ano</th>';
-						echo '<th>Gasto</th>';
+						echo '<th><p style="text-align: center;"> Nome</th>';
+						echo '<th><p style="text-align: center;"> Mês</th>';
+						echo '<th><p style="text-align: center;"> Ano</th>';
+						echo '<th><p style="text-align: center;"> Gasto</th>';
 						echo '</thead></tr>';
 						
 						echo '<tbody>';

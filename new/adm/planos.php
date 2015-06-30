@@ -13,6 +13,39 @@
 			require '../require/js-base.html';
 		?>
 	</head>
+	
+	<script type="text/javascript">
+	
+			$(document).ready(function() {
+				$('#table_planos').DataTable({
+					language: {
+						processing:     "Processando...",
+						search:         "Buscar:",
+						lengthMenu:     "Exibir _MENU_ itens por página",
+						info:           "Mostrando _START_ a _END_ de _TOTAL_ itens",
+						infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+						infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+						infoPostFix:    "",
+						loadingRecords: "Carregando...",
+						zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+						emptyTable:     "Aucune donnée disponible dans le tableau",
+						paginate: {
+							first:      "<<",
+							previous:   "<",
+							next:       ">",
+							last:       ">>"
+						},
+						aria: {
+							sortAscending:  ": activer pour trier la colonne par ordre croissant",
+							sortDescending: ": activer pour trier la colonne par ordre décroissant"
+						}
+					}
+				});
+			});
+</script>
+	
+	
+	
 	<?php
 		require '../require/menu-1.html';
 		require '../require/menu-adm.html';
@@ -47,7 +80,7 @@
 			</div>
 			<?php
 				if(isset($_POST['btnPesquisar'])){
-					if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL)
+					if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL) //Se algum campo não for preenchido
 						echo "<strong>Preencha todos os campos!</strong>";
 					else{
 						if((($_POST['qtdMinhrs']) < ($_POST['qtdMaxhrs'])) && (($_POST['VloMin']) < ($_POST['VloMax']))){ // Min < Max E Min < Max
@@ -56,21 +89,21 @@
 
 							if (mysql_num_rows($dados) > 0){
 
-								echo '<table width="100%">';
+								echo "<table width='100%' id='table_planos' cellpadding='1.5' border='1' class='bg-all'>";
 								echo '<thead><tr>';
-								echo '<th>Cliente</th>';
-								echo '<th>Nome</th>';
-								echo '<th>valor</th>';
-								echo '<th>Horas</th>';
-								echo '<th>Excedente</th>';
-								echo '<th>Data</th>';
-								echo '</thead></tr>';
+								echo '<th><p style="text-align: center;"> Cliente</th>';
+								echo '<th><p style="text-align: center;"> Plano</th>';
+								echo '<th><p style="text-align: center;"> Valor</th>';
+								echo '<th><p style="text-align: center;"> Horas</th>';
+								echo '<th><p style="text-align: center;"> Excedente</th>';
+								echo '<th><p style="text-align: center;"> Data</th>';
+								echo '</tr></thead>';
 								
 								echo '<tbody>';
 								while ($dados1 = mysql_fetch_array($dados)){
 									echo '<tr>';
-									echo '<td>'.$dados1[0].'</td>';		//Tabela Cliente tem como nome da coluna Nome "nome" então tem q acessar por indice
-									echo '<td>'.$dados1['nome'].'</td>';
+									echo '<td>'.$dados1['nome_cliente'].'</td>';
+									echo '<td>'.$dados1['nome_plano'].'</td>';
 									echo '<td>'.$dados1['valor'].'</td>';
 									echo '<td>'.$dados1['horas'].'</td>';
 									echo '<td>'.$dados1['valor_excedente'].'</td>';

@@ -85,8 +85,8 @@ function buscaMensalidade($mes, $ano, $nome){
 	//$sql = "SELECT c.id_cliente, c.nome, m.id_mensalidade, m.mes, m.ano, m.val_plano, m.val_execed, FROM mensalidade m JOIN	cliente c ON m.cliente_id_cliente = c.id_cliente WHERE m.mes = '$mes' AND m.ano = '$ano' AND c.nome like '$nome'";
 	$sql = "SELECT nome, mes, ano, (m.val_plano+m.val_execed) soma FROM mensalidade m JOIN cliente c ON c.id_cliente = m.cliente_id_cliente";
 	if ($nome <> '') $sql = $sql . " WHERE c.nome LIKE '%$nome%'";
-	//if ($mes <> '') $sql = $sql . " AND m.mes = '$mes'";
-	//if ($ano <> '') $sql = $sql . " AND m.ano = '$ano'";
+	if ($mes <> '00') $sql = $sql . " AND m.mes = '$mes'";
+	if ($ano <> '0000') $sql = $sql . " AND m.ano = '$ano'";
 
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
@@ -95,7 +95,7 @@ function buscaMensalidade($mes, $ano, $nome){
 
 function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
 	
-	$sql = "SELECT c.nome, p.nome, p.valor, p.horas, p.valor_excedente, o.data_contrato FROM plano p JOIN plano_contratado o ON p.id = o.plano_id_plano JOIN cliente c ON c.id_cliente = o.cliente_id_cliente WHERE p.horas BETWEEN $qtdMinhrs AND $qtdMaxhrs AND p.valor BETWEEN $VloMin AND $VloMax";
+	$sql = "SELECT c.nome nome_cliente, p.nome nome_plano, p.valor, p.horas, p.valor_excedente, o.data_contrato FROM plano p JOIN plano_contratado o ON p.id = o.plano_id_plano JOIN cliente c ON c.id_cliente = o.cliente_id_cliente WHERE p.horas BETWEEN $qtdMinhrs AND $qtdMaxhrs AND p.valor BETWEEN $VloMin AND $VloMax";
 
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
