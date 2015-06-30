@@ -1,4 +1,6 @@
-<?php require '../require/adm-aut.php'; ?>
+<?php require '../require/adm-aut.php'; 
+	  require '../dominio/constantes.php';	
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,9 +44,9 @@
 		<div class='form-group col-sm-6'>
 			<label for='sltTipo'>Tipo de vaga:</label>
 			<select class='form-control' id='sltTipo' name="tipo_vaga">
-				<option value="Carro">Carro</option>
-				<option value="Moto">Moto</option>
-				<option value="Utilitário">Utilit&aacute;rio</option>
+				<option value='<?php echo $TIPO_VAGA_CARRO; ?>'>Carro</option>
+				<option value='<?php echo $TIPO_VAGA_MOTO ?>'>Moto</option>
+				<option value='<?php echo $TIPO_VAGA_UTILITARIO ?>'>Utilitário</option>
 			</select>
 		</div>
 		<div class='form-group col-sm-12'>
