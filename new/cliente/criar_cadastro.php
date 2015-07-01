@@ -28,6 +28,8 @@
 			$(document).ready(function() {
 				$("#txtDataNascimento").mask("99/99/9999");
 				$("#txtCep").mask("99.999-999");
+				$("#txtCpfCnpj").mask("999.999.999-99");
+				$("#txtTelefone").mask("(99) 9999-9999");
 			});
 
 			function validaCampo(){
@@ -259,13 +261,13 @@
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label> Tipo de pessoa:</label>
-							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick="habilita(1)" /> Física
+							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaFisica' checked onclick="habilita(1)" /> Física
 							<input type='radio' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick="habilita(2)"/> Jurídica (CNPJ)
 							<input type='text' class='form-control' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj" onBlur="validaCPF_CNPJ(cadastro.cpf_cnpj);"/>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtTelefone'>Telefone: </label>
-							<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick="habilita_tel(1)" /> 8 dígitos
+							<input type='radio' name='rdbTelefone' id='rdbTelefone1' checked onclick="habilita_tel(1)" /> 8 dígitos
 							<input type='radio' name='rdbTelefone' id='rdbTelefone2' onclick="habilita_tel(2)"/> 9 dígitos
 							<input type='text' class='form-control' name="telefone" id='txtTelefone'/>
 						</div>
