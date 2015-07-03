@@ -2,6 +2,7 @@
 
 // conexão padrão local (1), servidor 000 (2) ou outro (3)
 
+
 function dbConnect2(){
     $connect = @mysql_connect("localhost", "root", "");
     return $connect;
@@ -125,7 +126,8 @@ function buscaClientes($nome, $checkbox){
 }
 
 function buscaVagas($numero, $situacao, $tipo){
-	
+	//$sql = "SELECT numero, situacao, tipo,"
+	//if ($numero <> '') $sql = $sql . " WHERE c.nome LIKE '%$nome%'";
 	
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
