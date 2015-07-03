@@ -41,7 +41,7 @@
 	//filtra os clientes
 	function buscaClientes ($idCliente)
 	{
-		$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado, telefone FROM cliente";
+		$sql = "SELECT id_cliente, nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado, telefone FROM cliente";
 
 		if ($idCliente != "")
 			$sql .= " WHERE id_cliente = $idCliente";
@@ -55,7 +55,7 @@
 		if (mysql_num_rows($result)) {
 			$dados = "";
 			while ($row=mysql_fetch_array($result)) {
-				$dados .= "<tr><td>".$row['nome']."</td><td>".$row['cpf_cnpj']."</td><td>".$row['email']."</td><td>".$row['logradouro']."&nbsp-&nbsp".$row['bairro']."&nbsp-&nbsp".$row['cidade']."&nbsp-&nbsp".$row['estado']."</td><td>".$row['cep']."</td><td>".$row['telefone']."</td></tr>";
+				$dados .= "<tr><td>".$row['id_cliente']."</td><td>".$row['nome']."</td><td>".$row['cpf_cnpj']."</td><td>".$row['email']."</td><td>".$row['logradouro']."&nbsp-&nbsp".$row['bairro']."&nbsp-&nbsp".$row['cidade']."&nbsp-&nbsp".$row['estado']."</td><td>".$row['cep']."</td><td>".$row['telefone']."</td></tr>";
 			}
 		} else return 0;
 		

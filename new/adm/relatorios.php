@@ -179,6 +179,7 @@
 				?>
 				<thead>
 					<tr>
+						<th>Id</th>
 						<th>Nome</th>
 						<th>CPF/CNPJ</th>
 						<th>E-mail</th>
