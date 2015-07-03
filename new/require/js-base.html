@@ -1,25 +1,7 @@
 <script type='text/javascript'>
+	
 	var errorMessage = "Oops! Parece que tivemos um problema...<br/>Tente recarregar a página!";
 		  
-	function onlyDigitAllow(e) { };
-			
-	function formatDecimal(e, n) { };
-			
-	function getPageContent(x) {
-				
-		$.ajax({
-			url: 'ajax/get_page.php?user_type=1',
-			method: 'POST',
-			data: { pageId: x },
-			dataType: 'html',
-			success: setContent,
-			error: function(erro) {
-				setContent(errorMessage);
-			}
-		});
-	}
-			
-			
 	function setContent(htmlStr) {
 
 		$("#divConteudo").empty();
@@ -29,5 +11,36 @@
 			$("#divConteudo").append(htmlStr);
 	
 	}
+	
+	$(document).ready(function() {
+	
+		// para usar os recursos do DataTable basta chamar a função para a tabela desejada
+		// IMPORTANTE: a tabela deve conter os elementos thead e tbody
+		// tr, th e td não podem conter colspan or rowspan
+		$('#tblResultadoPesquisa').DataTable({
+			language: {
+				processing:     "Processando...",
+				search:         "Buscar:",
+				lengthMenu:     "Exibir _MENU_ itens por página",
+				info:           "Mostrando _START_ a _END_ de _TOTAL_ itens",
+				infoEmpty:      "Nenhum registro",
+				infoFiltered:   "",
+				infoPostFix:    "",
+				loadingRecords: "Carregando...",
+				zeroRecords:    "Nenhum registro",
+				emptyTable:     "Nenhum registro",
+				paginate: {
+					first:      "<<",
+					previous:   "<",
+					next:       ">",
+					last:       ">>"
+				},
+				aria: {
+					sortAscending:  ": ordem crescente",
+					sortDescending: ": ordem decrescente"
+				}
+			}
+		});
+	});
 
 </script>

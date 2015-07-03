@@ -4,6 +4,7 @@
 ?>
 <?php	
 	$nomecliente = $_SESSION['username'];
+	$planoSalvo = 0;
 ?>
 
 <?php
@@ -11,29 +12,33 @@
 	if(isset($_POST["btnSalvar"])){
 
 		$id_plano = addslashes($_POST["sltPlano"]);
-		$descricao = addslashes($_POST["txtDescricao"]);
+		$observacao = addslashes($_POST["txtDescricao"]);
+		
+		if($id_plano == "")
+			echo "<script>alert('Por favor $nomecliente, selecione um plano!!');</script>";
+		else {
 
-			if($id_plano == ""){
-				echo "<script>alert('Por favor $nomecliente, selecione um plano!!');</script>";
-
-			}else{
-
-				require_once("../bd/conectBd.php");				
-					$sql="SELECT id_cliente FROM cliente INNER JOIN usuario ON cliente.id_cliente = usuario.cliente_id_cliente WHERE usuario.login='{$nomecliente}'";
-					$conexao = dbConnect("localhost","root","");
-					$query = dbConsulta($sql,"estacionamento", $conexao);
-
-			if (mysql_num_rows($query)) {
-				while($pegaid=mysql_fetch_array($query)){
-					$id=$pegaid["id_cliente"];
-				}
-
-			$sql="INSERT INTO plano_contratado values('NULL','$id','$id_plano', '" . date('Y-m-d') . "', '$descricao')";
-			$limite=dbConsulta($sql,'estacionamento', $conexao);
-			echo "<script>alert('Plano contratado com sucesso!!');</script>";
-			mysql_close($conexao);
-			echo("<script type='text/javascript'>location.href='contratar_plano.php';</script>");
+			require_once("../bd/conectBd.php");
+			$con = dbConnect("localhost", "root", "");
+			
+			$verificacaoPlano = dbConsulta("SELECT 1 FROM plano_contratado WHERE plano_id_plano = $id_plano AND cliente_id_cliente = " . $_SESSION['id_cliente'], "estacionamento", $con);
+			
+			if (mysql_num_rows($verificacaoPlano) > 0) {
+				echo "<script type='text/javascript'>alert('Você já tem este plano contratado!');</script>";
+				echo("<script type='text/javascript'>location.href='contratar_plano.php';</script>");
 			}
+			else {
+				if (dbConsulta("INSERT INTO plano_contratado (id_plano_contratado, cliente_id_cliente, plano_id_plano, data_contrato, observacao) VALUES (NULL," . $_SESSION['id_cliente'] . ", $id_plano, '" . date('Y-m-d') . "', '$observacao')", 'estacionamento', $con)) {
+					mysql_close($con);
+					echo "<script type='text/javascript'>alert('Plano contratado com sucesso!');</script>";
+					echo("<script type='text/javascript'>location.href='contratar_plano.php';</script>");
+				}
+				else
+					echo "<script type='text/javascript'>alert('Falha ao contratar o plano!');</script>";
+			}
+			
+			mysql_close($con);
+			
 		}
 	}
 ?>
@@ -74,6 +79,12 @@
 					);
 				});
 			});
+			
+			function erroSalvarPlano(resultado) {
+				if (resultado == 1) $('#spnErroSalvarPlano').html('Plano contratado com sucesso!');
+				else $('#spnErroSalvarPlano').html('Falha ao contratar o plano!');
+			}
+			
 		</script>
 	</head>
 	
@@ -121,7 +132,6 @@
 			<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
 			<input type='submit' name="btnSalvar" id='btnSalvar' class='btn cmd-item' value='Contratar' />
 		</div>
-		
 	</form>
 	<?php
 		require '../require/content-2-footer.html';
