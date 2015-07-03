@@ -95,7 +95,7 @@ function buscaMensalidade($mes, $ano, $nome){
 
 function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
 	
-	$sql = "SELECT c.nome, p.nome, p.valor, p.horas, p.valor_excedente, o.data_contrato FROM plano p JOIN plano_contratado o ON p.id = o.plano_id_plano JOIN cliente c ON c.id_cliente = o.cliente_id_cliente WHERE p.horas BETWEEN $qtdMinhrs AND $qtdMaxhrs AND p.valor BETWEEN $VloMin AND $VloMax";
+	$sql = "SELECT c.nome nome_cliente, p.nome nome_plano, p.valor, p.horas, p.valor_excedente, o.data_contrato FROM plano p JOIN plano_contratado o ON p.id = o.plano_id_plano JOIN cliente c ON c.id_cliente = o.cliente_id_cliente WHERE p.horas BETWEEN $qtdMinhrs AND $qtdMaxhrs AND p.valor BETWEEN $VloMin AND $VloMax";
 
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
