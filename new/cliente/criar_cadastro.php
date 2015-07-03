@@ -389,13 +389,13 @@
 	 			$senha=addslashes($_POST["senha"]);
 	 			$conf_senha=addslashes($_POST["conf_senha"]);
 
-	 			$testa="SELECT * FROM usuario WHERE usuario.senha='$senha' or usuario.login='$login'";
+	 			$testa="SELECT * FROM usuario WHERE usuario.login='$login'";
 	 			$pega=dbConsulta($testa,'estacionamento', $conexao);
 	 			$numrow = @mysql_num_rows($pega);
 				if($numrow > 0){
-	 				echo "<script>alert('Já existe um usuário com esse login ou senha !!');</script>";
+	 				echo "<script>alert('Já existe um usuário com esse login!!');</script>";
 	 			}else{
-	 				
+	 				if (strlen($estado) > 2) $estado = "XX";
 					$sql="INSERT INTO cliente values('NULL','$nome','$cpf_cnpj','$email', '$logradouro','$numero', '$cep', '$bairro', '$cidade', '$estado', '$telefone')";
 					$limite=dbConsulta($sql,'estacionamento', $conexao);
 				

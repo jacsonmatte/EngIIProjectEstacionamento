@@ -3,8 +3,7 @@
 
 ?>
 <?php	
-	$nomecliente = $_SESSION['username'];	
-	$data = date('Y-m-d H:i:s');
+	$nomecliente = $_SESSION['username'];
 ?>
 
 <?php
@@ -29,7 +28,7 @@
 					$id=$pegaid["id_cliente"];
 				}
 
-			$sql="INSERT INTO plano_contratado values('NULL','$id','$id_plano', '$data', '$descricao')";
+			$sql="INSERT INTO plano_contratado values('NULL','$id','$id_plano', '" . date('Y-m-d') . "', '$descricao')";
 			$limite=dbConsulta($sql,'estacionamento', $conexao);
 			echo "<script>alert('Plano contratado com sucesso!!');</script>";
 			mysql_close($conexao);

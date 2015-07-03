@@ -104,21 +104,5 @@
 				mysql_close($conexao);
 		}				
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	?>
 </html>

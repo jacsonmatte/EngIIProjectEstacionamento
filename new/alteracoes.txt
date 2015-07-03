@@ -1,0 +1,25 @@
+Alterações - banco
+
+Plano contratado
+Alterada coluna id_cliente para id_plano_contratado (este nome sempre estava errado, ele deve ser o id da tabela, o cliente é referenciado pelo campo cliente_id_cliente)
+
+Estacionamento
+Acrescentada coluna id_plano_contratado no estacionamento para fazer a soma por plano posteriormente
+não foi removida a coluna cliente_id_cliente para não interferir nos métodos já existentes
+
+Mensalidade
+alteradas colunas ano e mês da mensalidade para tipo int 4 e 2 respectivamente (estava como varchar 100 e varchar 40)
+colocada restrição not null em mês, valor_plano e valor_excedente
+
+Planos
+alterado campo horas de int 11 para int 3 (um mês tem no máximo 720 horas)
+colocada restrição not null no valor_excedente e nome (no form estava obrigatório mas no banco não)
+
+Clientes
+cpf_cnpj tamanho 14
+retirados comentários
+
+Alterações - aplicação
+ 
+Cadastro de cliente
+Retirada verificação de exisTência de usuário com a mesma senha (a unicidade é apenas do username)
