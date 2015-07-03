@@ -45,7 +45,7 @@
 			<input type='submit' id='btnPesquisar' class='btn cmd-item' value='Pesquisar' name="btnPesquisar"/>
 		</div>
 			<?php
-				if(isset($_POST["btnPesquisar"])){
+				if(isset($_POST["btnPesquisar"])){//quando o botão de pesquisar for pressionado
 					/*if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL)
 						echo "<strong>Preencha todos os campos!</strong>";
 					else{
@@ -88,26 +88,9 @@
 							echo "<strong>Valor mínimo do plano deve ser menor que o valor máximo do plano</strong>";
 					}*/
 
-					//pegando os valores escolhidos nos campos selects
-					/*$situacao_aux=$_POST["situacao"]; 
-					for ($i=0;$i<count($situacao_aux);$i++){
-   						if(!empty($situacao_aux[$i])){
-   							//echo "<br> Situacao selecionada: " . $i . ": " . $situacao_aux[$i];
-   							$situacao=$situacao_aux;
-   						}
-  					}
+					$dados = buscaVagas($_POST['numero'],$_POST['situacao'], $_POST['tipo']);//faz a consulta ao banco, arquivo mensalidadeBD
 
-  					$tipo_aux=$_POST["tipo"]; 
-					for ($i=0;$i<count($tipo_aux);$i++){
-   						if(!empty($tipo_aux[$i])){
-   							//echo "<br> Tipo selecionado: " . $i . ": " . $tipo_aux[$i];
-   							$tipo=$tipo_aux;
-   						}
-  					}*/
-		
-					$dados = buscaVagas($_POST['numero'],$_POST['situacao'], $_POST['tipo']);
-
-					if (mysql_num_rows($dados) > 0){
+					if (mysql_num_rows($dados) > 0){//se a consulta retornar com algum dado
 						echo '<table width="100%">';
 						echo '<thead><tr>';
 						echo '<th>Vaga</th>';
@@ -115,7 +98,7 @@
 						echo '<th>tipo</th>';
 						echo '<tbody>';
 
-						while ($dados1 = mysql_fetch_array($dados)){
+						while ($dados1 = mysql_fetch_array($dados)){//mostra os dados na estrutura montada acima
 							echo '<tr>';
 							if(!empty($dados1['nro_vaga']))
 								echo '<td>'.$dados1['nro_vaga'].'</td>';	
