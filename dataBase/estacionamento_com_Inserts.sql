@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Jul-2015 às 18:01
+-- Generation Time: 03-Jul-2015 às 18:40
 -- Versão do servidor: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `estacionamento`
 --
+CREATE DATABASE IF NOT EXISTS `estacionamento` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `estacionamento`;
 
 -- --------------------------------------------------------
 
@@ -26,7 +28,8 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `cliente`
 --
 
-CREATE TABLE IF NOT EXISTS `cliente` (
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL COMMENT 'tempo em de estacionamento',
   `cpf_cnpj` varchar(14) NOT NULL,
@@ -53,7 +56,8 @@ INSERT INTO `cliente` (`id_cliente`, `nome`, `cpf_cnpj`, `email`, `logradouro`, 
 -- Estrutura da tabela `estacionamento`
 --
 
-CREATE TABLE IF NOT EXISTS `estacionamento` (
+DROP TABLE IF EXISTS `estacionamento`;
+CREATE TABLE `estacionamento` (
   `id_estacionamento` int(11) NOT NULL,
   `dh_entrada` varchar(100) NOT NULL COMMENT 'o custo em relação ao tempo',
   `dh_saida` varchar(45) DEFAULT NULL,
@@ -80,7 +84,8 @@ INSERT INTO `estacionamento` (`id_estacionamento`, `dh_entrada`, `dh_saida`, `va
 -- Estrutura da tabela `mensalidade`
 --
 
-CREATE TABLE IF NOT EXISTS `mensalidade` (
+DROP TABLE IF EXISTS `mensalidade`;
+CREATE TABLE `mensalidade` (
   `id_mensalidade` int(11) NOT NULL,
   `ano` int(4) NOT NULL COMMENT 'o custo em relação ao tempo',
   `mes` int(2) NOT NULL,
@@ -102,7 +107,8 @@ INSERT INTO `mensalidade` (`id_mensalidade`, `ano`, `mes`, `val_plano`, `val_exe
 -- Estrutura da tabela `plano`
 --
 
-CREATE TABLE IF NOT EXISTS `plano` (
+DROP TABLE IF EXISTS `plano`;
+CREATE TABLE `plano` (
   `id` int(11) NOT NULL,
   `horas` int(3) NOT NULL,
   `valor` double NOT NULL COMMENT 'o custo em relação ao tempo',
@@ -125,7 +131,8 @@ INSERT INTO `plano` (`id`, `horas`, `valor`, `valor_excedente`, `descr`, `observ
 -- Estrutura da tabela `plano_contratado`
 --
 
-CREATE TABLE IF NOT EXISTS `plano_contratado` (
+DROP TABLE IF EXISTS `plano_contratado`;
+CREATE TABLE `plano_contratado` (
   `id_plano_contratado` int(11) NOT NULL,
   `cliente_id_cliente` int(11) NOT NULL,
   `plano_id_plano` int(11) NOT NULL,
@@ -146,7 +153,8 @@ INSERT INTO `plano_contratado` (`id_plano_contratado`, `cliente_id_cliente`, `pl
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario` (
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `senha` varchar(45) NOT NULL,
   `login` varchar(45) NOT NULL,
@@ -166,7 +174,8 @@ INSERT INTO `usuario` (`id`, `senha`, `login`, `cliente_id_cliente`) VALUES(2, '
 -- Estrutura da tabela `vaga`
 --
 
-CREATE TABLE IF NOT EXISTS `vaga` (
+DROP TABLE IF EXISTS `vaga`;
+CREATE TABLE `vaga` (
   `id_vaga` int(11) NOT NULL,
   `nro_vaga` varchar(50) NOT NULL COMMENT 'tempo em de estacionamento',
   `descricao` varchar(100) NOT NULL COMMENT 'o custo em relação ao tempo',
