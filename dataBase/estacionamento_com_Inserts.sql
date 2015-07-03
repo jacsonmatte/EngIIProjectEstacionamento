@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Jul-2015 às 05:55
+-- Generation Time: 03-Jul-2015 às 18:01
 -- Versão do servidor: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -109,14 +109,15 @@ CREATE TABLE IF NOT EXISTS `plano` (
   `valor_excedente` double NOT NULL,
   `descr` varchar(45) DEFAULT NULL,
   `observacao` varchar(45) DEFAULT NULL,
-  `nome` varchar(20) NOT NULL
+  `nome` varchar(20) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Table storing all customers. Holds foreign keys to the addre';
 
 --
 -- Extraindo dados da tabela `plano`
 --
 
-INSERT INTO `plano` (`id`, `horas`, `valor`, `valor_excedente`, `descr`, `observacao`, `nome`) VALUES(1, 100, 100, 1.2, '', '', 'plano 1');
+INSERT INTO `plano` (`id`, `horas`, `valor`, `valor_excedente`, `descr`, `observacao`, `nome`, `status`) VALUES(1, 100, 100, 1.2, '', '', 'plano 1', 0);
 
 -- --------------------------------------------------------
 
@@ -129,14 +130,15 @@ CREATE TABLE IF NOT EXISTS `plano_contratado` (
   `cliente_id_cliente` int(11) NOT NULL,
   `plano_id_plano` int(11) NOT NULL,
   `data_contrato` date DEFAULT NULL,
-  `observacao` varchar(45) DEFAULT NULL
+  `observacao` varchar(45) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table storing all customers. Holds foreign keys to the addre';
 
 --
 -- Extraindo dados da tabela `plano_contratado`
 --
 
-INSERT INTO `plano_contratado` (`id_plano_contratado`, `cliente_id_cliente`, `plano_id_plano`, `data_contrato`, `observacao`) VALUES(1, 2, 1, '2015-06-25', '');
+INSERT INTO `plano_contratado` (`id_plano_contratado`, `cliente_id_cliente`, `plano_id_plano`, `data_contrato`, `observacao`, `status`) VALUES(1, 2, 1, '2015-06-25', '', 0);
 
 -- --------------------------------------------------------
 
