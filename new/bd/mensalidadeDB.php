@@ -123,4 +123,15 @@ function buscaClientes($nome, $checkbox){
 	
 	}
 }
+
+function buscaVagas($numero, $situacao, $tipo){
+	
+	
+	$con = dbConnect("localhost","root","");
+	$result = dbConsulta($sql,"mensalidade", $con);
+	return $result;
+}
+
+
 ?>
+
