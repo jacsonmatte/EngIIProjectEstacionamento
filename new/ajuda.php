@@ -198,56 +198,60 @@
 					
 						</div>
 
-		
-		<form id="sugestao" name="sugestao" class="form-horizontal" role="form" action="enviarSugestao.php" method="post">
-		<body class='bg-content full-height'>
-		
-		<div class="container-fluid bg-info bg-content full-height">
-
-			<div class="row offset-top-and-bottom-1 bg-content"> 
-				<div class="col-sm-3">
-				</div>
-
-				<div class="col-sm-6 text-center">
-					<h3>Críticas, dúvidas ou sugestões!</h3>
-					
-						<div class='form-group  text-left col-sm-12'>
-							<label for='txtNomeCompleto'>Nome completo:</label>
-							<input type='text' class='form-control' id='txtNomeCompleto' name="txtNome" placeholder='Ex: Pedro Pedreira, João Joaninha...'>
-						</div>						
-						
-						<div class='form-group  text-left col-sm-5'>
-							<label for='txtCidade'>Cidade:</label>
-							<input type='text' class='form-control' id='txtCidade' name="txtIdade" placeholder='Ex: Chapecó...'> 
-						</div>
-						
-						<div class='form-group  text-left col-sm-7'>
-							<label for='txtEmail'>e-Mail:</label>
-							<input type='email' class='form-control' id='txtEmail' name="txtEmail" placeholder='Ex: email@email.com'/>
-						</div>
-						<div class='form-group text-left col-sm-12'>
-							<label for='txtDescricao'>Descrição:</label>
-							<textarea name='txtDescricao' class='form-control' id='txtDescricao' ></textarea>
-						</div>							
-						<div class='form-group col-sm-12 text-right'>
-							<span id='spnErroSalvarPlano'></span> &nbsp;
-							<input type='button' id='btnVoltar' class='btn btn-danger min-border-white' value='Voltar' /> &nbsp;
-							<input type='submit' name="btnEnviar" id='btnEnviar' class='btn cmd-item' value='Enviar' />
-						</div>
-					</form>
-					
-				</div>
+<body class='bg-content'>
+	<div class="container-fluid bg-info bg-content full-height">
+		<div class="row offset-top-and-bottom-1 bg-content"> 
+			
+			<div class="col-sm-9 text-center">	
+			<form id="sugestao" name="sugestao" class="text-center" role="form" action="enviarSugestao.php" method="post">
+				<body class='bg-content full-height'>
 				
-			</div>				
-		</div>
-	
-		</form>
+				<div class="container-fluid bg-info bg-content full-height">
+
+					<div class="row offset-top-and-bottom-1 bg-content"> 
+						<div class="col-sm-12 text-center">
+							<h3>Críticas, dúvidas ou sugestões!</h3>
+							
+								<div class='form-group  text-left col-sm-12'>
+									<label for='txtNomeCompleto'>Nome completo:</label>
+									<input type='text' class='form-control' id='txtNomeCompleto' name="txtNome" placeholder='Ex: Pedro Pedreira, João Joaninha...'>
+								</div>						
+								
+								<div class='form-group  text-left col-sm-5'>
+									<label for='txtCidade'>Cidade:</label>
+									<input type='text' class='form-control' id='txtCidade' name="txtIdade" placeholder='Ex: Chapecó...'> 
+								</div>
+								
+								<div class='form-group  text-left col-sm-7'>
+									<label for='txtEmail'>e-Mail:</label>
+									<input type='email' class='form-control' id='txtEmail' name="txtEmail" placeholder='Ex: email@email.com'/>
+								</div>
+								<div class='form-group text-left col-sm-12'>
+									<label for='txtDescricao'>Descrição:</label>
+									<textarea name='txtDescricao' class='form-control' id='txtDescricao' ></textarea>
+								</div>							
+								<div class='form-group col-sm-12 text-right'>
+									<span id='spnErroSalvarPlano'></span> &nbsp;
+									<input type='button' id='btnVoltar' class='btn btn-danger min-border-white' value='Voltar' /> &nbsp;
+									<input type='submit' name="btnEnviar" id='btnEnviar' class='btn cmd-item' value='Enviar' />
+								</div>
+							</form>
+							
+						</div>
+						
+					</div>				
+				</div>
+			
+				</form>
 
 		<script type="text/javascript">
 						$( "#btnVoltar").click(function() {
 							$(location).attr('href', '../new/index.html');
 					});
-					</script>
+		</script>
+			<div class="col-sm-3">
+				
+			</div>
 		<footer class='panel-footer'>
 			<div class="text-center">
 				Control Parking - Sistema de gerenciamento de estacionamentos | &copy 2015 | Desenvolvido por Non Static Void 
