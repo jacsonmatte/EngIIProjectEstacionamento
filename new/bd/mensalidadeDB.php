@@ -55,33 +55,6 @@ function verificaAtributos($email, $Cpf_Cnpj){
      return mysql_num_rows($result);
 }
 
-function loadCliente($login){
-	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado, telefone FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
-	$con = dbConnect("localhost","root","");
-	$result =dbConsulta($sql,"estacionamento",$con);
-	$dados = array();
-	while($row=mysql_fetch_array($result)){
-			$dados["nome"]=$row["nome"];
-			$dados["cpf_cnpj"]=$row["cpf_cnpj"];
-			$dados["email"]=$row["email"];
-			$dados["logradouro"]=$row["logradouro"];
-			$dados["nro"]=$row["nro"];
-			$dados["cep"]=$row["cep"];
-			$dados["bairro"]=$row["bairro"];
-			$dados["cidade"]=$row["cidade"];
-			$dados["estado"]=$row["estado"];
-			$dados["telefone"]=$row["telefone"];
-	}
-	return $dados;
-}
-
-function gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $login){
-	$sql = "UPDATE cliente, usuario SET nome='$nome',cpf_cnpj='$cpf_cnpj',email='$email',logradouro='$logradouro',nro='$nro',cep='$cep',bairro='$bairro',cidade='$cidade', estado='$estado',telefone='$telefone' WHERE cliente.id_cliente=usuario.cliente_id_cliente and  usuario.login='$login'";
-	$con = dbConnect("localhost","root","");
-	$result =dbConsulta($sql,"estacionamento",$con);
-	
-}
-
 function buscaMensalidade($mes, $ano, $nome){
 	//$sql = "SELECT c.id_cliente, c.nome, m.id_mensalidade, m.mes, m.ano, m.val_plano, m.val_execed, FROM mensalidade m JOIN	cliente c ON m.cliente_id_cliente = c.id_cliente WHERE m.mes = '$mes' AND m.ano = '$ano' AND c.nome like '$nome'";
 	$sql = "SELECT nome, mes, ano, (m.val_plano+m.val_execed) soma FROM mensalidade m JOIN cliente c ON c.id_cliente = m.cliente_id_cliente";

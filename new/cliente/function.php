@@ -77,7 +77,7 @@
 		$query = dbConsulta($sql,"estacionamento", $conexao);
 
 		$opt = Array();
-		$opt['txtValor'] = "<table><thead><tr><td> Valor do seu Plano&nbsp&nbsp </td><td> Horas Contratadas&nbsp&nbsp </td><td> Valor da Hora Excedente&nbsp&nbsp </td><td> Descrição do Plano </td></tr></thead><tbody>";
+		$opt['txtValor'] = "<table id='tblResultadoPesquisa'><thead><tr><td>Valor</td><td>Horas</td><td>Hora Excedente</td><td>Descrição</td></tr></thead><tbody>";
 		
 		if (mysql_num_rows($query)) {
 			while ($dados = mysql_fetch_array($query)) {

@@ -55,9 +55,6 @@ function verificaAtributos($email, $Cpf_Cnpj){
      return mysql_num_rows($result);
 }
 
-
-
-
 function loadCliente($login){
 	$sql = "SELECT nome, cpf_cnpj, email, logradouro, nro, cep, bairro, cidade, estado,telefone, senha FROM cliente, usuario WHERE cliente.id_cliente=usuario.cliente_id_cliente and usuario.login='$login'";
 	$con = dbConnect("localhost","root","");

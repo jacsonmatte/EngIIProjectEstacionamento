@@ -108,13 +108,35 @@
 
 				// exibe o modal
 				$("#divRelatorio").modal();
-				
+				$('#tblResultadoPesquisa').DataTable({
+					language: {
+						processing:     "Processando...",
+						search:         "Buscar:",
+						lengthMenu:     "Exibir _MENU_ itens por página",
+						info:           "Mostrando _START_ a _END_ de _TOTAL_ itens",
+						infoEmpty:      "Nenhum registro",
+						infoFiltered:   "",
+						infoPostFix:    "",
+						loadingRecords: "Carregando...",
+						zeroRecords:    "Nenhum registro",
+						emptyTable:     "Nenhum registro",
+						paginate: {
+							first:      "<<",
+							previous:   "<",
+							next:       ">",
+							last:       ">>"
+						},
+						aria: {
+							sortAscending:  ": ordem crescente",
+							sortDescending: ": ordem decrescente"
+						}
+					}
+				});
+
 			} 
 		});
 		
 	
 	</script>
-	
-	
 	
 </html>
