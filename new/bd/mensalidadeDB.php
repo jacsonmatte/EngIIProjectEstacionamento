@@ -126,9 +126,20 @@ function buscaClientes($nome, $checkbox){
 }
 
 function buscaVagas($numero, $situacao, $tipo){
-	//$sql = "SELECT numero, situacao, tipo,"
-	//if ($numero <> '') $sql = $sql . " WHERE c.nome LIKE '%$nome%'";
 	
+	
+	$sql = "SELECT id_vaga, descricao, nro_vaga, tipo FROM vaga WHERE tipo = $tipo AND";
+
+	$data1 = date("Y-m-d") . "T:00:00";
+	$data2 = date("Y-m-d") . "T:23:59";
+
+	if ($situacao == 2 or $situacao == 4)
+		$sql .= " id_vaga IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = $situacao)";
+	else
+		$sql .= " (id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE (status = 4 OR status = 2) AND ('$data1' NOT BETWEEN 'dh_entrada' AND 'dh_saida' AND '$data2' NOT BETWEEN 'dh_entrada' AND 'dh_saida')) OR id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = 2 OR status = 4))";
+
+	if ($numero <> '') $sql .= " AND nro_vaga = '$numero'";
+
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
 	return $result;

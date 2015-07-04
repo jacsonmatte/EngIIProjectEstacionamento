@@ -44,8 +44,10 @@
 			<span id='spnErroPesquisarVagas'></span>
 			<input type='submit' id='btnPesquisar' class='btn cmd-item' value='Pesquisar' name="btnPesquisar"/>
 		</div>
+		<div id='divResultadoPesquisaVagas' class='form-group col-sm-12 text-center'>
 			<?php
 				if(isset($_POST["btnPesquisar"])){//quando o botão de pesquisar for pressionado
+
 					/*if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL)
 						echo "<strong>Preencha todos os campos!</strong>";
 					else{
@@ -89,20 +91,27 @@
 					}*/
 
 					$dados = buscaVagas($_POST['numero'],$_POST['situacao'], $_POST['tipo']);//faz a consulta ao banco, arquivo mensalidadeBD
-
+					//echo " ";
 					if (mysql_num_rows($dados) > 0){//se a consulta retornar com algum dado
-						echo '<table width="100%">';
+						echo '<table id="tblResultadoPesquisa" width="100%">';
 						echo '<thead><tr>';
-						echo '<th>Vaga</th>';
-						echo '<th>Situacao</th>';
-						echo '<th>tipo</th>';
+						echo '<th>Código</th>';
+						echo '<th>Descrição</th>';
+						echo '<th>Número</th>';
+						echo '<th>Tipo</th></tr></thead>';
 						echo '<tbody>';
 
-						while ($dados1 = mysql_fetch_array($dados)){//mostra os dados na estrutura montada acima
+						while ($dados1 = mysql_fetch_assoc($dados)){//mostra os dados na estrutura montada acima
 							echo '<tr>';
-							if(!empty($dados1['nro_vaga']))
-								echo '<td>'.$dados1['nro_vaga'].'</td>';	
-							echo '<td>'.$dados1['tipo'].'</td>';
+							echo '<td>'.$dados1['id_vaga'].'</td>';	
+							echo '<td>'.$dados1['descricao'].'</td>';
+							echo '<td>'.$dados1['nro_vaga'].'</td>';
+							if($dados1['tipo'] == 1){
+								echo '<td>Carro</td>';
+							}else if($dados1['tipo'] == 2){
+								echo '<td>Moto</td>';
+							}else
+								echo '<td>Utilitário</td>';
 							echo '</tr>';
 						}
 						echo '</tbody></table>';
@@ -113,6 +122,7 @@
 				else
 					echo "<strong>Nenhuma pesquisa realizada por enquanto</strong>";
 			?>
+	</div>
 	</form>
 	<?php
 		require '../require/content-2-footer.html';
