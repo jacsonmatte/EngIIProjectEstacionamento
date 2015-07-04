@@ -93,7 +93,7 @@
 	 			$valor_hr_excedente=addslashes($_POST["valor_hr_excedente"]);
 	 			$descricao=addslashes($_POST["descricao"]);
 	 			
-				$sql="INSERT INTO plano values('NULL','$nome','$valor','$qt_horas', '$valor_hr_excedente', '$descricao')";
+				$sql="INSERT INTO plano values('NULL','$qt_horas', '$valor', '$valor_hr_excedente', '$descricao','NULL','$nome','0')";
 				$pega=dbConsulta($sql,'estacionamento', $conexao);
 				
 				if(!$pega){

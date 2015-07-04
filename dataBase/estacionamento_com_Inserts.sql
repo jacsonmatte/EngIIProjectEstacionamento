@@ -273,6 +273,12 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `vaga`
   MODIFY `id_vaga` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  
+  -- AUTO_INCREMENT for table `plano_contratado`
+--
+ALTER TABLE `plano_contratado`
+MODIFY `id_plano_contratado` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  
 --
 -- Constraints for dumped tables
 --
