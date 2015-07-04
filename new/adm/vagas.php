@@ -17,7 +17,7 @@
 		require '../require/menu-adm.html';
 		require '../require/menu-2-content-1.html';
 	?> 
-	<h3>Vagas</h3>
+	<h3>Vagas</h3><!--formulário com os campos a serem preenchidos--> 
 		<form role='form' class='text-center'id="form-pesquisa-vaga" action='vagas.php?search=custom' method='POST'>
 
 		<div class='form-group col-sm-3 text-left'>
@@ -48,48 +48,6 @@
 			<?php
 				if(isset($_POST["btnPesquisar"])){//quando o botão de pesquisar for pressionado
 
-					/*if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL)
-						echo "<strong>Preencha todos os campos!</strong>";
-					else{
-						if((($_POST['qtdMinhrs']) < ($_POST['qtdMaxhrs'])) && (($_POST['VloMin']) < ($_POST['VloMax']))){ // Min < Max E Min < Max
-							
-							$dados = buscaPlanos($_POST['qtdMinhrs'], $_POST['qtdMaxhrs'], $_POST['VloMin'], $_POST['VloMax']);
-
-							if (mysql_num_rows($dados) > 0){
-
-								echo '<table width="100%">';
-								echo '<thead><tr>';
-								echo '<th>Cliente</th>';
-								echo '<th>Nome</th>';
-								echo '<th>valor</th>';
-								echo '<th>Horas</th>';
-								echo '<th>Excedente</th>';
-								echo '<th>Data</th>';
-								echo '</thead></tr>';
-								
-								echo '<tbody>';
-								while ($dados1 = mysql_fetch_array($dados)){
-									echo '<tr>';
-									echo '<td>'.$dados1[0].'</td>';		//Tabela Cliente tem como nome da coluna Nome "nome" então tem q acessar por indice
-									echo '<td>'.$dados1['nome'].'</td>';
-									echo '<td>'.$dados1['valor'].'</td>';
-									echo '<td>'.$dados1['horas'].'</td>';
-									echo '<td>'.$dados1['valor_excedente'].'</td>';
-									echo '<td>'.$dados1['data_contrato'].'</td>';
-									echo '</tr>';
-								}
-								echo '</tbody></table>';
-							}
-							else
-								echo "<strong>Nenhum resultado encontrado</strong>";
-						}
-						else if (($_POST['qtdMinhrs']) >= ($_POST['qtdMaxhrs'])){ // MinHrs >= MaxHrs
-							echo "<strong>Limite mínimo de horas deve ser menor que o limite máximo de horas</strong>";
-						}
-						else // ValorMin >= ValorMax
-							echo "<strong>Valor mínimo do plano deve ser menor que o valor máximo do plano</strong>";
-					}*/
-
 					$dados = buscaVagas($_POST['numero'],$_POST['situacao'], $_POST['tipo']);//faz a consulta ao banco, arquivo mensalidadeBD
 					//echo " ";
 					if (mysql_num_rows($dados) > 0){//se a consulta retornar com algum dado
@@ -101,7 +59,7 @@
 						echo '<th>Tipo</th></tr></thead>';
 						echo '<tbody>';
 
-						while ($dados1 = mysql_fetch_assoc($dados)){//mostra os dados na estrutura montada acima
+						while ($dados1 = mysql_fetch_assoc($dados)){//mostra os dados na estrutura montada acima, resultado mostrado dentro do datatable
 							echo '<tr>';
 							echo '<td>'.$dados1['id_vaga'].'</td>';	
 							echo '<td>'.$dados1['descricao'].'</td>';

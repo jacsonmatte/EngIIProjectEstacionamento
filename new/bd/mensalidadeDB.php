@@ -125,26 +125,24 @@ function buscaClientes($nome, $checkbox){
 	}
 }
 
-function buscaVagas($numero, $situacao, $tipo){
-	
+function buscaVagas($numero, $situacao, $tipo){//o campo numero nem sempre virá preenchido, então é necessário tratá-lo 
 	
 	$sql = "SELECT id_vaga, descricao, nro_vaga, tipo FROM vaga WHERE tipo = $tipo AND";
 
 	$data1 = date("Y-m-d") . "T:00:00";
 	$data2 = date("Y-m-d") . "T:23:59";
 
-	if ($situacao == 2 or $situacao == 4)
+	if ($situacao == 2 or $situacao == 4)//quando a situação é em utilização ou reservado
 		$sql .= " id_vaga IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = $situacao)";
-	else
+	else//livre
 		$sql .= " (id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE (status = 4 OR status = 2) AND ('$data1' NOT BETWEEN 'dh_entrada' AND 'dh_saida' AND '$data2' NOT BETWEEN 'dh_entrada' AND 'dh_saida')) OR id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = 2 OR status = 4))";
 
-	if ($numero <> '') $sql .= " AND nro_vaga = '$numero'";
+	if ($numero <> '') $sql .= " AND nro_vaga = '$numero'";//quando numero não for vazio
 
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
 	return $result;
 }
-
 
 ?>
 
