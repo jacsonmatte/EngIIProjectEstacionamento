@@ -199,7 +199,7 @@
 						</div>
 
 		
-		<form id="sugestao" name="sugestao" class="form-horizontal" role="form" action="enviarSugestao3.php" method="post">
+		<form id="sugestao" name="sugestao" class="form-horizontal" role="form" action="enviarSugestao.php" method="post">
 		<body class='bg-content full-height'>
 		
 		<div class="container-fluid bg-info bg-content full-height">
