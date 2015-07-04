@@ -103,7 +103,6 @@ function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
 	return $result;
 }
 
-
 function buscaClientes($nome, $checkbox){	
 
 		if($checkbox == '1'){

@@ -49,7 +49,7 @@
 				if(isset($_POST["btnPesquisar"])){//quando o botão de pesquisar for pressionado
 
 					$dados = buscaVagas($_POST['numero'],$_POST['situacao'], $_POST['tipo']);//faz a consulta ao banco, arquivo mensalidadeBD
-					//echo " ";
+
 					if (mysql_num_rows($dados) > 0){//se a consulta retornar com algum dado
 						echo '<table id="tblResultadoPesquisa" width="100%">';
 						echo '<thead><tr>';
