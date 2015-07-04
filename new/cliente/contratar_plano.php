@@ -28,7 +28,7 @@
 				echo("<script type='text/javascript'>location.href='contratar_plano.php';</script>");
 			}
 			else {
-				if (dbConsulta("INSERT INTO plano_contratado (id_plano_contratado, cliente_id_cliente, plano_id_plano, data_contrato, observacao) VALUES (NULL," . $_SESSION['id_cliente'] . ", $id_plano, '" . date('Y-m-d') . "', '$observacao')", 'estacionamento', $con)) {
+				if (dbConsulta("INSERT INTO plano_contratado (cliente_id_cliente, plano_id_plano, data_contrato, observacao) VALUES (" . $_SESSION['id_cliente'] . ", $id_plano, '" . date('Y-m-d') . "', '$observacao')", 'estacionamento', $con)) {
 					mysql_close($con);
 					echo "<script type='text/javascript'>alert('Plano contratado com sucesso!');</script>";
 					echo("<script type='text/javascript'>location.href='contratar_plano.php';</script>");
