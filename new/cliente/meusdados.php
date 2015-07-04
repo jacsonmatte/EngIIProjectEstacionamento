@@ -191,7 +191,7 @@
 							<label> Tipo de pessoa:</label>
 
 							<?php
-								if (strlen($dados['cpf_cnpj']) == 11) {
+								if (strlen($dados['cpf_cnpj']) == 14) {
 									echo "<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaFisica' checked='checked' onclick='habilita(1)' /> Física <input type='radio'  disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick='habilita(2)'/> Jurídica (CNPJ)<script type='text/javascript'> habilita(1); </script>";
 								}
 								else {
