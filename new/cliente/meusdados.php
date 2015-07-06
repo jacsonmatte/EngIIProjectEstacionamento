@@ -47,7 +47,7 @@
 
 			function setarValorTelefone(v) {
 				$("#txtTelefone").val(v);
-				habilitaTelefoneOitoNoveDigitos(v.lenght == 14 ? 1 : 2);
+				habilitaTelefoneOitoNoveDigitos(v.length == 10 ? false : true);
 			}
 			
 			function habilitaTelefoneOitoNoveDigitos(v){
