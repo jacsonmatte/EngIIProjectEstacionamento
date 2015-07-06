@@ -1,7 +1,8 @@
 <script type='text/javascript'>
 	
 	var errorMessage = "Oops! Parece que tivemos um problema...<br/>Tente recarregar a página!";
-		  
+	var erEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	
 	function setContent(htmlStr) {
 
 		$("#divConteudo").empty();

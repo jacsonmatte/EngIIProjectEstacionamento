@@ -76,8 +76,8 @@ function loadCliente($login){
 	return $dados;
 }
 
-function gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $login){
-	$sql = "UPDATE cliente, usuario SET nome='$nome',cpf_cnpj='$cpf_cnpj',email='$email',logradouro='$logradouro',nro='$nro',cep='$cep',bairro='$bairro',cidade='$cidade', estado='$estado',telefone='$telefone' WHERE cliente.id_cliente=usuario.cliente_id_cliente and  usuario.login='$login'";
+function gravaCliente($nome, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $login){
+	$sql = "UPDATE cliente, usuario SET nome='$nome', email='$email',logradouro='$logradouro',nro='$nro',cep='$cep',bairro='$bairro',cidade='$cidade', estado='$estado',telefone='$telefone' WHERE cliente.id_cliente=usuario.cliente_id_cliente and  usuario.login='$login'";
     $con = dbConnect("localhost","root","");
 	$result =dbConsulta($sql,"estacionamento",$con);
     $sql = "UPDATE usuario SET senha = '$senha' WHERE login='$login'";

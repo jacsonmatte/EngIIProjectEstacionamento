@@ -1,93 +1,5 @@
 <?php
-	session_start();
-	//comment
-?>
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<title>Control Parking - Cadastro de usuário</title>
-		<?php
-			require '../require/meta.html';
-			require '../require/js-base.html';
-		?>
-		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-		<script type='text/javascript'>
-			function habilita(v) {
-				if (v == 1) {
-        			$("#txtCpfCnpj").mask('999.999.999-99'); 
-    			} else {
-        			$("#txtCpfCnpj").mask('99.999.999/9999-99');
-    			}
-			}  
-
-			function habilita_tel(v){
-				if (v == 1) {  
-        			$("#txtTelefone").mask('(99) 9999-9999');
-    			} else {  
-        			$("#txtTelefone").mask('(99) 99999-9999');		  
-    			}
-			}
-			
-			$(document).ready(function() {
-				$("#txtDataNascimento").mask("99/99/9999");
-				$("#txtCep").mask("99.999-999");
-			});
-
-			function validaCampo(){
-				var er = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-				var nome = $("#txtNomeCompleto").val();
-				if (nome.lenght < 5 || nome.trim().indexOf(" ") <= 0) {
-					alert("Informe o nome completo!");
-					document.getElementById('txtNomeCompleto').focus();
-					return;
-				}
-				else if(!validarCPF($("#txtCpfCnpj").val()) && !validarCNPJ($("#txtCpfCnpj").val())){
-					alert("O CPF/CNPJ digitado é inválido!");
-					document.getElementById('txtCpfCnpj').focus();
-					return;	
-				}
-				else if($("#txtTelefone").val().replace(/^d/).length < 10){
-					alert("O telefone está incompleto!");
-					document.getElementById('txtTelefone').focus();
-					return;					
-				}
-				else if($("#txtLogradouro").val() == ''){
-					alert("O campo logradouro é obrigatório!");
-					document.getElementById('txtLogradouro').focus();
-					return;
-				}else if($("#txtCep").val() == ''){
-					alert("O Campo CEP é obrigatório!");
-					document.getElementById('txtCep').focus();
-					return;
-				}
-				else if($("#txtCidade").val() == ''){
-					alert("O Campo cidade é obrigatório!");
-					document.getElementById('txtCidade').focus();
-					return;	
-				}
-				else if(!er.test($("#txtEmail").val())){
-					alert("O email informado é inválido!");
-					document.getElementById('txtEmail').focus();
-					return;				
-				}
-				else if($("#txtSenha").val() == ''){
-					alert("O Campo senha é obrigatório!");
-					document.getElementById('txtSenha').focus();
-					return;
-				}
-				else if($("#txtSenhaRep").val() != $("#txtSenha").val()){
-					alert("A confirmação de senha deve ser igual a senha!");
-					document.getElementById('txtSenhaRep').focus();
-					return;
-				}
-				document.forms["frmCadastro"].submit();
-			}
-			
-		</script>
-    	
-	</head>
-
-<?php
+	require '../require/cliente-aut.php';
 	require "../bd/conectBd.php";
 	
 	function validaCPF($cpf = null) {
@@ -137,9 +49,8 @@
 		}
 	}
 	
-	if(isset($_POST["nome"])){
+	if(isset($_POST["btnSalvar"])){
 		$nome = addslashes($_POST["nome"]);
-		$cpf_cnpj = addslashes($_POST["cpf_cnpj"]);
 		$email = addslashes($_POST["email"]);
 		$logradouro = addslashes($_POST["logradouro"]);
 		$nro = addslashes($_POST["nro"]);
@@ -167,6 +78,91 @@
 			require '../require/meta.html';
 			require '../require/js-base.html';
 		?>
+				<script type='text/javascript'>
+			
+			function setarCampoCpfCnpj(v) {
+				$("#txtCpfCnpj").val(v);
+				if (v.lenght == 11) {
+        			$("#txtCpfCnpj").mask('999.999.999-99');
+					$("#rdbPessoaFisica").prop("checked", "checked");
+				}
+				else {
+					$("#rdbPessoaJuridica").prop("checked", "checked");
+        			$("#txtCpfCnpj").mask('99.999.999/9999-99');
+				}
+			}  
+
+			function setarValorTelefone(v) {
+				$("#txtTelefone").val(v);
+				habilita_tel(v.lenght == 10 ? 1 : 2);
+			}
+			
+			function habilita_tel(v){
+				if (v == 1) {  
+        			$("#txtTelefone").mask('(99) 9999-9999');
+    			} else {  
+        			$("#txtTelefone").mask('(99) 99999-9999');		  
+    			}
+			}
+			
+			$(document).ready(function() {
+				$("#txtDataNascimento").mask("99/99/9999");
+				$("#txtCep").mask("99.999-999");
+			});
+
+			function validaCampos(){
+				var er = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+				var nome = $("#txtNomeCompleto").val();
+				alert($("#txtTelefone").val());
+				$("#spnErroSalvarMeusDados").text('');
+				if (nome.lenght < 5 || nome.trim().indexOf(" ") <= 0) {
+					$("#spnErroSalvarMeusDados").text("Informe o nome completo!");
+					document.getElementById('txtNomeCompleto').focus();
+					return;
+				}
+				else if(!validarCPF($("#txtCpfCnpj").val()) && !validarCNPJ($("#txtCpfCnpj").val())){
+					$("#spnErroSalvarMeusDados").text("O CPF/CNPJ digitado é inválido!");
+					document.getElementById('txtCpfCnpj').focus();
+					return;	
+				}
+				else if($("#txtTelefone").val().replace(/^d/).length < 10){
+					$("#spnErroSalvarMeusDados").text("O telefone está incompleto!");
+					document.getElementById('txtTelefone').focus();
+					return;					
+				}
+				else if($("#txtLogradouro").val() == ''){
+					$("#spnErroSalvarMeusDados").text("O campo logradouro é obrigatório!");
+					document.getElementById('txtLogradouro').focus();
+					return;
+				}else if($("#txtCep").val() == ''){
+					$("#spnErroSalvarMeusDados").text("O Campo CEP é obrigatório!");
+					document.getElementById('txtCep').focus();
+					return;
+				}
+				else if($("#txtCidade").val() == ''){
+					$("#spnErroSalvarMeusDados").text("O Campo cidade é obrigatório!");
+					document.getElementById('txtCidade').focus();
+					return;	
+				}
+				else if(!er.test($("#txtEmail").val())){
+					$("#spnErroSalvarMeusDados").text("O email informado é inválido!");
+					document.getElementById('txtEmail').focus();
+					return;				
+				}
+				else if($("#txtSenha").val() == ''){
+					$("#spnErroSalvarMeusDados").text("O Campo senha é obrigatório!");
+					document.getElementById('txtSenha').focus();
+					return;
+				}
+				else if($("#txtSenhaRep").val() != $("#txtSenha").val()){
+					$("#spnErroSalvarMeusDados").text("A confirmação de senha deve ser igual a senha!");
+					document.getElementById('txtSenhaRep').focus();
+					return;
+				}
+				document.forms["frmCadastro"].submit();
+			}
+			
+		</script>
 	</head>
 	<?php
 		require '../require/menu-1.html';
@@ -180,7 +176,7 @@
 				<div class="col-sm-1">
 				</div>
 				<div class="col-sm-10 text-center">
-					<h3>Cadastro de usuário</h3>
+					<h3>Meus dados</h3>
 					<form role='form' class='text-center' method="post" actions="meusdados.php" name="cadastro" id='frmCadastro'>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
@@ -189,16 +185,12 @@
 						
 						<div class='form-group  text-left col-sm-6'>
 							<label> Tipo de pessoa:</label>
-
+							<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaFisica' /> Física
+							<input type='radio'  disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaJuridica' /> Jurídica
+							<input type='text' class='form-control' disabled='disabled' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj"/>
 							<?php
-								if (strlen($dados['cpf_cnpj']) == 14) {
-									echo "<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaFisica' checked='checked' onclick='habilita(1)' /> Física <input type='radio'  disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaJuridica' onclick='habilita(2)'/> Jurídica (CNPJ)<script type='text/javascript'> habilita(1); </script>";
-								}
-								else {
-									echo "<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaFisica' onclick='habilita(1)' /> Física<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaJuridica' checked='checked' onclick='habilita(2)'/> Jurídica (CNPJ)<script type='text/javascript'> habilita(2); </script>";
-								}
+								echo "<script type='text/javascript'> setarCampoCpfCnpj('" . $dados['cpf_cnpj'] . "'); </script>";
 							?>
-							<input type='text' class='form-control'  disabled='disabled' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj" value="<?php echo $dados['cpf_cnpj']; ?>"/>
 						</div>
 						
 						<div class='form-group  text-left col-sm-6'>
@@ -358,7 +350,6 @@
 							<label for='txtBairro'>Bairro:</label>
 							<input type='text' class='form-control' id='txtBairro' name="bairro" value="<?php echo $dados['bairro']; ?>">
 						</div>
-						
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtCidade'>Cidade:</label>
 							<input type='text' class='form-control' id='txtCidade' name="cidade" value="<?php echo $dados['cidade']; ?>">
@@ -367,31 +358,27 @@
 							<label for='txtEmail'>e-Mail:</label>
 							<input type='email' class='form-control' id='txtEmail' name="email" value="<?php echo $dados['email']; ?>"/>
 						</div>
-						
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtTelefone'>Telefone: </label>
+							<input type='radio' name='rdbTelefone' id='rdbTelefoneOitoDigitos' onclick='habilita_tel(1)' /> 8 dígitos
+							<input type='radio' name='rdbTelefone' id='rdbTelefoneNoveDigitos' onclick='habilita_tel(2)' /> 9 dígitos
+							<input type='text' class='form-control' name="telefone" id='txtTelefone' />
 							<?php
-							if (strlen($dados['telefone']) == 10)
-								echo "<input type='radio' name='rdbTelefone' id='rdbTelefone1' checked='checked' onclick='habilita_tel(1)' /> 8 dígitos<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick='habilita_tel(2)' /> 9 dígitos <script type='text/javascript'>habilita_tel(1);</script>";
-							else
-								echo "<input type='radio' name='rdbTelefone' id='rdbTelefone1' onclick='habilita_tel(1)' /> 8 dígitos<input type='radio' name='rdbTelefone' id='rdbTelefone1' checked='checked' onclick='habilita_tel(2)' /> 9 dígitos <script type='text/javascript'>habilita_tel(2);</script>";
+								echo "<script type='text/javascript'> setarValorTelefone('" . $dados['telefone'] . "');</script>";
 							?>
-							
-							<input type='text' class='form-control' name="telefone" id='txtTelefone' value="<?php echo $dados['telefone']; ?>"/>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
-
-							<label for='txtEmail'>senha:</label>
+							<label for='txtEmail'>Senha:</label>
 							<input type='password' class='form-control' id='txtSenha' name="senha"  value="<?php echo $dados['senha']; ?>"/>
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtEmail'>Repetir Senha:</label>
-							<input type='password' class='form-control' id='txtSenhaRep' name="senhaRep" onBlur="valida_senha(cadastro.senha, cadastro.senhaRep);" value="<?php echo $dados['senha']; ?>"/>
+							<input type='password' class='form-control' id='txtSenhaRep' name="senhaRep" value="<?php echo $dados['senha']; ?>"/>
 						</div>				
 						<div class='form-group col-sm-12 text-right'>
-							<span id='spnErroSalvarPlano'></span> &nbsp;
+							<span class="label label-danger" id='spnErroSalvarMeusDados'></span> &nbsp;
 							<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
-							<input type='button' name="btnSalvar" id='btnSalvar' onclick="validaCampo();" class='btn cmd-item' value='Salvar' />
+							<input type='button' name="btnSalvar" id='btnSalvar' onclick="validaCampos();" class='btn cmd-item' value='Salvar' />
 						</div>
 					</form>
 				</div>
