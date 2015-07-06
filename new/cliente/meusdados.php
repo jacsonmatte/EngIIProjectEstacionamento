@@ -1,55 +1,13 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+	<head>
+
 <?php
 	require '../require/cliente-aut.php';
 	require "../bd/conectBd.php";
 	
-	function validaCPF($cpf = null) {
-	 
-		// Verifica se um número foi informado
-		if(empty($cpf)) {
-			return false;
-		}
-	 
-		// Elimina possivel mascara
-		$cpf = ereg_replace('[^0-9]', '', $cpf);
-		$cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
-		 
-		// Verifica se o numero de digitos informados é igual a 11 
-		if (strlen($cpf) != 11) {
-			return false;
-		}
-		// Verifica se nenhuma das sequências invalidas abaixo 
-		// foi digitada. Caso afirmativo, retorna falso
-		else if ($cpf == '00000000000' || 
-			$cpf == '11111111111' || 
-			$cpf == '22222222222' || 
-			$cpf == '33333333333' || 
-			$cpf == '44444444444' || 
-			$cpf == '55555555555' || 
-			$cpf == '66666666666' || 
-			$cpf == '77777777777' || 
-			$cpf == '88888888888' || 
-			$cpf == '99999999999') {
-			return false;
-		 // Calcula os digitos verificadores para verificar se o
-		 // CPF é válido
-		 } else {   
-			 
-			for ($t = 9; $t < 11; $t++) {
-				 
-				for ($d = 0, $c = 0; $c < $t; $c++) {
-					$d += $cpf{$c} * (($t + 1) - $c);
-				}
-				$d = ((10 * $d) % 11) % 10;
-				if ($cpf{$c} != $d) {
-					return false;
-				}
-			}
-	 
-			return true;
-		}
-	}
-	
-	if(isset($_POST["btnSalvar"])){
+	if(isset($_POST["nome"])){
 		$nome = addslashes($_POST["nome"]);
 		$email = addslashes($_POST["email"]);
 		$logradouro = addslashes($_POST["logradouro"]);
@@ -62,47 +20,45 @@
 		$telefone = addslashes($_POST["telefone"]);
 		$telefone = ereg_replace('[^0-9]', '', $telefone);
 		$senha = addslashes($_POST["senha"]);
-		
-		gravaCliente($nome, $cpf_cnpj, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $_SESSION['username']);
-		
+		if (gravaCliente($nome, $email, $logradouro, $nro, $cep, $bairro, $cidade, $estado, $telefone, $senha, $_SESSION['username']) == 1)
+			echo "<input type='hidden' id='hddAtualizado' value='1' />";
+		else
+			echo "<input type='hidden' id='hddAtualizado' value='0' />";
 	}
 	$dados = loadCliente($_SESSION['username']);
 ?>
-	
-<!DOCTYPE html>
-
-<html lang="pt-br">
-	<head>
 		<title>Control Parking - Contratar plano</title>
 		<?php
 			require '../require/meta.html';
 			require '../require/js-base.html';
 		?>
-				<script type='text/javascript'>
-			
+		<script type='text/javascript'>
 			function setarCampoCpfCnpj(v) {
 				$("#txtCpfCnpj").val(v);
-				if (v.lenght == 11) {
+				if (v.length == 11) {
         			$("#txtCpfCnpj").mask('999.999.999-99');
 					$("#rdbPessoaFisica").prop("checked", "checked");
 				}
 				else {
 					$("#rdbPessoaJuridica").prop("checked", "checked");
-        			$("#txtCpfCnpj").mask('99.999.999/9999-99');
+					$("#txtCpfCnpj").mask('99.999.999/9999-99');
 				}
 			}  
 
 			function setarValorTelefone(v) {
 				$("#txtTelefone").val(v);
-				habilita_tel(v.lenght == 10 ? 1 : 2);
+				habilitaTelefoneOitoNoveDigitos(v.lenght == 14 ? 1 : 2);
 			}
 			
-			function habilita_tel(v){
-				if (v == 1) {  
-        			$("#txtTelefone").mask('(99) 9999-9999');
-    			} else {  
-        			$("#txtTelefone").mask('(99) 99999-9999');		  
-    			}
+			function habilitaTelefoneOitoNoveDigitos(v){
+				if (!v) {
+        			$("#txtTelefone").mask("(99) 9999-9999");
+					$("#ckbTelefoneNoveDigitos").attr("checked", false);
+				}
+    			else {
+					$("#ckbTelefoneNoveDigitos").prop("checked", "checked");
+        			$("#txtTelefone").mask("(99) 99999-9999");		  
+				}
 			}
 			
 			$(document).ready(function() {
@@ -113,53 +69,67 @@
 			function validaCampos(){
 				var er = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 				var nome = $("#txtNomeCompleto").val();
-				alert($("#txtTelefone").val());
+
 				$("#spnErroSalvarMeusDados").text('');
-				if (nome.lenght < 5 || nome.trim().indexOf(" ") <= 0) {
+				if (nome.length < 5 || nome.trim().indexOf(" ") <= 0) {
 					$("#spnErroSalvarMeusDados").text("Informe o nome completo!");
-					document.getElementById('txtNomeCompleto').focus();
+					$('#txtNomeCompleto').focus();
 					return;
 				}
-				else if(!validarCPF($("#txtCpfCnpj").val()) && !validarCNPJ($("#txtCpfCnpj").val())){
-					$("#spnErroSalvarMeusDados").text("O CPF/CNPJ digitado é inválido!");
-					document.getElementById('txtCpfCnpj').focus();
+				if($("#txtLogradouro").val() == ''){
+					$("#spnErroSalvarMeusDados").text("Informe o logradouro corretamente!");
+					$('#txtLogradouro').focus();
+					return;
+				}
+				if($("#txtNumero").val() == '' || isNaN($("#txtNumero").val())){
+					$("#spnErroSalvarMeusDados").text("Informe o número corretamente!");
+					$('#txtLogradouro').focus();
+					return;
+				}
+				if($("#txtCep").val() == ''){
+					$("#spnErroSalvarMeusDados").text("Informe o CEP corretamente!");
+					$('#txtCep').focus();
+					return;
+				}
+				if($("#txtCidade").val() == ''){
+					$("#spnErroSalvarMeusDados").text("Informe a cidade corretamente!");
+					$('#txtCidade').focus();
 					return;	
 				}
-				else if($("#txtTelefone").val().replace(/^d/).length < 10){
-					$("#spnErroSalvarMeusDados").text("O telefone está incompleto!");
-					document.getElementById('txtTelefone').focus();
-					return;					
-				}
-				else if($("#txtLogradouro").val() == ''){
-					$("#spnErroSalvarMeusDados").text("O campo logradouro é obrigatório!");
-					document.getElementById('txtLogradouro').focus();
-					return;
-				}else if($("#txtCep").val() == ''){
-					$("#spnErroSalvarMeusDados").text("O Campo CEP é obrigatório!");
-					document.getElementById('txtCep').focus();
-					return;
-				}
-				else if($("#txtCidade").val() == ''){
-					$("#spnErroSalvarMeusDados").text("O Campo cidade é obrigatório!");
-					document.getElementById('txtCidade').focus();
-					return;	
-				}
-				else if(!er.test($("#txtEmail").val())){
-					$("#spnErroSalvarMeusDados").text("O email informado é inválido!");
+				if(!er.test($("#txtEmail").val())){
+					$("#spnErroSalvarMeusDados").text("Informe um email válido!");
 					document.getElementById('txtEmail').focus();
 					return;				
 				}
-				else if($("#txtSenha").val() == ''){
-					$("#spnErroSalvarMeusDados").text("O Campo senha é obrigatório!");
-					document.getElementById('txtSenha').focus();
+				if($("#txtTelefone").val() == ''){
+					$("#spnErroSalvarMeusDados").text("Informe o telefone corretamente!");
+					$('#txtTelefone').focus();
+					return;					
+				}
+				if($("#txtSenha").val() == ''){
+					$("#spnErroSalvarMeusDados").text("Informe a senha!");
+					$('#txtSenha').focus();
 					return;
 				}
-				else if($("#txtSenhaRep").val() != $("#txtSenha").val()){
+				if($("#txtSenhaRep").val() != $("#txtSenha").val()){
 					$("#spnErroSalvarMeusDados").text("A confirmação de senha deve ser igual a senha!");
-					document.getElementById('txtSenhaRep').focus();
+					$('#txtSenhaRep').focus();
 					return;
 				}
-				document.forms["frmCadastro"].submit();
+				$("#spnErroSalvarMeusDados").removeClass("label-danger").addClass("label-success");
+				$("#spnErroSalvarMeusDados").text("Tudo certo! Atualizando seu cadastro...");
+				setTimeout(function () { document.forms["frmCadastro"].submit(); }, 2000);
+			}
+			
+			function resultadoAtualizacao() {
+				if ($("#hddAtualizado").val() == true) {
+					$("#spnErroSalvarMeusDados").removeClass("label-danger").addClass("label-success");
+					$("#spnErroSalvarMeusDados").text("Cadastro atualizado com sucesso...");
+				}
+				else if ($("#hddAtualizado").val() == false) {
+					$("#spnErroSalvarMeusDados").removeClass("label-success").addClass("label-danger");
+					$("#spnErroSalvarMeusDados").text("Cadastro não atualizado...");
+				}
 			}
 			
 		</script>
@@ -181,12 +151,11 @@
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtNomeCompleto'>Nome completo:</label>
 							<input type='text' class='form-control' id='txtNomeCompleto' name="nome"  value="<?php echo $dados['nome']; ?>">
-						</div>
-						
+						</div>					
 						<div class='form-group  text-left col-sm-6'>
-							<label> Tipo de pessoa:</label>
-							<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaFisica' /> Física
-							<input type='radio'  disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaJuridica' /> Jurídica
+							<label title='Escolha CPF para cadastrar uma pessoa física ou CNPJ para cadastrar uma pessoa jurídica'>
+							<input type='radio' disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaFisica' /> CPF
+							<input type='radio'  disabled='disabled' name='rdbTipoPessoa' id='rdbPessoaJuridica' /> CNPJ</label>
 							<input type='text' class='form-control' disabled='disabled' id='txtCpfCnpj' name="cpf_cnpj" class="cpf_cnpj"/>
 							<?php
 								echo "<script type='text/javascript'> setarCampoCpfCnpj('" . $dados['cpf_cnpj'] . "'); </script>";
@@ -360,9 +329,8 @@
 						</div>
 						<div class='form-group  text-left col-sm-6'>
 							<label for='txtTelefone'>Telefone: </label>
-							<input type='radio' name='rdbTelefone' id='rdbTelefoneOitoDigitos' onclick='habilita_tel(1)' /> 8 dígitos
-							<input type='radio' name='rdbTelefone' id='rdbTelefoneNoveDigitos' onclick='habilita_tel(2)' /> 9 dígitos
-							<input type='text' class='form-control' name="telefone" id='txtTelefone' />
+							<input type='checkbox' name='telefoneNoveDigitos' id='ckbTelefoneNoveDigitos' onchange="habilitaTelefoneOitoNoveDigitos(this.checked)" /> <label for='ckbTelefoneNoveDigitos' title='Marque esta opção para informar um telefone com 9 dígitos'>9 dígitos</label>
+							<input type='text' class='form-control' name="telefone" id='txtTelefone'/>
 							<?php
 								echo "<script type='text/javascript'> setarValorTelefone('" . $dados['telefone'] . "');</script>";
 							?>
@@ -380,6 +348,7 @@
 							<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
 							<input type='button' name="btnSalvar" id='btnSalvar' onclick="validaCampos();" class='btn cmd-item' value='Salvar' />
 						</div>
+						<?php echo "<script type='text/javascript'> resultadoAtualizacao(); </script>"; ?>
 					</form>
 				</div>
 				<div class="col-sm-3">

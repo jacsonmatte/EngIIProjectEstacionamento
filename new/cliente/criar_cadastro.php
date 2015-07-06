@@ -104,7 +104,7 @@
 					}
 				}					
 				if ($("#txtTelefone").val() == ""){
-					$("#spnErroSalvarCadastro").text("Informe o telefone!");
+					$("#spnErroSalvarCadastro").text("Informe o telefone corretamente!");
 					$('#txtTelefone').focus();
 					return;					
 				}
@@ -119,7 +119,7 @@
 					return;
 				}
 				if ($("#txtCep").val() == ''){
-					$("#spnErroSalvarCadastro").text("Informe o CEP!");
+					$("#spnErroSalvarCadastro").text("Informe o CEP corretamente!");
 					$('#txtCep').focus();
 					return;
 				}

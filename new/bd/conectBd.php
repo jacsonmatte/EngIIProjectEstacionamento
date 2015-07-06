@@ -84,7 +84,7 @@ function gravaCliente($nome, $email, $logradouro, $nro, $cep, $bairro, $cidade, 
     $con = dbConnect("localhost","root","");
     $result =dbConsulta($sql,"estacionamento",$con);
 
-
+	return $result;
 	
 }
 ?>
