@@ -13,20 +13,27 @@
 
 	<script type="text/javascript">
 		
+		function validarCampos(){
 
-		function validaCampo(){
-			if(document.form_vaga.cod_vaga.value==""){
-				alert("O Campo Numero da Vaga é obrigatório!");
-				document.getElementById('txtCodigo').focus();
-				return false;
-				
-			}else if(document.form_vaga.tipo_vaga.value==""){
-				alert("O Campo tipo da vaga é obrigatório!");
-				document.getElementById('sltTipo').focus();
-				return false;	
-
+			var codigo = $("#txtCodigo").val().trim();
+			if(codigo == '' || isNaN(codigo) || parseInt(codigo) < 1) {
+				$("#spnErroSalvarVaga").text("Informe um número maior que 0 para a vaga!");
+				$('#$txtCodigo').focus();
+				return;			
 			}
-		}		
+			$("#spnErroSalvarVaga").text("Aguarde! Verificando disponibilidade do número...");
+			$("#spnErroSalvarVaga").removeClass('label-danger').addClass('label-default');
+			setTimeout(function () { $('#frmCadastrarVaga').submit(); }, 2000);
+		}
+		
+		function resultadoCadastrarVaga(texto, sucesso) {
+			$("#spnErroSalvarVaga").text(texto);
+			if (sucesso)
+				$("#spnErroSalvarVaga").removeClass('label-danger').addClass('label-success');
+			else
+				$("#spnErroSalvarVaga").removeClass('label-success').addClass('label-danger');
+		}
+		
 	</script>	
 	</head>
 	<?php
@@ -36,10 +43,10 @@
 		require '../require/menu-2-content-1.html';
 	?> 
 	<h3>Cadastro de Vagas</h3>
-	<form role='form' class='text-center' name="form_vaga" action="cadastrar_vaga.php" method="POST" onsubmit="return validaCampo(); return false;">
+	<form role='form' class='text-center' name="form_vaga" id='frmCadastrarVaga' action="cadastrar_vaga.php" method="POST">
 		<div class='form-group col-sm-6'>
 			<label for='txtValor'>C&oacute;digo:</label>
-			<input type='number' class='form-control' id='txtCodigo' name="cod_vaga" placeholder='Digite o c&oacute;digo da vaga'>
+			<input type='number' class='form-control' id='txtCodigo' name="cod_vaga" placeholder='Digite o número da vaga'>
 		</div>
 		<div class='form-group col-sm-6'>
 			<label for='sltTipo'>Tipo de vaga:</label>
@@ -51,12 +58,12 @@
 		</div>
 		<div class='form-group col-sm-12'>
 			<label for='txtDescricao'>Descri&ccedil;&atilde;o:</label>
-			<textarea class='form-control' id='txtDescricao' name="descricao_vaga" placeholder='Digite alguma descri&ccedil;&atilde;o para o plano (opcional)'></textarea>
+			<textarea class='form-control' id='txtDescricao' name="descricao_vaga" placeholder='Digite alguma descrição para o plano (opcional)'></textarea>
 		</div>
 		<div class='form-group col-sm-12 text-right'>
-			<span id='spnErroSalvarVaga'></span>
+			<span id='spnErroSalvarVaga' class='label label-danger'></span>
 			<input type='button' id='btnCancelar' class='btn btn-danger min-border-white' value='Cancelar' /> &nbsp;
-			<input type='submit' id='btnSalvar' class='btn cmd-item' value='Salvar' name="btnSalvar"/>
+			<input type='button' id='btnSalvar' class='btn cmd-item' value='Salvar' name="btnSalvar" onclick='validarCampos()'/>
 		</div>
 	</form>
 
@@ -70,32 +77,46 @@
 	
 	<?php
 		require '../require/content-2-footer.html';
-	
 
-
-		if(isset($_POST["btnSalvar"])){
+		if(isset($_POST["cod_vaga"])){
+				
+				$cod_vaga=addslashes($_POST["cod_vaga"]);
+				
+				if ( $cod_vaga < 0 || $cod_vaga == '' || !is_numeric($cod_vaga)) {
+					echo "<script language='javascript'>resultadoCadastrarVaga('Informe um número maior que 0 para a vaga!', false);</script>";
+					die();
+				}
+				
 				
 				require_once("../bd/conectBd.php");
 				$conexao=dbConnect("localhost","root","");
-
-				$cod_vaga=addslashes($_POST["cod_vaga"]);
+				
+				
 	 			$tipo_vaga=addslashes($_POST["tipo_vaga"]);
 	 			$descricao_vaga=addslashes($_POST["descricao_vaga"]);
 	 			
-				$sql="INSERT INTO vaga values('NULL','$cod_vaga','$descricao_vaga','$tipo_vaga')";
-				$pega=dbConsulta($sql,'estacionamento', $conexao);
 				
-				if(!$pega){
-					echo "<script language=javascript>alert( 'Falha ao cadastrar Vaga !!!' );</script>";
-				}else{
-					echo "<script language=javascript>alert( 'Nova Vaga Cadastrada com Sucesso !!!' );</script>";
+				
+				$verificarNumeroVaga = dbConsulta("SELECT 1 FROM vaga WHERE nro_vaga = $cod_vaga", 'estacionamento', $conexao);
+
+				if ($verificarNumeroVaga) {
+
+					if (mysql_num_rows($verificarNumeroVaga) > 0) {
+						echo "<script language='javascript'>resultadoCadastrarVaga('Já existe uma vaga com este número!', false);</script>";
+					}
+					else {
+
+						$sql = "INSERT INTO vaga (nro_vaga, descricao, tipo) VALUES ('$cod_vaga','$descricao_vaga','$tipo_vaga')";
+						$pega = dbConsulta($sql,'estacionamento', $conexao);
+
+						if(!$pega)
+							echo "<script language='javascript'>resultadoCadastrarVaga('Vaga não cadastrada', false);</script>";
+						else
+							echo "<script language='javascript'>resultadoCadastrarVaga('Vaga cadastrada com sucesso', true);</script>";
+					}
 				}
 				mysql_close($conexao);
 		}				
-
-
-
-
 
 	?>
 </html>
