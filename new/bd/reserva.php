@@ -52,8 +52,9 @@ function efetuarReserva($vaga, $dataHoraInicial, $dataHoraFinal, $cliente, $plan
 	else return -1;
 	
 	$res = dbConsulta("SELECT token FROM estacionamento WHERE id_estacionamento = '$idReserva'", "estacionamento", $con);
-	
-	return mysql_fetch_array($res)[0];
+	if (!$res) return "0";
+	$tk = mysql_fetch_array($res);
+	return $tk[0];
 	
 }
 

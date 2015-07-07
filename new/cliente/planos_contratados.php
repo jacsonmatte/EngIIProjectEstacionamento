@@ -1,6 +1,8 @@
 <?php 
 	require '../require/cliente-aut.php'; 
-	require '../bd/conectBd.php"';
+	require '../dominio/constantes.php';
+	require '../bd/conectBd.php';
+	require '../bd/plano_contratado.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +12,6 @@
 		<?php
 			require '../require/meta.html';
 			require '../require/js-base.html';
-			require '../bd/plano_contratado.php';
 		?>
 		<script type='text/javascript'>
 			function exibirPlanos(html) {

@@ -1,5 +1,6 @@
 <?php
-	require '../bd/conectBd.php"';
+	require_once '../dominio/constantes.php';
+	require_once '../bd/conectBd.php';
 
 	function montaSelect()
 	{

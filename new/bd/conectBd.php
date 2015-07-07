@@ -8,18 +8,18 @@ function dbConnect2(){
 }
 
 function dbConnect($host, $user, $pass){
-	$CONNECT = 1;
+	$CONNECT = 2;
 	if ($CONNECT == 1)
 		return @mysql_connect("localhost", "root", "");
 	else if ($CONNECT == 2)
-		return @mysql_connect("http://mysql14.000webhost.com/", "a3618106_root", "ProjetoES2");
+		return @mysql_connect("mysql14.000webhost.com", "a3618106_root", "ProjetoES2");
 	else
 		return @mysql_connect($host, $user, $pass);
 }
  
 //Conecta na BD e executa uma consulta
 function dbConsulta($sql, $app, $connect){
-	$CONNECT = 1;
+	$CONNECT = 2;
 	if ($CONNECT == 1)
 		mysql_select_db("estacionamento", $connect);
 	else if ($CONNECT == 2)
@@ -36,7 +36,11 @@ function validaLogin($user, $senha){
 	$sql = "SELECT `cliente_id_cliente` FROM `usuario` WHERE login='$user' and senha='$senha'";
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"estacionamento",$con);
-	return mysql_fetch_array($result)[0];
+	if (mysql_num_rows($result) > 0) {
+		$row = mysql_fetch_array($result);
+		return $row[0];
+	}
+	return 0;
 }
 
 function verificaAtributos($email, $Cpf_Cnpj){

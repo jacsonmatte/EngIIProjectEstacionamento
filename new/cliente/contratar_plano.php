@@ -1,13 +1,10 @@
 <?php
-	require '../require/cliente-aut.php';
+	require_once '../require/cliente-aut.php';
+	require_once '../dominio/constantes.php';
+	require_once 'function.php';
 
-?>
-<?php	
 	$nomecliente = $_SESSION['username'];
 	$planoSalvo = 0;
-?>
-
-<?php
 
 	if(isset($_POST["btnSalvar"])){
 
@@ -18,7 +15,6 @@
 			echo "<script>alert('Por favor $nomecliente, selecione um plano!!');</script>";
 		else {
 
-			require_once("../bd/conectBd.php");
 			$con = dbConnect("localhost", "root", "");
 			
 			$verificacaoPlano = dbConsulta("SELECT 1 FROM plano_contratado WHERE plano_id_plano = $id_plano AND cliente_id_cliente = " . $_SESSION['id_cliente'], "estacionamento", $con);
@@ -101,7 +97,6 @@
 			<select name="sltPlano" class='form-control' id='sltPlano'>
 				<option value="">--</option>
 				<?php
-				include 'function.php';
 				echo montaSelect();
 				?>
 			</select>
