@@ -79,48 +79,37 @@
 				<input type='submit' id='btnPesquisar' class='btn cmd-item' value='Pesquisar' name="btnPesquisar"/>
 			</div>
 			<?php
-				if(isset($_POST['btnPesquisar'])){
-					if($_POST['qtdMinhrs'] == NULL || $_POST['qtdMaxhrs'] == NULL || $_POST['VloMin'] == NULL || $_POST['VloMax'] == NULL) //Se algum campo não for preenchido
-						echo "<strong>Preencha todos os campos!</strong>";
-					else{
-						if((($_POST['qtdMinhrs']) < ($_POST['qtdMaxhrs'])) && (($_POST['VloMin']) < ($_POST['VloMax']))){ // Min < Max E Min < Max
+				if(isset($_POST['btnPesquisar'])) {
 							
-							$dados = buscaPlanos($_POST['qtdMinhrs'], $_POST['qtdMaxhrs'], $_POST['VloMin'], $_POST['VloMax']);
+					$dados = buscaPlanos($_POST['qtdMinhrs'], $_POST['qtdMaxhrs'], $_POST['VloMin'], $_POST['VloMax']);
+					$stauts = "";
+					if (mysql_num_rows($dados) > 0) {
 
-							if (mysql_num_rows($dados) > 0){
-
-								echo "<table width='100%' id='table_planos' cellpadding='1.5' border='1' class='bg-all'>";
-								echo '<thead><tr>';
-								echo '<th><p style="text-align: center;"> Cliente</th>';
-								echo '<th><p style="text-align: center;"> Plano</th>';
-								echo '<th><p style="text-align: center;"> Valor</th>';
-								echo '<th><p style="text-align: center;"> Horas</th>';
-								echo '<th><p style="text-align: center;"> Excedente</th>';
-								echo '<th><p style="text-align: center;"> Data</th>';
-								echo '</tr></thead>';
-								
-								echo '<tbody>';
-								while ($dados1 = mysql_fetch_array($dados)){
-									echo '<tr>';
-									echo '<td>'.$dados1['nome_cliente'].'</td>';
-									echo '<td>'.$dados1['nome_plano'].'</td>';
-									echo '<td>'.$dados1['valor'].'</td>';
-									echo '<td>'.$dados1['horas'].'</td>';
-									echo '<td>'.$dados1['valor_excedente'].'</td>';
-									echo '<td>'.$dados1['data_contrato'].'</td>';
-									echo '</tr>';
-								}
-								echo '</tbody></table>';
-							}
-							else
-								echo "<strong>Nenhum resultado encontrado</strong>";
+						echo "<table width='100%' id='table_planos' cellpadding='1.5' border='1' class='bg-all'>";
+						echo '<thead><tr>';
+						echo '<th><p style="text-align: center;"> Código</th>';
+						echo '<th><p style="text-align: center;"> Nome</th>';
+						echo '<th><p style="text-align: center;"> Horas</th>';
+						echo '<th><p style="text-align: center;"> Valor</th>';
+						echo '<th><p style="text-align: center;"> Valor excedente</th>';
+						echo '<th><p style="text-align: center;"> Status</th>';
+						echo '</tr></thead>';		
+						echo '<tbody>';
+						while ($dados1 = mysql_fetch_array($dados)){
+							echo '<tr>';
+							echo '<td>'.$dados1['id'].'</td>';
+							echo '<td>'.$dados1['nome'].'</td>';
+							echo '<td>'.$dados1['horas'].'</td>';
+							echo '<td>'.$dados1['valor'].'</td>';
+							echo '<td>'.$dados1['valor_excedente'].'</td>';
+							$status = $dados1['status'] == 0 ? "ativo" : "inativo";
+							echo '<td>' . $status . '</td>';
+							echo '</tr>';
 						}
-						else if (($_POST['qtdMinhrs']) >= ($_POST['qtdMaxhrs'])){ // MinHrs >= MaxHrs
-							echo "<strong>Limite mínimo de horas deve ser menor que o limite máximo de horas</strong>";
-						}
-						else // ValorMin >= ValorMax
-							echo "<strong>Valor mínimo do plano deve ser menor que o valor máximo do plano</strong>";
-					}	
+						echo '</tbody></table>';
+					}
+					else
+						echo "<strong>Nenhum resultado encontrado</strong>";
 				}
 				else
 					echo "<strong>Nenhuma pesquisa realizada por enquanto</strong>";

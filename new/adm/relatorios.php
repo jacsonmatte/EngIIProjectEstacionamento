@@ -273,6 +273,8 @@
 						<th>Nº da Vaga</th>
 						<th>Data Entrada</th>
 						<th>Data Saída</th>
+						<th>Token</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				
@@ -282,6 +284,8 @@
 						<th>Nº da Vaga</th>
 						<th>Data Entrada</th>
 						<th>Data Saída</th>
+						<th>Token</th>
+						<th>Status</th>
 					</tr>
 				</tfoot>
 				

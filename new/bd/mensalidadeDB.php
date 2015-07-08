@@ -9,17 +9,17 @@ function dbConnect2(){
 }
 
 function dbConnect($host, $user, $pass){
-	$CONNECT = 1;
+	$CONNECT = 2;
 	if ($CONNECT == 1)
 		return @mysql_connect("localhost", "root", "");
 	else if ($CONNECT == 2)
-		return @mysql_connect("http://mysql14.000webhost.com/", "a3618106_root", "ProjetoES2");
+		return @mysql_connect("mysql14.000webhost.com", "a3618106_root", "ProjetoES2");
 	else
 		return @mysql_connect($host, $user, $pass);
 }
 //Conecta na BD e executa uma consulta
 function dbConsulta($sql, $app, $connect){
-	$CONNECT = 1;
+	$CONNECT = 2;
 	if ($CONNECT == 1)
 		mysql_select_db("estacionamento", $connect);
 	else if ($CONNECT == 2)
@@ -36,7 +36,11 @@ function validaLogin($user, $senha){
 	$sql = "SELECT `cliente_id_cliente` FROM `usuario` WHERE login='$user' and senha='$senha'";
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"estacionamento",$con);
-	return mysql_fetch_array($result)[0];
+	if ($result) {
+		$row = mysql_fetch_array($result);
+		return $row[0];
+	}
+	return 0;
 }
 
 function verificaAtributos($email, $Cpf_Cnpj){
@@ -57,10 +61,10 @@ function verificaAtributos($email, $Cpf_Cnpj){
 
 function buscaMensalidade($mes, $ano, $nome){
 	//$sql = "SELECT c.id_cliente, c.nome, m.id_mensalidade, m.mes, m.ano, m.val_plano, m.val_execed, FROM mensalidade m JOIN	cliente c ON m.cliente_id_cliente = c.id_cliente WHERE m.mes = '$mes' AND m.ano = '$ano' AND c.nome like '$nome'";
-	$sql = "SELECT nome, mes, ano, (m.val_plano+m.val_execed) soma FROM mensalidade m JOIN cliente c ON c.id_cliente = m.cliente_id_cliente";
-	if ($nome <> '') $sql = $sql . " WHERE c.nome LIKE '%$nome%'";
-	//if ($mes <> '') $sql = $sql . " AND m.mes = '$mes'";
-	//if ($ano <> '') $sql = $sql . " AND m.ano = '$ano'";
+	$sql = "SELECT c.nome nome, m.mes mes, m.ano ano, (m.val_plano+m.val_execed) soma FROM mensalidade m JOIN cliente c ON c.id_cliente = m.cliente_id_cliente WHERE m.id_mensalidade > 0 ";
+	if ($nome <> '') $sql = $sql . " AND c.nome LIKE '%$nome%'";
+	if ($mes <> '00' && $mes <> '') $sql = $sql . " AND m.mes = '$mes'";
+	if ($ano <> '0000' && $ano <> '') $sql = $sql . " AND m.ano = '$ano'";
 
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta($sql,"mensalidade", $con);
@@ -69,11 +73,21 @@ function buscaMensalidade($mes, $ano, $nome){
 
 function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
 	
-	$sql = "SELECT c.nome nome_cliente, p.nome nome_plano, p.valor, p.horas, p.valor_excedente, o.data_contrato FROM plano p JOIN plano_contratado o ON p.id = o.plano_id_plano JOIN cliente c ON c.id_cliente = o.cliente_id_cliente WHERE p.horas BETWEEN $qtdMinhrs AND $qtdMaxhrs AND p.valor BETWEEN $VloMin AND $VloMax";
+	$sql = "SELECT * FROM plano";
+
+	if ($qtdMinhrs <> '')
+		$sql .= " AND horas >= $qtdMinhrs";
+	if ($qtdMaxhrs <> '')
+		$sql .= " AND horas <= $qtdMaxhrs";
+	if ($VloMin <> '')
+		$sql .= " AND valor >= $VloMin";
+	if ($VloMax <> '')
+		$sql .= " AND valor <= $VloMax";
 
 	$con = dbConnect("localhost","root","");
-	$result = dbConsulta($sql,"mensalidade", $con);
+	$result = dbConsulta(str_word_count("AND") > 0 ? str_replace("plano AND", "plano WHERE", $sql) : $sql, "mensalidade", $con);
 	return $result;
+
 }
 
 function buscaClientes($nome, $checkbox){	
@@ -99,15 +113,17 @@ function buscaClientes($nome, $checkbox){
 
 function buscaVagas($numero, $situacao, $tipo){//o campo numero nem sempre virá preenchido, então é necessário tratá-lo 
 	
-	$sql = "SELECT id_vaga, descricao, nro_vaga, tipo FROM vaga WHERE tipo = $tipo AND";
+	$sql = "SELECT id_vaga, descricao, nro_vaga, tipo FROM vaga WHERE id_vaga > 0";
+	
+	if ($tipo <> '') $sql .= " AND tipo = '$tipo'";
 
 	$data1 = date("Y-m-d") . "T:00:00";
 	$data2 = date("Y-m-d") . "T:23:59";
 
 	if ($situacao == 2 or $situacao == 4)//quando a situação é em utilização ou reservado
-		$sql .= " id_vaga IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = $situacao)";
-	else//livre
-		$sql .= " (id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE (status = 4 OR status = 2) AND ('$data1' NOT BETWEEN 'dh_entrada' AND 'dh_saida' AND '$data2' NOT BETWEEN 'dh_entrada' AND 'dh_saida')) OR id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = 2 OR status = 4))";
+		$sql .= " AND id_vaga IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = $situacao)";
+	else if ($situacao == 1) //livre
+		$sql .= " AND (id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE (status = 4 OR status = 2) AND ('$data1' NOT BETWEEN 'dh_entrada' AND 'dh_saida' AND '$data2' NOT BETWEEN 'dh_entrada' AND 'dh_saida')) OR id_vaga NOT IN (SELECT vaga_id_vaga FROM estacionamento WHERE status = 2 OR status = 4))";
 
 	if ($numero <> '') $sql .= " AND nro_vaga = '$numero'";//quando numero não for vazio
 
@@ -117,4 +133,3 @@ function buscaVagas($numero, $situacao, $tipo){//o campo numero nem sempre virá
 }
 
 ?>
-

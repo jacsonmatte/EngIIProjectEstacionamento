@@ -27,6 +27,7 @@
 		<div class='form-group col-sm-3 text-left'>
 			<label for='sltPesquisaSituacao'>Situação:</label>
 			<select class='form-control' id='sltPesquisaSituacao' name="situacao">
+				<option value="">Todas</option>
 				<option value="1">Livre</option>
 				<option value="2">Em utilização</option>
 				<option value="4">Reservada</option>
@@ -35,6 +36,7 @@
 		<div class='form-group col-sm-3 text-left'>
 			<label for='sltPesquisaTipo'>Tipo:</label>
 			<select class='form-control' id='sltPesquisaTipo' name="tipo">
+				<option value="">Tudo</option>
 				<option value="1">Carro</option>
 				<option value="2">Moto</option>
 				<option value="3">Utilitário</option>
@@ -49,7 +51,7 @@
 				if(isset($_POST["btnPesquisar"])){//quando o botão de pesquisar for pressionado
 
 					$dados = buscaVagas($_POST['numero'],$_POST['situacao'], $_POST['tipo']);//faz a consulta ao banco, arquivo mensalidadeBD
-
+					
 					if (mysql_num_rows($dados) > 0){//se a consulta retornar com algum dado
 						echo '<table id="tblResultadoPesquisa" width="100%">';
 						echo '<thead><tr>';
@@ -75,7 +77,7 @@
 						echo '</tbody></table>';
 					}
 					else
-								echo "<strong>Nenhum resultado encontrado</strong>";
+						echo "<strong>Nenhum resultado encontrado</strong>";
 				}
 				else
 					echo "<strong>Nenhuma pesquisa realizada por enquanto</strong>";

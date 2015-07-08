@@ -115,13 +115,23 @@
 		
 		$con = dbConnect("localhost","root","");
 		$result = dbConsulta($sql,"estacionamento",$con);
-
+		$status2 = '';
 		$dados = '';
 		if (mysql_num_rows($result)) {
 			$dados = "";
 			while ($row = mysql_fetch_array($result)) {
+					if ($row['status'] == 1)
+						$status2 = "Utilizada";
+					else if ($row['status'] == 2)
+						$status2 = "Em utilização";
+					else if ($row['status'] == 3)
+						$status2 = "Cancelada";
+					else if ($row['status'] == 4)
+						$status2 = "Reservada";
+					else
+						$status2 = "Não utilizada";
 					
-					$dados .= "<tr><td>".$row['codigo']."</td><td>".$row['entrada']."</td><td>".$row['saida']."</td><td>".$row['vaga']."</td><td>".$row['token']."</td><td>".$row['status']."</td></tr>";
+					$dados .= "<tr><td>".$row['codigo']."</td><td>".$row['entrada']."</td><td>".$row['saida']."</td><td>".$row['vaga']."</td><td>".$row['token']."</td><td>".$status2."</td></tr>";
 			}
 		} else return 0;
 		return $dados;

@@ -152,7 +152,8 @@
 								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td></tr>"; 	
 								$i++;
 							}
-							echo "<script type='text/javascript'> exibirReservas(\"" . $html . "</tbody></table>\")</script>";
+							//echo "<script type='text/javascript'> exibirReservas(\"" . $html . "</tbody></table>\")</script>";
+							echo $html . "</tbody></table>";
 						}
 					}
 				}
