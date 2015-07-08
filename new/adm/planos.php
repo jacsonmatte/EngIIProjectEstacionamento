@@ -70,9 +70,9 @@
 				<input type='text' class='form-control' id='txtPesquisaValorMax' name="VloMax"/>
 			</div>
 			<div class='form-group col-sm-12 text-left'>
-				<input type='radio' id='rdbPesquisaSomentePlanosAtivos' name='pesquisaPlanoSituacao'/><label for='rdbPesquisaSomentePlanosAtivos'>&nbsp;Apenas planos ativos</label>&nbsp;
-				<input type='radio' id='rdbPesquisaSomentePlanosInativos' name='pesquisaPlanoSituacao'/><label for='rdbPesquisaSomentePlanosInativos'>&nbsp;Apenas planos inativos</label>&nbsp;
-				<input type='radio' id='rdbPesquisaTodosPlanos' name='pesquisaPlanoSituacao'/><label for='rdbPesquisaTodosPlanos'>&nbsp;Todos</label>
+				<input type='radio' id='rdbPesquisaSomentePlanosAtivos' name='pesquisaPlanoSituacao' value='ativos'/><label for='rdbPesquisaSomentePlanosAtivos'>&nbsp;Apenas planos ativos</label>&nbsp;
+				<input type='radio' id='rdbPesquisaSomentePlanosInativos' name='pesquisaPlanoSituacao' value='inativos'/><label for='rdbPesquisaSomentePlanosInativos'>&nbsp;Apenas planos inativos</label>&nbsp;
+				<input type='radio' id='rdbPesquisaTodosPlanos' name='pesquisaPlanoSituacao' value='todos'/><label for='rdbPesquisaTodosPlanos'>&nbsp;Todos</label>
 			</div>
 			<div class='form-group col-sm-12 text-right'>
 				<span id='spnErroPesquisarPlanos'></span>
@@ -81,7 +81,7 @@
 			<?php
 				if(isset($_POST['btnPesquisar'])) {
 							
-					$dados = buscaPlanos($_POST['qtdMinhrs'], $_POST['qtdMaxhrs'], $_POST['VloMin'], $_POST['VloMax']);
+					$dados = buscaPlanos($_POST['qtdMinhrs'], $_POST['qtdMaxhrs'], $_POST['VloMin'], $_POST['VloMax'], $_POST['pesquisaPlanoSituacao']);
 					$stauts = "";
 					if (mysql_num_rows($dados) > 0) {
 

@@ -71,7 +71,7 @@ function buscaMensalidade($mes, $ano, $nome){
 	return $result;
 }
 
-function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
+function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax, $situacao){
 	
 	$sql = "SELECT * FROM plano";
 
@@ -84,6 +84,11 @@ function buscaPlanos($qtdMinhrs, $qtdMaxhrs, $VloMin, $VloMax){
 	if ($VloMax <> '')
 		$sql .= " AND valor <= $VloMax";
 
+	if ($situacao == 'ativos')
+		$sql .= ' AND status = 0';
+	else if ($situacao == 'inativos')
+		$sql .= ' AND status = 1';
+	
 	$con = dbConnect("localhost","root","");
 	$result = dbConsulta(str_word_count("AND") > 0 ? str_replace("plano AND", "plano WHERE", $sql) : $sql, "mensalidade", $con);
 	return $result;

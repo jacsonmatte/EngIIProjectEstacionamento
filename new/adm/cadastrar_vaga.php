@@ -16,8 +16,8 @@
 		function validarCampos(){
 
 			var codigo = $("#txtCodigo").val().trim();
-			if(codigo == '' || isNaN(codigo) || parseInt(codigo) < 1) {
-				$("#spnErroSalvarVaga").text("Informe um número maior que 0 para a vaga!");
+			if(codigo == '' || isNaN(codigo) || parseInt(codigo) < 1 || parseInt(codigo) > 99999) {
+				$("#spnErroSalvarVaga").text("Informe um número entre 0 e 99999 para a vaga!");
 				$('#$txtCodigo').focus();
 				return;			
 			}
@@ -82,7 +82,7 @@
 				
 				$cod_vaga=addslashes($_POST["cod_vaga"]);
 				
-				if ( $cod_vaga < 0 || $cod_vaga == '' || !is_numeric($cod_vaga)) {
+				if ( $cod_vaga < 0 || $cod_vaga > 99999 || $cod_vaga == '' || !is_numeric($cod_vaga)) {
 					echo "<script language='javascript'>resultadoCadastrarVaga('Informe um número maior que 0 para a vaga!', false);</script>";
 					die();
 				}
