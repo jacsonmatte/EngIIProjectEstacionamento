@@ -157,7 +157,7 @@
 								else if ($row['status'] == $STATUS_RESERVA_NAO_UTILIZADA) $status = 'Não utilizada';
 								else $status = 'Em utilização';
 								
-								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . $row['entrada'] . "</td><td>" . $row['saida'] . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td></tr>"; 	
+								$html = $html . "<tr style='background: " . ($i % 2 == 0 ? "#CCC'" : "#FFF'") . "><td>" . $row['codigo'] . "</td><td>" . date("Y/m/d H:s", strtotime($row['entrada'])) . "</td><td>" . date("Y/m/d H:s", strtotime($row['saida'])) . "</td><td>" . $row['vaga'] . "</td><td>" . $row['token'] . "</td><td>" . $status . "</td></tr>"; 	
 								$i++;
 							}
 							echo "<script type='text/javascript'> exibirReservas(\"" . $html . "</tbody></table>\")</script>";

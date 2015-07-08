@@ -87,7 +87,6 @@
 								echo "<th>E-mail</th>";
 								echo "<th>Logradouro</th>";
 								echo "<th>Nº</th>";
-								echo "<th>Cep</th>";
 								echo "<th>Bairro</th>";
 								echo "<th>Cidade/UF</th>";
 								echo "<th>Telefone</th>";
@@ -101,7 +100,6 @@
 									echo "<td>".$dados1['email']."</td>";
 									echo "<td>".$dados1['logradouro']."</td>";
 									echo "<td>".$dados1['nro']."</td>";
-									echo "<td>".$dados1['cep']."</td>";
 									echo "<td>".$dados1['bairro']."</td>";
 									echo "<td>".$dados1['cidade'] . ", " . $dados1['estado'] . "</td>";
 									echo "<td>".$dados1['telefone']."</td>";

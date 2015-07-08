@@ -37,7 +37,7 @@
 		$pdf->SetFont('Arial', 'B', 14);
 		$pdf->Ln(); // adiciona uma quebra de linha
 		if ($dataInicial <> '' && $dataFinal <> '')
-			$pdf->Cell(190, 10, utf8_decode("Período: " . $dataInicial . " a " . $dataFinal), 1, 0, 'C');  // usar o utf_decode ao inserir texto com acento
+			$pdf->Cell(190, 10, utf8_decode("Período: " . date("d/m/Y", strtotime($dataInicial)) . " a " . date("d/m/Y", strtotime($dataFinal))), 1, 0, 'C');  // usar o utf_decode ao inserir texto com acento
 		else
 			$pdf->Cell(190, 10, utf8_decode("Período: tudo"), 1, 0, 'C');
 		$pdf->Ln();
@@ -64,7 +64,7 @@
 				$pdf->Cell(20, 8, $row['valor'], 1, 0, 'C', true);
 				$pdf->Cell(20, 8, $row['horas'], 1, 0, 'C', true);
 				$pdf->Cell(40, 8, $row['excedente'], 1, 0, 'C', true);
-				$pdf->Cell(60, 8, $row['data'], 1, 0, 'C', true);
+				$pdf->Cell(60, 8, date("d/m/Y", strtotime($row['data'])), 1, 0, 'C', true);
 				$pdf->Ln();
 			}
 		}
@@ -85,7 +85,7 @@
 		$pdf->SetFont('Arial','B',14);
 		$pdf->Ln();
 		if ($dataInicial <> '' && $dataFinal <> '')
-			$pdf->Cell(190, 10, utf8_decode("Período: " . $dataInicial . " a " . $dataFinal), 1, 0, 'C');
+			$pdf->Cell(190, 10, utf8_decode("Período: " . date("d/m/Y", strtotime($dataInicial)) . " a " . date("d/m/Y", strtotime($dataFinal))), 1, 0, 'C');
 		else
 			$pdf->Cell(190, 10, utf8_decode("Período: tudo"), 1, 0, 'C');
 		$pdf->Ln();
@@ -116,8 +116,10 @@
 				$i += 1;
 				
 				$pdf->Cell(20, 8, $row['codigo'], 1, 0, 'C', true);
-				$pdf->Cell(50, 8, str_replace('T', ' ', $row['entrada']), 1, 0, 'C', true);
-				$pdf->Cell(50, 8, str_replace('T', ' ', $row['saida']), 1, 0, 'C', true);
+				$dhe = date("d/m/Y H:s", strtotime(str_replace("T", " ", $row['entrada'])));
+				$dhs = date("d/m/Y H:s", strtotime(str_replace("T", " ", $row['saida'])));
+				$pdf->Cell(50, 8, $dhe, 1, 0, 'C', true);
+				$pdf->Cell(50, 8, $dhs, 1, 0, 'C', true);
 				$pdf->Cell(20, 8, $row['vaga'], 1, 0, 'C', true);
 				$pdf->Cell(20, 8, $row['token'], 1, 0, 'C', true);
 				$pdf->Cell(30, 8, utf8_decode($status), 1, 0, 'C', true);
